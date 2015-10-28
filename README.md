@@ -8,5 +8,9 @@ Trabalho do 4º Bimestre - 2015
 * Criação do projeto.
 * Criação da classe Cliente e suas classes Enum e DAO.
 * Criação da classe Produto e suas classes Enum e DAO.
-* Criação da classe Usuário e suas classe DAO.
+* Criação da classe Usuário e sua classe DAO.
+
+# 28 de Outubro de 2015
+
+*Tela principal e tela de cadastro de cliente
 
