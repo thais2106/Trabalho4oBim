@@ -172,4 +172,8 @@ public class MioloCadastroCliente extends JPanel {
 		
 	}
 
+	public Runnable getAcaoSalvar() {
+		return () -> System.out.println("Salvando");	
+	}
+
 }

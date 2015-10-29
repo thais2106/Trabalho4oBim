@@ -32,7 +32,6 @@ public abstract class MolduraAbstrata extends JPanel {
 	}
 	
 	
-	
 	/**
 	 * Create the panel.
 	 */
@@ -73,6 +72,10 @@ public abstract class MolduraAbstrata extends JPanel {
 		panel_1.add(btnFechar, gbc_btnFechar);
 
 		configuraMiolo();
+	}
+
+	public void setAcaoSalvar(Runnable acaoSalvar) {
+		btnSalvar.addActionListener(e -> acaoSalvar.run());
 	}
 
 }
