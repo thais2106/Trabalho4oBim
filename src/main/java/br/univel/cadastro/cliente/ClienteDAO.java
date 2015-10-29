@@ -1,5 +1,6 @@
 package br.univel.cadastro.cliente;
 
+import java.sql.SQLException;
 import java.util.List;
 /**
  * Interface de métodos da classe Cliente
@@ -7,7 +8,7 @@ import java.util.List;
  *
  */
 public interface ClienteDAO {
-	public void inserir(Cliente c);
+	public void inserir(Cliente c) throws SQLException;
 	
 	public void atualizar(Cliente c);
 	

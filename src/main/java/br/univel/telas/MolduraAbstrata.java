@@ -23,12 +23,15 @@ import java.awt.Insets;
 public abstract class MolduraAbstrata extends JPanel {
 	private JPanel panel;
 	private JButton btnFechar;
+	private JButton btnSalvar;
 
 	protected abstract void configuraMiolo();
 	
 	public void setCloseAction(ActionListener action){
 		btnFechar.addActionListener(action);
 	}
+	
+	
 	
 	/**
 	 * Create the panel.
@@ -48,16 +51,24 @@ public abstract class MolduraAbstrata extends JPanel {
 		panel_1.setBackground(Color.LIGHT_GRAY);
 		add(panel_1, BorderLayout.SOUTH);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{0, 0};
+		gbl_panel_1.columnWidths = new int[]{0, 0, 0};
 		gbl_panel_1.rowHeights = new int[]{0, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel_1.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
+		
+		btnSalvar = new JButton("Salvar");
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
+		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton.gridx = 0;
+		gbc_btnNewButton.gridy = 0;
+		panel_1.add(btnSalvar, gbc_btnNewButton);
 		
 		btnFechar = new JButton("Fechar");
 		GridBagConstraints gbc_btnFechar = new GridBagConstraints();
 		gbc_btnFechar.anchor = GridBagConstraints.EAST;
-		gbc_btnFechar.gridx = 0;
+		gbc_btnFechar.gridx = 1;
 		gbc_btnFechar.gridy = 0;
 		panel_1.add(btnFechar, gbc_btnFechar);
 

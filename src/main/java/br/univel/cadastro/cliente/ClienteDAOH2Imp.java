@@ -3,8 +3,11 @@ package br.univel.cadastro.cliente;
 import java.io.ObjectInputStream.GetField;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 /**
  * Classe com implementações dos métodos de manipulação de banco para a classe Cliente
@@ -14,6 +17,7 @@ import java.util.List;
 
 public class ClienteDAOH2Imp implements ClienteDAO{
 	
+	private String sql;
 	private static Connection con;
 	
 	private Connection getConnection() throws SQLException{
@@ -31,9 +35,24 @@ public class ClienteDAOH2Imp implements ClienteDAO{
 	}
 
 	@Override
-	public void inserir(Cliente c) {
-		// TODO Auto-generated method stub
+	public void inserir(Cliente c) throws SQLException {
+		sql = "INSERT INTO CLIENTE(id, nome, telefone, endereco, cidade, uf, email, genero)"
+				+ "values(?,?,?,?,?,?,?,?)";
 		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, c.getId());
+		ps.setString(2, c.getNome());
+		ps.setString(3, c.getTelefone());
+		ps.setString(4, c.getEndereco());
+		ps.setString(5, c.getCidade());
+		ps.setString(6, c.getUf().getNome());
+		ps.setString(7, c.getEmail());
+		ps.setString(8, c.getGenero().getNome());
+		
+		int res = ps.executeUpdate();
+		ps.close();
+		
+		JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
 	}
 
 	@Override

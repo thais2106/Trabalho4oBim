@@ -16,6 +16,5 @@ public class TelaCadastroCliente extends MolduraAbstrata{
 	@Override
 	protected void configuraMiolo() {
 		super.add(new MioloCadastroCliente(), BorderLayout.CENTER);
-		
 	}
 }
