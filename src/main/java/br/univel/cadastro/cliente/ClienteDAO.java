@@ -1,5 +1,6 @@
 package br.univel.cadastro.cliente;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 /**
@@ -8,6 +9,8 @@ import java.util.List;
  *
  */
 public interface ClienteDAO {
+	Connection getConnection() throws SQLException;
+	
 	public void inserir(Cliente c) throws SQLException;
 	
 	public void atualizar(Cliente c);

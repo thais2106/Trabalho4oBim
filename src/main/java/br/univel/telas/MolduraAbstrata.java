@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
 import java.awt.Insets;
+import java.sql.SQLException;
 /**
  * Tela moldura onde aparecerá os campos para preencher 
  * @author tcrivelatti - 28/10/2015
@@ -25,7 +26,7 @@ public abstract class MolduraAbstrata extends JPanel {
 	private JButton btnFechar;
 	private JButton btnSalvar;
 
-	protected abstract void configuraMiolo();
+	protected abstract void configuraMiolo() throws SQLException;
 	
 	public void setCloseAction(ActionListener action){
 		btnFechar.addActionListener(action);
@@ -71,7 +72,12 @@ public abstract class MolduraAbstrata extends JPanel {
 		gbc_btnFechar.gridy = 0;
 		panel_1.add(btnFechar, gbc_btnFechar);
 
-		configuraMiolo();
+		try {
+			configuraMiolo();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void setAcaoSalvar(Runnable acaoSalvar) {

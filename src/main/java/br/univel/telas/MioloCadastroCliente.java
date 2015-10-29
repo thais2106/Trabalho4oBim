@@ -2,11 +2,17 @@ package br.univel.telas;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.sql.SQLException;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+
+import br.univel.cadastro.cliente.Cliente;
+import br.univel.cadastro.cliente.ClienteDAOH2Imp;
 /**
  * Tela "miolo" com os campos do cadastro de cliente
  * @author tcrivelatti - 28/10/2015 - 19:04
@@ -19,7 +25,7 @@ public class MioloCadastroCliente extends JPanel {
 	protected JTextField txtendereco;
 	protected JTextField txtcidade;
 	protected JTextField txtemail;
-	protected JTextField txttelfone;
+	protected JTextField txttelefone;
 
 	/**
 	 * Create the panel.
@@ -145,14 +151,14 @@ public class MioloCadastroCliente extends JPanel {
 		gbc_lblTelefone.gridy = 4;
 		add(lblTelefone, gbc_lblTelefone);
 		
-		txttelfone = new JTextField();
+		txttelefone = new JTextField();
 		GridBagConstraints gbc_txttelfone = new GridBagConstraints();
 		gbc_txttelfone.insets = new Insets(0, 0, 5, 5);
 		gbc_txttelfone.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txttelfone.gridx = 5;
 		gbc_txttelfone.gridy = 4;
-		add(txttelfone, gbc_txttelfone);
-		txttelfone.setColumns(10);
+		add(txttelefone, gbc_txttelfone);
+		txttelefone.setColumns(10);
 		
 		JLabel lblGnero = new JLabel("G\u00EAnero");
 		GridBagConstraints gbc_lblGnero = new GridBagConstraints();
@@ -172,8 +178,31 @@ public class MioloCadastroCliente extends JPanel {
 		
 	}
 
-	public Runnable getAcaoSalvar() {
-		return () -> System.out.println("Salvando");	
+	public Runnable getAcaoSalvar() throws SQLException {
+		return () -> {
+			ClienteDAOH2Imp dao = new ClienteDAOH2Imp();
+			Cliente c = new Cliente();
+			
+			c.setId(Integer.parseInt(txtid.getText()));
+			c.setNome(txtnome.getText());
+			c.setTelefone(txttelefone.getText());
+			c.setEndereco(txtendereco.getText());
+			c.setCidade(txtcidade.getText());
+			c.setUf(null);
+			c.setEmail(txtemail.getText());
+			c.setGenero(null);
+			
+			try {
+				dao.getConnection();
+				dao.inserir(c);
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			System.out.println("Salvando");
+		};	
 	}
 
 }

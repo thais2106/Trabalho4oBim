@@ -20,8 +20,10 @@ public class ClienteDAOH2Imp implements ClienteDAO{
 	private String sql;
 	private static Connection con;
 	
-	private Connection getConnection() throws SQLException{
+	public Connection getConnection() throws SQLException{
 		synchronized (con) {
+			System.out.println("oi");
+			
 			if (con == null){
 				String url = "jdbc:h2:~/sisvendas";
 				String user = "sa";

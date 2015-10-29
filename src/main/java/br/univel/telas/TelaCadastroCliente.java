@@ -1,6 +1,7 @@
 package br.univel.telas;
 
 import java.awt.BorderLayout;
+import java.sql.SQLException;
 
 /**
  * Tela que configura o MioloCadastroCliente e o DAOCliente na mesma tela
@@ -17,6 +18,11 @@ public class TelaCadastroCliente extends MolduraAbstrata{
 	protected void configuraMiolo() {
 		MioloCadastroCliente mioloCadastroCliente = new MioloCadastroCliente();
 		super.add(mioloCadastroCliente, BorderLayout.CENTER);
-		super.setAcaoSalvar(mioloCadastroCliente.getAcaoSalvar());
+		try {
+			super.setAcaoSalvar(mioloCadastroCliente.getAcaoSalvar());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
