@@ -47,7 +47,7 @@ public class TelaPrincipal extends JFrame {
 	 */
 	public TelaPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 510, 400);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -64,6 +64,11 @@ public class TelaPrincipal extends JFrame {
 		mnCadastro.add(mntmCliente);
 		
 		mntmProduto = new JMenuItem("Produto");
+		mntmProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				abrirTelaProduto();
+			}
+		});
 		mnCadastro.add(mntmProduto);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -72,6 +77,18 @@ public class TelaPrincipal extends JFrame {
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
+	}
+
+	protected void abrirTelaProduto() {
+		//Instancia uma nova TelaCadProduto
+		TelaCadProduto tcp = new TelaCadProduto();
+		
+		//Configura a ação do botão fechar para remover a aba de cadastro de produto
+		tcp.setCloseAction(e -> tabbedPane.remove(tcp));
+		
+		//Insere a aba de cadastro de produto
+		tabbedPane.addTab("Cadastro de Produto", tcp);
+		
 	}
 
 	protected void abrirTelaCliente() {
