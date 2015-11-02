@@ -1,10 +1,14 @@
 package br.univel.telas;
 
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 /**
@@ -155,6 +159,11 @@ public class MioloCadProduto extends JPanel {
 		add(txtmargem, gbc_txtmargem);
 		txtmargem.setColumns(10);
 
+	}
+
+	public static Runnable getAcaoSalvar() {
+		
+		return null;
 	}
 
 }

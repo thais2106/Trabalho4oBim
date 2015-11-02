@@ -22,6 +22,8 @@ public class TelaCadProduto extends MolduraAbstrata{
 		//Adiciona o miolo no centro da MolduraAbstrata	
 		super.add(mcp, BorderLayout.CENTER);
 		
+	//	super.setAcaoSalvar(MioloCadProduto.getAcaoSalvar());
+		
 	}
 
 }
