@@ -24,6 +24,7 @@ public class TelaPrincipal extends JFrame {
 	private JPanel contentPane;
 	private JMenuItem mntmCliente;
 	private JTabbedPane tabbedPane;
+	private JMenuItem mntmProduto;
 
 	/**
 	 * Launch the application.
@@ -61,6 +62,9 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		mnCadastro.add(mntmCliente);
+		
+		mntmProduto = new JMenuItem("Produto");
+		mnCadastro.add(mntmProduto);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -71,7 +75,7 @@ public class TelaPrincipal extends JFrame {
 	}
 
 	protected void abrirTelaCliente() {
-		TelaCadastroCliente tcc = new TelaCadastroCliente();
+		TelaCadCliente tcc = new TelaCadCliente();
 		tcc.setCloseAction(e -> tabbedPane.remove(tcc));
 		tabbedPane.addTab("Cadastro de Cliente", tcc);
 	}

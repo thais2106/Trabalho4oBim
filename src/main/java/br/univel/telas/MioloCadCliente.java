@@ -21,7 +21,7 @@ import br.univel.cadastro.cliente.UF;
  *
  */
 
-public class MioloCadastroCliente extends JPanel {
+public class MioloCadCliente extends JPanel {
 	protected JTextField txtid;
 	protected JTextField txtnome;
 	protected JTextField txtendereco;
@@ -34,7 +34,7 @@ public class MioloCadastroCliente extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public MioloCadastroCliente() {
+	public MioloCadCliente() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};

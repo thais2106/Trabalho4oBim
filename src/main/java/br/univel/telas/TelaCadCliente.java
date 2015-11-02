@@ -8,15 +8,15 @@ import java.sql.SQLException;
  * @author tcrivelatti - 28/10/2015 - 19:30
  *
  */
-public class TelaCadastroCliente extends MolduraAbstrata{
+public class TelaCadCliente extends MolduraAbstrata{
 	
-	public TelaCadastroCliente(){
+	public TelaCadCliente(){
 		super();
 	}
 
 	@Override
 	protected void configuraMiolo() {
-		MioloCadastroCliente mioloCadastroCliente = new MioloCadastroCliente();
+		MioloCadCliente mioloCadastroCliente = new MioloCadCliente();
 		super.add(mioloCadastroCliente, BorderLayout.CENTER);
 		try {
 			super.setAcaoSalvar(mioloCadastroCliente.getAcaoSalvar());
