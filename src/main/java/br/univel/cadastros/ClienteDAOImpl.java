@@ -14,9 +14,11 @@ import javax.swing.JOptionPane;
  *
  */
 
-public class ClienteDAOH2Imp implements ClienteDAO{
+public class ClienteDAOImpl implements ClienteDAO{
 	
 	private String sql;
+	private Conexao connect;
+	/*
 	private static Connection con;
 	
 	public Connection getConnection(){
@@ -37,10 +39,11 @@ public class ClienteDAOH2Imp implements ClienteDAO{
 			return con; //retorna conexão
 		}
 	}
-
+*/
 	@Override
 	public void inserir(Cliente c) throws SQLException {
-		Connection con = getConnection();
+		Connection con = connect.getConnection();
+		
 		sql = "INSERT INTO CLIENTE(id, nome, telefone, endereco, cidade, uf, email, genero)"
 				+ "values(?,?,?,?,?,?,?,?)";
 		

@@ -1,5 +1,6 @@
 package br.univel.cadastros;
 
+import java.sql.SQLException;
 import java.util.List;
 /**
  * Interface de métodos da classe Produto
@@ -7,11 +8,11 @@ import java.util.List;
  *
  */
 public interface ProdutoDAO {
-	public void inserir(Produto c);
+	public void inserir(Produto p) throws SQLException;
 	
-	public void atualizar(Produto c);
+	public void atualizar(Produto p);
 	
-	public void excluir (Produto c);
+	public void excluir (Produto p);
 	
 	public Produto buscar(int id);
 	

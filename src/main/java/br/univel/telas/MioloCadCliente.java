@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
 import br.univel.cadastros.Cliente;
-import br.univel.cadastros.ClienteDAOH2Imp;
+import br.univel.cadastros.ClienteDAOImpl;
 import br.univel.cadastros.Genero;
 import br.univel.cadastros.UF;
 /**
@@ -185,7 +185,7 @@ public class MioloCadCliente extends JPanel {
 
 	public Runnable getAcaoSalvar() throws SQLException {
 		return () -> {
-			ClienteDAOH2Imp dao = new ClienteDAOH2Imp();
+			ClienteDAOImpl dao = new ClienteDAOImpl();
 			Cliente c = new Cliente();
 			
 			c.setId(Integer.parseInt(txtid.getText()));
