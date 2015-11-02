@@ -204,8 +204,6 @@ public class MioloCadCliente extends JPanel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			System.out.println("Salvando");
 		};	
 	}
 

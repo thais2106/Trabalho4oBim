@@ -15,14 +15,18 @@ public class TelaCadProduto extends MolduraAbstrata{
 	}
 	
 	@Override
-	protected void configuraMiolo() throws SQLException {
+	protected void configuraMiolo() {
 		//Instancia novo Miolo
 		MioloCadProduto mcp = new MioloCadProduto();
-		
 		//Adiciona o miolo no centro da MolduraAbstrata	
 		super.add(mcp, BorderLayout.CENTER);
 		
-	//	super.setAcaoSalvar(MioloCadProduto.getAcaoSalvar());
+		try{
+			super.setAcaoSalvar(mcp.getAcaoSalvar());
+		} catch (SQLException e) {
+			System.out.println("Erro ao salvar produto.");
+			e.printStackTrace();
+		}
 		
 	}
 

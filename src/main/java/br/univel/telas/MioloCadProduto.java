@@ -8,9 +8,16 @@ import javax.swing.JLabel;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.math.BigDecimal;
+import java.sql.SQLException;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+
+import br.univel.cadastros.Categoria;
+import br.univel.cadastros.Produto;
+import br.univel.cadastros.ProdutoDAOImpl;
+import br.univel.cadastros.Unidade;
 /**
  * Classe com os campos do Produto para preencher
  * @author Thaís - 02/11/2015 - 16:01:49
@@ -79,7 +86,7 @@ public class MioloCadProduto extends JPanel {
 		add(txtcodbarras, gbc_txtcodbarras);
 		txtcodbarras.setColumns(10);
 		
-		cbxcategoria = new JComboBox();
+		cbxcategoria = new JComboBox(Categoria.values());
 		GridBagConstraints gbc_cbxcategoria = new GridBagConstraints();
 		gbc_cbxcategoria.gridwidth = 2;
 		gbc_cbxcategoria.insets = new Insets(0, 0, 5, 0);
@@ -122,7 +129,7 @@ public class MioloCadProduto extends JPanel {
 		gbc_lblCusto.gridy = 6;
 		add(lblCusto, gbc_lblCusto);
 		
-		cbxunidade = new JComboBox();
+		cbxunidade = new JComboBox(Unidade.values());
 		GridBagConstraints gbc_cbxunidade = new GridBagConstraints();
 		gbc_cbxunidade.gridwidth = 2;
 		gbc_cbxunidade.insets = new Insets(0, 0, 5, 5);
@@ -161,9 +168,27 @@ public class MioloCadProduto extends JPanel {
 
 	}
 
-	public static Runnable getAcaoSalvar() {
+	public Runnable getAcaoSalvar() throws SQLException {
+		return () -> {
+			ProdutoDAOImpl dao = new ProdutoDAOImpl();
+			Produto p = new Produto();
 		
-		return null;
+			p.setId(Integer.parseInt(txtid.getText()));
+			p.setCodBarras(txtcodbarras.getText());
+			p.setCategoria((Categoria)cbxcategoria.getSelectedItem());
+			p.setDescricao(txtdescricao.getText());
+			p.setUnidade((Unidade)cbxunidade.getSelectedItem());
+			p.setCusto(BigDecimal.valueOf(Double.parseDouble(txtcusto.getText())));
+			p.setCusto(BigDecimal.valueOf(Double.parseDouble(txtmargem.getText())));
+		
+			try {
+				dao.inserir(p);
+			} catch (Exception e) {
+				System.out.println("Erro ao inserir produto");
+				e.printStackTrace();
+			}
+		
+		};
 	}
 
 }

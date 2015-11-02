@@ -1,6 +1,7 @@
 package br.univel.cadastros;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,13 +16,32 @@ import javax.swing.JOptionPane;
 
 public class ProdutoDAOImpl implements ProdutoDAO{
 	private String sql;
-	private Conexao connect;
+	private static Connection con;
+	
+	public Connection getConnection(){
+			
+			if (con == null){
+				try{
+					String url = "jdbc:h2:~/sisvendas";
+					String user = "sa";
+					String pass = "sa";
+						
+					con = DriverManager.getConnection(url, user, pass);
+				} catch (SQLException e){
+					System.out.println("Erro ao abrir conexão");
+					e.printStackTrace();
+				}
+			}
+			synchronized (con) {
+			return con; //retorna conexão
+		}
+	}
 	
 	@Override
 	public void inserir(Produto p) throws SQLException {
-		Connection con = connect.getConnection();
+		Connection con = getConnection();
 		
-		sql = "INSERT INTO PRODUTO(id, codbarras, categoria, descricao, unidade, custo, margemlucro"
+		sql = "INSERT INTO PRODUTO(id, codbarras, categoria, descricao, unidade, custo, margemlucro) "
 				+ "VALUES(?, ?, ?, ?, ?, ?, ?)";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
