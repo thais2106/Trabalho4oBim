@@ -6,17 +6,5 @@ package br.univel.cadastro.cliente;
  *
  */
 public enum Genero {
-	F("Feminino"),
-	M("Masculino");
-	
-	private String nome;
-	
-	public String getNome(){
-		return nome;
-	}
-	
-	private Genero(String nome){
-		this.nome = nome;
-	}
-
+	Feminino, Masculino;
 }

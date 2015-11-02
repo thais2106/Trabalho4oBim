@@ -13,6 +13,8 @@ import javax.swing.JComboBox;
 
 import br.univel.cadastro.cliente.Cliente;
 import br.univel.cadastro.cliente.ClienteDAOH2Imp;
+import br.univel.cadastro.cliente.Genero;
+import br.univel.cadastro.cliente.UF;
 /**
  * Tela "miolo" com os campos do cadastro de cliente
  * @author tcrivelatti - 28/10/2015 - 19:04
@@ -26,6 +28,8 @@ public class MioloCadastroCliente extends JPanel {
 	protected JTextField txtcidade;
 	protected JTextField txtemail;
 	protected JTextField txttelefone;
+	private JComboBox cbxuf;
+	private JComboBox cbxgenero;
 
 	/**
 	 * Create the panel.
@@ -117,7 +121,7 @@ public class MioloCadastroCliente extends JPanel {
 		gbc_lblEstado.gridy = 3;
 		add(lblEstado, gbc_lblEstado);
 		
-		JComboBox cbxuf = new JComboBox();
+		cbxuf = new JComboBox(UF.values());
 		GridBagConstraints gbc_cbxuf = new GridBagConstraints();
 		gbc_cbxuf.insets = new Insets(0, 0, 5, 0);
 		gbc_cbxuf.fill = GridBagConstraints.HORIZONTAL;
@@ -168,7 +172,8 @@ public class MioloCadastroCliente extends JPanel {
 		gbc_lblGnero.gridy = 5;
 		add(lblGnero, gbc_lblGnero);
 		
-		JComboBox cbxgenero = new JComboBox();
+		//Adicionado valores da Enum Genero no JComboBox
+		cbxgenero = new JComboBox(Genero.values());
 		GridBagConstraints gbc_cbxgenero = new GridBagConstraints();
 		gbc_cbxgenero.insets = new Insets(0, 0, 0, 5);
 		gbc_cbxgenero.fill = GridBagConstraints.HORIZONTAL;
@@ -188,9 +193,9 @@ public class MioloCadastroCliente extends JPanel {
 			c.setTelefone(txttelefone.getText());
 			c.setEndereco(txtendereco.getText());
 			c.setCidade(txtcidade.getText());
-			c.setUf(null);
+			c.setUf((UF)cbxuf.getSelectedItem());
 			c.setEmail(txtemail.getText());
-			c.setGenero(null);
+			c.setGenero((Genero)cbxgenero.getSelectedItem());
 			
 			try {
 				dao.inserir(c);

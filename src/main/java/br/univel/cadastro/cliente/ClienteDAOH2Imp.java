@@ -52,7 +52,7 @@ public class ClienteDAOH2Imp implements ClienteDAO{
 		ps.setString(5, c.getCidade());
 		ps.setString(6, c.getUf().getNome());
 		ps.setString(7, c.getEmail());
-		ps.setString(8, c.getGenero().getNome());
+		ps.setString(8, c.getGenero().toString());
 		
 		int res = ps.executeUpdate();
 		ps.close();
