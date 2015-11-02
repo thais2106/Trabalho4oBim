@@ -11,10 +11,10 @@ import java.sql.SQLException;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
-import br.univel.cadastro.cliente.Cliente;
-import br.univel.cadastro.cliente.ClienteDAOH2Imp;
-import br.univel.cadastro.cliente.Genero;
-import br.univel.cadastro.cliente.UF;
+import br.univel.cadastros.Cliente;
+import br.univel.cadastros.ClienteDAOH2Imp;
+import br.univel.cadastros.Genero;
+import br.univel.cadastros.UF;
 /**
  * Tela "miolo" com os campos do cadastro de cliente
  * @author tcrivelatti - 28/10/2015 - 19:04

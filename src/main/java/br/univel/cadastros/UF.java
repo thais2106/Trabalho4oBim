@@ -1,4 +1,4 @@
-package br.univel.cadastro.cliente;
+package br.univel.cadastros;
 
 /**
  * Classe Enum de siglas de estado (UF)

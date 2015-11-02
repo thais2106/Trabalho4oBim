@@ -1,4 +1,4 @@
-package br.univel.cadastro.cliente;
+package br.univel.cadastros;
 
 import java.sql.Connection;
 import java.sql.SQLException;

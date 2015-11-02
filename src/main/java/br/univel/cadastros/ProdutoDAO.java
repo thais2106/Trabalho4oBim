@@ -1,4 +1,4 @@
-package br.univel.cadastro.produto;
+package br.univel.cadastros;
 
 import java.util.List;
 /**

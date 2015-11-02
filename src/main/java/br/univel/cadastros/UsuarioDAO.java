@@ -1,4 +1,4 @@
-package br.univel.cadastro.usuario;
+package br.univel.cadastros;
 
 import java.util.List;
 /**

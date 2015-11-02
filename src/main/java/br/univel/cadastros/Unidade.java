@@ -1,4 +1,4 @@
-package br.univel.cadastro.produto;
+package br.univel.cadastros;
 /**
  * Classe Enum de Unidade de Medidas
  * @author tcrivelatti - 27/10/2015 - 20:05
