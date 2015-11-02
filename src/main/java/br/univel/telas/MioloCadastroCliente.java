@@ -193,7 +193,6 @@ public class MioloCadastroCliente extends JPanel {
 			c.setGenero(null);
 			
 			try {
-				dao.getConnection();
 				dao.inserir(c);
 				
 			} catch (Exception e) {

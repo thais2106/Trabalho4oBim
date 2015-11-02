@@ -8,10 +8,8 @@ import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 
-import javax.swing.AbstractButton;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
 
 import java.awt.Insets;
 import java.sql.SQLException;

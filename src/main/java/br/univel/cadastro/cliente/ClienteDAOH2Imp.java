@@ -1,6 +1,5 @@
 package br.univel.cadastro.cliente;
 
-import java.io.ObjectInputStream.GetField;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,24 +19,28 @@ public class ClienteDAOH2Imp implements ClienteDAO{
 	private String sql;
 	private static Connection con;
 	
-	public Connection getConnection() throws SQLException{
-		synchronized (con) {
-			System.out.println("oi");
+	public Connection getConnection(){
 			
-			if (con == null){
-				String url = "jdbc:h2:~/sisvendas";
-				String user = "sa";
-				String pass = "sa";
+			if (con == null){ //Se não ouver conexão instanciada
+				try{ // Tenta abrir uma nova conexão
+					String url = "jdbc:h2:~/sisvendas";
+					String user = "sa";
+					String pass = "sa";
 						
-				con = DriverManager.getConnection(url, user, pass);
+					con = DriverManager.getConnection(url, user, pass);
+				} catch (SQLException e){ //Se não conseguir abrir conexão, retorna erro
+					System.out.println("Erro ao abrir conexão");
+					e.printStackTrace();
+				}
 			}
-			
-			return con;
+			synchronized (con) {
+			return con; //retorna conexão
 		}
 	}
 
 	@Override
 	public void inserir(Cliente c) throws SQLException {
+		Connection con = getConnection();
 		sql = "INSERT INTO CLIENTE(id, nome, telefone, endereco, cidade, uf, email, genero)"
 				+ "values(?,?,?,?,?,?,?,?)";
 		
@@ -80,5 +83,5 @@ public class ClienteDAOH2Imp implements ClienteDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 }

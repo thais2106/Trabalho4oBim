@@ -11,10 +11,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 
-import br.univel.cadastro.cliente.Cliente;
-import br.univel.cadastro.cliente.ClienteDAO;
-import br.univel.cadastro.cliente.ClienteDAOH2Imp;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 

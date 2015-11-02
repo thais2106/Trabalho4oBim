@@ -9,7 +9,7 @@ import java.util.List;
  *
  */
 public interface ClienteDAO {
-	Connection getConnection() throws SQLException;
+	//Connection getConnection() throws SQLException;
 	
 	public void inserir(Cliente c) throws SQLException;
 	
