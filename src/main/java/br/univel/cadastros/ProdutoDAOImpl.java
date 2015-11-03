@@ -74,8 +74,8 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 		ps.setString(2, p.getCodBarras());
 		ps.setString(3, p.getCategoria().toString());
 		ps.setString(4, p.getDescricao());
-		ps.setBigDecimal(5, p.getCusto());
-		ps.setString(6, p.getUnidade().getNome());
+		ps.setString(5, p.getUnidade().getNome());
+		ps.setBigDecimal(6, p.getCusto());
 		ps.setBigDecimal(7, p.getMargemLucro());
 		
 		ps.executeUpdate();
@@ -151,9 +151,19 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 		while (rs.next()){
 			p.setId(rs.getInt(1));
 			p.setCodBarras(rs.getString(2));
-			p.setCategoria((Categoria)(rs.getObject(3)));
+			
+			for (Categoria c : Categoria.values()) {
+				if (c.toString().equals(rs.getString(3)))
+					p.setCategoria(c);
+			}
+			
 			p.setDescricao(rs.getString(4));
-			p.setUnidade((Unidade)(rs.getObject(5)));
+			
+			for (Unidade u : Unidade.values()) {
+				if (u.toString().equals(rs.getString(5)))
+					p.setUnidade(u);
+			}
+			
 			p.setCusto(rs.getBigDecimal(6));
 			p.setMargemLucro(rs.getBigDecimal(6));
 			produtos.add(p);

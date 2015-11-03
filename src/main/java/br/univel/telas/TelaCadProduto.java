@@ -28,6 +28,14 @@ public class TelaCadProduto extends MolduraAbstrata{
 			e.printStackTrace();
 		}
 		
+		try {
+			super.setAcaoExcluir(mcp.getAcaoExcluir());
+		} catch (NumberFormatException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		
 	}
 

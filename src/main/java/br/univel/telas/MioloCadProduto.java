@@ -10,8 +10,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.List;
 
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
@@ -19,9 +19,10 @@ import br.univel.cadastros.Categoria;
 import br.univel.cadastros.Produto;
 import br.univel.cadastros.ProdutoDAOImpl;
 import br.univel.cadastros.Unidade;
+import br.univel.tabelas.ProdutoModel;
 
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 /**
  * Classe com os campos do Produto para preencher
  * @author Thaís - 02/11/2015 - 16:01:49
@@ -36,6 +37,9 @@ public class MioloCadProduto extends JPanel {
 	private JComboBox cbxunidade;
 	private JComboBox cbxcategoria;
 	private ProdutoDAOImpl dao;
+	private JScrollPane scrollPane;
+	private JTable table;
+	private ProdutoModel model;
 
 	/**
 	 * Create the panel.
@@ -43,9 +47,9 @@ public class MioloCadProduto extends JPanel {
 	public MioloCadProduto() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lblId = new JLabel("ID");
@@ -57,12 +61,6 @@ public class MioloCadProduto extends JPanel {
 		add(lblId, gbc_lblId);
 		
 		txtid = new JTextField();
-		txtid.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent arg0) {
-				buscarId();
-			}
-		});
 		GridBagConstraints gbc_txtid = new GridBagConstraints();
 		gbc_txtid.insets = new Insets(0, 0, 5, 5);
 		gbc_txtid.fill = GridBagConstraints.HORIZONTAL;
@@ -170,44 +168,41 @@ public class MioloCadProduto extends JPanel {
 		txtmargem = new JTextField();
 		GridBagConstraints gbc_txtmargem = new GridBagConstraints();
 		gbc_txtmargem.gridwidth = 2;
-		gbc_txtmargem.insets = new Insets(0, 0, 0, 5);
+		gbc_txtmargem.insets = new Insets(0, 0, 5, 5);
 		gbc_txtmargem.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtmargem.gridx = 0;
 		gbc_txtmargem.gridy = 9;
 		add(txtmargem, gbc_txtmargem);
 		txtmargem.setColumns(10);
+		
+		scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 5;
+		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 10;
+		add(scrollPane, gbc_scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		setModelTabela();
 
 	}
 
-	protected void buscarId() {
-		Produto p = new Produto();
-		dao = new ProdutoDAOImpl();
-		int id;
+	private void setModelTabela() {
+		ProdutoDAOImpl dao = new ProdutoDAOImpl();
 		
+		List<Produto> lista;
 		try {
-			id = Integer.parseInt(txtid.getText());
-			System.out.println("id" + id);
-			try {
-				System.out.println("primeiro try");
-				p = dao.buscar(id);
-				
-			} catch (SQLException e) {
-				System.out.println("Erro ao buscar id");
-				e.printStackTrace();
-			}
-			
-		} catch (NumberFormatException e){
-			JOptionPane.showConfirmDialog(this, "Insira um id válido!");
+			lista = dao.listar();
+			model = new ProdutoModel(lista);
+			table.setModel(model);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
-		if (p != null){
-			txtid.setText(String.valueOf(p.getId()));
-			txtcodbarras.setText(p.getCodBarras());
-			txtcusto.setText(String.valueOf(p.getCusto()));
-			txtmargem.setText(String.valueOf(p.getMargemLucro()));
-		}
-		
-		
 	}
 
 	public Runnable getAcaoSalvar() throws SQLException {
@@ -221,7 +216,7 @@ public class MioloCadProduto extends JPanel {
 			p.setDescricao(txtdescricao.getText());
 			p.setUnidade((Unidade)cbxunidade.getSelectedItem());
 			p.setCusto(BigDecimal.valueOf(Double.parseDouble(txtcusto.getText())));
-			p.setCusto(BigDecimal.valueOf(Double.parseDouble(txtmargem.getText())));
+			p.setMargemLucro((BigDecimal.valueOf(Double.parseDouble(txtmargem.getText()))));
 		
 			try {
 				dao.inserir(p);
@@ -230,6 +225,28 @@ public class MioloCadProduto extends JPanel {
 				e.printStackTrace();
 			}
 		
+		};
+	}
+
+	public Runnable getAcaoExcluir() throws NumberFormatException, SQLException {
+		return () -> {
+			dao = new ProdutoDAOImpl();
+			
+			Produto p = new Produto();
+			
+			try {
+				p = dao.buscar(Integer.parseInt(txtid.getText()));
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			try {
+				dao.excluir(p);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		};
 	}
 
