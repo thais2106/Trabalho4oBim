@@ -32,6 +32,26 @@ public class ProdutoModel extends AbstractTableModel {
 	}
 
 	@Override
+	public String getColumnName(int col) {
+		switch (col) {
+		case 0:
+			return "ID";
+		case 1:
+			return "CODIGO DE BARRAS";
+		case 2:
+			return "CATEGORIA";
+		case 3:
+			return "DESCRIÇÃO";
+		case 4:
+			return "UNIDADE";
+		case 5:
+			return "CUSTO";
+		default:
+			return "MARGEM LUCRO";
+		}
+	}
+	
+	@Override
 	public Object getValueAt(int row, int col) {
 		
 		Produto p = produtos.get(row);

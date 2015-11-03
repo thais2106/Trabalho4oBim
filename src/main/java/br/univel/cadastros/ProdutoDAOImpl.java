@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +81,6 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 		
 		ps.executeUpdate();
 		ps.close();
-		
 	}
 
 	@Override
@@ -92,7 +92,6 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 		ps.setInt(1, p.getId());
 		ps.executeUpdate();
 		ps.close();
-		
 	}
 
 	@Override
@@ -139,16 +138,17 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 	@Override
 	public List<Produto> listar() throws SQLException {
 		Connection con = getConnection();
-		Produto p = new Produto();
+		
 		List<Produto> produtos = new ArrayList<Produto>();
 				
 				
-		sql = "SELECT * FROM PRODUTO";
+		sql = "SELECT * FROM PRODUTO ORDER BY id ASC";
 
-		PreparedStatement ps = con.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery(sql);
 		
 		while (rs.next()){
+			Produto p = new Produto();
 			p.setId(rs.getInt(1));
 			p.setCodBarras(rs.getString(2));
 			
@@ -165,12 +165,12 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 			}
 			
 			p.setCusto(rs.getBigDecimal(6));
-			p.setMargemLucro(rs.getBigDecimal(6));
+			p.setMargemLucro(rs.getBigDecimal(7));
 			produtos.add(p);
 		}
 		
 		rs.close();
-		ps.close();
+		st.close();
 		
 		return produtos;
 	}
