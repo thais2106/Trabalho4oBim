@@ -40,7 +40,7 @@ public class ClienteModel extends AbstractTableModel implements TableModel {
 		case 3:
 			return c.getCidade();
 		case 4:
-			return c.getUf();
+			return c.getUf().getNome();
 		case 5:
 			return c.getEmail();
 		case 6:

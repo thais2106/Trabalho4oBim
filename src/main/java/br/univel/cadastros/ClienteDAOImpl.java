@@ -99,16 +99,16 @@ public class ClienteDAOImpl implements ClienteDAO{
 			c.setEndereco(rs.getString(4));
 			c.setCidade(rs.getString(5));
 			
-			for (Genero g : Genero.values()) {
-				if (c.toString().equals(rs.getString(6)))
-					c.setGenero(g);
+			for (UF uf : UF.values()) {
+				if (uf.getNome().equals(rs.getString(6)))
+					c.setUf(uf);
 			}
 			
 			c.setEmail(rs.getString(7));
 			
-			for (UF uf : UF.values()) {
-				if (uf.toString().equals(rs.getString(8)))
-					c.setUf(uf);
+			for (Genero g : Genero.values()) {
+				if (g.toString().equals(rs.getString(8)))
+					c.setGenero(g);
 			}
 			
 			clientes.add(c);
