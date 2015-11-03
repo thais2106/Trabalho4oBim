@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -15,6 +16,11 @@ import br.univel.cadastros.Cliente;
 import br.univel.cadastros.ClienteDAOImpl;
 import br.univel.cadastros.Genero;
 import br.univel.cadastros.UF;
+import br.univel.tabelas.ClienteModel;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
 /**
  * Tela "miolo" com os campos do cadastro de cliente
  * @author tcrivelatti - 28/10/2015 - 19:04
@@ -30,21 +36,23 @@ public class MioloCadCliente extends JPanel {
 	protected JTextField txttelefone;
 	private JComboBox cbxuf;
 	private JComboBox cbxgenero;
+	private JTable table;
+	private TableModel model;
 
 	/**
 	 * Create the panel.
 	 */
 	public MioloCadCliente() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lblId = new JLabel("ID");
 		GridBagConstraints gbc_lblId = new GridBagConstraints();
-		gbc_lblId.anchor = GridBagConstraints.EAST;
+		gbc_lblId.anchor = GridBagConstraints.WEST;
 		gbc_lblId.insets = new Insets(0, 0, 5, 5);
 		gbc_lblId.gridx = 0;
 		gbc_lblId.gridy = 0;
@@ -54,17 +62,17 @@ public class MioloCadCliente extends JPanel {
 		GridBagConstraints gbc_txtid = new GridBagConstraints();
 		gbc_txtid.insets = new Insets(0, 0, 5, 5);
 		gbc_txtid.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtid.gridx = 1;
-		gbc_txtid.gridy = 0;
+		gbc_txtid.gridx = 0;
+		gbc_txtid.gridy = 1;
 		add(txtid, gbc_txtid);
 		txtid.setColumns(10);
 		
 		JLabel lblNome = new JLabel("Nome");
 		GridBagConstraints gbc_lblNome = new GridBagConstraints();
-		gbc_lblNome.anchor = GridBagConstraints.EAST;
+		gbc_lblNome.anchor = GridBagConstraints.WEST;
 		gbc_lblNome.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNome.gridx = 0;
-		gbc_lblNome.gridy = 1;
+		gbc_lblNome.gridy = 2;
 		add(lblNome, gbc_lblNome);
 		
 		txtnome = new JTextField();
@@ -72,17 +80,17 @@ public class MioloCadCliente extends JPanel {
 		gbc_txtnome.gridwidth = 6;
 		gbc_txtnome.insets = new Insets(0, 0, 5, 0);
 		gbc_txtnome.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtnome.gridx = 1;
-		gbc_txtnome.gridy = 1;
+		gbc_txtnome.gridx = 0;
+		gbc_txtnome.gridy = 3;
 		add(txtnome, gbc_txtnome);
 		txtnome.setColumns(10);
 		
 		JLabel lblEndereo = new JLabel("Endere\u00E7o");
 		GridBagConstraints gbc_lblEndereo = new GridBagConstraints();
-		gbc_lblEndereo.anchor = GridBagConstraints.EAST;
+		gbc_lblEndereo.anchor = GridBagConstraints.WEST;
 		gbc_lblEndereo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEndereo.gridx = 0;
-		gbc_lblEndereo.gridy = 2;
+		gbc_lblEndereo.gridy = 4;
 		add(lblEndereo, gbc_lblEndereo);
 		
 		txtendereco = new JTextField();
@@ -90,96 +98,126 @@ public class MioloCadCliente extends JPanel {
 		gbc_txtendereco.gridwidth = 6;
 		gbc_txtendereco.insets = new Insets(0, 0, 5, 0);
 		gbc_txtendereco.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtendereco.gridx = 1;
-		gbc_txtendereco.gridy = 2;
+		gbc_txtendereco.gridx = 0;
+		gbc_txtendereco.gridy = 5;
 		add(txtendereco, gbc_txtendereco);
 		txtendereco.setColumns(10);
 		
 		JLabel lblCidade = new JLabel("Cidade");
 		GridBagConstraints gbc_lblCidade = new GridBagConstraints();
-		gbc_lblCidade.anchor = GridBagConstraints.EAST;
+		gbc_lblCidade.anchor = GridBagConstraints.WEST;
 		gbc_lblCidade.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCidade.gridx = 0;
-		gbc_lblCidade.gridy = 3;
+		gbc_lblCidade.gridy = 6;
 		add(lblCidade, gbc_lblCidade);
+		
+		JLabel lblEstado = new JLabel("Estado");
+		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
+		gbc_lblEstado.anchor = GridBagConstraints.WEST;
+		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEstado.gridx = 4;
+		gbc_lblEstado.gridy = 6;
+		add(lblEstado, gbc_lblEstado);
 		
 		txtcidade = new JTextField();
 		GridBagConstraints gbc_txtcidade = new GridBagConstraints();
 		gbc_txtcidade.gridwidth = 3;
 		gbc_txtcidade.insets = new Insets(0, 0, 5, 5);
 		gbc_txtcidade.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtcidade.gridx = 1;
-		gbc_txtcidade.gridy = 3;
+		gbc_txtcidade.gridx = 0;
+		gbc_txtcidade.gridy = 7;
 		add(txtcidade, gbc_txtcidade);
 		txtcidade.setColumns(10);
 		
-		JLabel lblEstado = new JLabel("Estado");
-		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
-		gbc_lblEstado.anchor = GridBagConstraints.EAST;
-		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEstado.gridx = 4;
-		gbc_lblEstado.gridy = 3;
-		add(lblEstado, gbc_lblEstado);
-		
 		cbxuf = new JComboBox(UF.values());
 		GridBagConstraints gbc_cbxuf = new GridBagConstraints();
+		gbc_cbxuf.gridwidth = 2;
 		gbc_cbxuf.insets = new Insets(0, 0, 5, 0);
 		gbc_cbxuf.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbxuf.gridx = 5;
-		gbc_cbxuf.gridy = 3;
+		gbc_cbxuf.gridx = 4;
+		gbc_cbxuf.gridy = 7;
 		add(cbxuf, gbc_cbxuf);
 		
 		JLabel lblEmail = new JLabel("Email");
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
-		gbc_lblEmail.anchor = GridBagConstraints.EAST;
+		gbc_lblEmail.anchor = GridBagConstraints.WEST;
 		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEmail.gridx = 0;
-		gbc_lblEmail.gridy = 4;
+		gbc_lblEmail.gridy = 8;
 		add(lblEmail, gbc_lblEmail);
+		
+		JLabel lblTelefone = new JLabel("Telefone");
+		GridBagConstraints gbc_lblTelefone = new GridBagConstraints();
+		gbc_lblTelefone.anchor = GridBagConstraints.WEST;
+		gbc_lblTelefone.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTelefone.gridx = 4;
+		gbc_lblTelefone.gridy = 8;
+		add(lblTelefone, gbc_lblTelefone);
 		
 		txtemail = new JTextField();
 		GridBagConstraints gbc_txtemail = new GridBagConstraints();
 		gbc_txtemail.gridwidth = 3;
 		gbc_txtemail.insets = new Insets(0, 0, 5, 5);
 		gbc_txtemail.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtemail.gridx = 1;
-		gbc_txtemail.gridy = 4;
+		gbc_txtemail.gridx = 0;
+		gbc_txtemail.gridy = 9;
 		add(txtemail, gbc_txtemail);
 		txtemail.setColumns(10);
 		
-		JLabel lblTelefone = new JLabel("Telefone");
-		GridBagConstraints gbc_lblTelefone = new GridBagConstraints();
-		gbc_lblTelefone.anchor = GridBagConstraints.EAST;
-		gbc_lblTelefone.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTelefone.gridx = 4;
-		gbc_lblTelefone.gridy = 4;
-		add(lblTelefone, gbc_lblTelefone);
-		
 		txttelefone = new JTextField();
 		GridBagConstraints gbc_txttelfone = new GridBagConstraints();
-		gbc_txttelfone.insets = new Insets(0, 0, 5, 5);
+		gbc_txttelfone.gridwidth = 2;
+		gbc_txttelfone.insets = new Insets(0, 0, 5, 0);
 		gbc_txttelfone.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txttelfone.gridx = 5;
-		gbc_txttelfone.gridy = 4;
+		gbc_txttelfone.gridx = 4;
+		gbc_txttelfone.gridy = 9;
 		add(txttelefone, gbc_txttelfone);
 		txttelefone.setColumns(10);
 		
 		JLabel lblGnero = new JLabel("G\u00EAnero");
 		GridBagConstraints gbc_lblGnero = new GridBagConstraints();
-		gbc_lblGnero.anchor = GridBagConstraints.EAST;
-		gbc_lblGnero.insets = new Insets(0, 0, 0, 5);
+		gbc_lblGnero.anchor = GridBagConstraints.WEST;
+		gbc_lblGnero.insets = new Insets(0, 0, 5, 5);
 		gbc_lblGnero.gridx = 0;
-		gbc_lblGnero.gridy = 5;
+		gbc_lblGnero.gridy = 10;
 		add(lblGnero, gbc_lblGnero);
 		
 		//Adicionado valores da Enum Genero no JComboBox
 		cbxgenero = new JComboBox(Genero.values());
 		GridBagConstraints gbc_cbxgenero = new GridBagConstraints();
-		gbc_cbxgenero.insets = new Insets(0, 0, 0, 5);
+		gbc_cbxgenero.insets = new Insets(0, 0, 5, 5);
 		gbc_cbxgenero.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbxgenero.gridx = 1;
-		gbc_cbxgenero.gridy = 5;
+		gbc_cbxgenero.gridx = 0;
+		gbc_cbxgenero.gridy = 11;
 		add(cbxgenero, gbc_cbxgenero);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 6;
+		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 12;
+		add(scrollPane, gbc_scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		setModelTabela();
+		
+	}
+
+	private void setModelTabela() {
+		ClienteDAOImpl dao = new ClienteDAOImpl();
+
+		List<Cliente> lista;
+		try {
+			lista = dao.listar();
+			model = new ClienteModel(lista);
+			table.setModel(model);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

@@ -184,6 +184,7 @@ public class MioloCadProduto extends JPanel {
 		gbc_scrollPane.gridy = 10;
 		add(scrollPane, gbc_scrollPane);
 		
+		// Declarações de tabela, setando Model.
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		setModelTabela();

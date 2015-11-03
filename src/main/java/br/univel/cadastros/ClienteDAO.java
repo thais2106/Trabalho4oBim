@@ -19,5 +19,5 @@ public interface ClienteDAO {
 	
 	public Cliente buscar(int id);
 	
-	public List<Cliente> listar();
+	public List<Cliente> listar() throws SQLException;
 }

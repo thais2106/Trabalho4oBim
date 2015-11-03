@@ -3,7 +3,10 @@ package br.univel.cadastros;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -79,9 +82,43 @@ public class ClienteDAOImpl implements ClienteDAO{
 	}
 
 	@Override
-	public List<Cliente> listar() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Cliente> listar() throws SQLException {
+Connection con = getConnection();
+		
+		List<Cliente> clientes = new ArrayList<Cliente>();
+				
+		sql = "SELECT * FROM CLIENTE ORDER BY id ASC";
+
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		
+		while (rs.next()){
+			Cliente c = new Cliente();
+			c.setId(rs.getInt(1));
+			c.setNome(rs.getString(2));
+			c.setTelefone(rs.getString(3));
+			c.setEndereco(rs.getString(4));
+			c.setCidade(rs.getString(5));
+			
+			for (Genero g : Genero.values()) {
+				if (c.toString().equals(rs.getString(6)))
+					c.setGenero(g);
+			}
+			
+			c.setEmail(rs.getString(7));
+			
+			for (UF uf : UF.values()) {
+				if (uf.toString().equals(rs.getString(8)))
+					c.setUf(uf);
+			}
+			
+			clientes.add(c);
+		}
+		
+		rs.close();
+		st.close();
+		
+		return clientes;
 	}
 	
 }
