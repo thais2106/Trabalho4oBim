@@ -160,7 +160,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 			p.setDescricao(rs.getString(4));
 			
 			for (Unidade u : Unidade.values()) {
-				if (u.toString().equals(rs.getString(5)))
+				if (u.getNome().equals(rs.getString(5)))
 					p.setUnidade(u);
 			}
 			

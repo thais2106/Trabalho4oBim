@@ -66,7 +66,7 @@ public class ProdutoModel extends AbstractTableModel {
 		case 3:
 			return p.getDescricao();
 		case 4:
-			return p.getUnidade();
+			return p.getUnidade().getNome();
 		case 5:
 			return p.getCusto();
 		default:
