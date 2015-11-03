@@ -3,7 +3,9 @@ package br.univel.cadastros;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -19,7 +21,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 	private static Connection con;
 	
 	public Connection getConnection(){
-			
+			System.out.println("tenta iniciar a con");
 			if (con == null){
 				try{
 					String url = "jdbc:h2:~/sisvendas";
@@ -36,6 +38,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 			return con; //retorna conexão
 		}
 	}
+	
 	
 	@Override
 	public void inserir(Produto p) throws SQLException {
@@ -81,21 +84,85 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 	}
 
 	@Override
-	public void excluir(Produto p) {
-		// TODO Auto-generated method stub
+	public void excluir(Produto p) throws SQLException {
+		Connection con = getConnection();
+		sql = "DELETE FROM PRODUTO WHERE ID = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, p.getId());
+		ps.executeUpdate();
+		ps.close();
 		
 	}
 
 	@Override
-	public Produto buscar(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Produto buscar(int id) throws SQLException {
+		System.out.println("vai pegar a con");
+		Connection con = getConnection();
+		System.out.println("novo prod");
+		Produto p = new Produto();
+	
+		sql = "SELECT * FROM PRODUTO WHERE ID = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		System.out.println("prepare stat");
+		ps.setInt(1, id);
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()){
+			p.setId(rs.getInt(1));
+			p.setCodBarras(rs.getString(2));
+			
+			//Percorre lista de valores da Enum Categoria
+			for (Categoria c : Categoria.values()) {
+				//Se existir um valor de Enum que seja igual a String salva no banco, ele seta a categoria para o Produto
+				if (c.toString().equals(rs.getString(3)))
+					p.setCategoria(c);
+			}
+			
+			p.setDescricao(rs.getString(4));
+			
+			for (Unidade u : Unidade.values()) {
+				if (u.toString().equals(rs.getString(5)))
+					p.setUnidade(u);
+			}
+			p.setCusto(rs.getBigDecimal(6));
+			p.setMargemLucro(rs.getBigDecimal(7));
+		}
+		
+		rs.close();
+		ps.close();
+		
+		return p;
 	}
 
 	@Override
-	public List<Produto> listar() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Produto> listar() throws SQLException {
+		Connection con = getConnection();
+		Produto p = new Produto();
+		List<Produto> produtos = new ArrayList<Produto>();
+				
+				
+		sql = "SELECT * FROM PRODUTO";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()){
+			p.setId(rs.getInt(1));
+			p.setCodBarras(rs.getString(2));
+			p.setCategoria((Categoria)(rs.getObject(3)));
+			p.setDescricao(rs.getString(4));
+			p.setUnidade((Unidade)(rs.getObject(5)));
+			p.setCusto(rs.getBigDecimal(6));
+			p.setMargemLucro(rs.getBigDecimal(6));
+			produtos.add(p);
+		}
+		
+		rs.close();
+		ps.close();
+		
+		return produtos;
 	}
 
 }

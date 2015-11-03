@@ -75,7 +75,6 @@ public class ClienteDAOImpl implements ClienteDAO{
 
 	@Override
 	public Cliente buscar(int id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

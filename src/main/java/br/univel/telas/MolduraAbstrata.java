@@ -23,6 +23,7 @@ public abstract class MolduraAbstrata extends JPanel {
 	private JPanel panel;
 	private JButton btnFechar;
 	private JButton btnSalvar;
+	private JButton btnAtualizar;
 
 	protected abstract void configuraMiolo() throws SQLException;
 	
@@ -49,9 +50,9 @@ public abstract class MolduraAbstrata extends JPanel {
 		panel_1.setBackground(Color.LIGHT_GRAY);
 		add(panel_1, BorderLayout.SOUTH);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{0, 0, 0};
+		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0};
 		gbl_panel_1.rowHeights = new int[]{0, 0};
-		gbl_panel_1.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.columnWeights = new double[]{1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
@@ -63,10 +64,17 @@ public abstract class MolduraAbstrata extends JPanel {
 		gbc_btnNewButton.gridy = 0;
 		panel_1.add(btnSalvar, gbc_btnNewButton);
 		
+		btnAtualizar = new JButton("Atualizar");
+		GridBagConstraints gbc_btnAtualizar = new GridBagConstraints();
+		gbc_btnAtualizar.insets = new Insets(0, 0, 0, 5);
+		gbc_btnAtualizar.gridx = 1;
+		gbc_btnAtualizar.gridy = 0;
+		panel_1.add(btnAtualizar, gbc_btnAtualizar);
+		
 		btnFechar = new JButton("Fechar");
 		GridBagConstraints gbc_btnFechar = new GridBagConstraints();
 		gbc_btnFechar.anchor = GridBagConstraints.EAST;
-		gbc_btnFechar.gridx = 1;
+		gbc_btnFechar.gridx = 2;
 		gbc_btnFechar.gridy = 0;
 		panel_1.add(btnFechar, gbc_btnFechar);
 

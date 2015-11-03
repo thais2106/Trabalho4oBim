@@ -28,6 +28,7 @@ public class TelaCadProduto extends MolduraAbstrata{
 			e.printStackTrace();
 		}
 		
+		
 	}
 
 }

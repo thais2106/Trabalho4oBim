@@ -12,9 +12,9 @@ public interface ProdutoDAO {
 	
 	public void atualizar(Produto p) throws SQLException;
 	
-	public void excluir (Produto p);
+	public void excluir (Produto p) throws SQLException;
 	
-	public Produto buscar(int id);
+	public Produto buscar(int id) throws SQLException;
 	
-	public List<Produto> listar();
+	public List<Produto> listar() throws SQLException;
 }

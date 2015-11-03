@@ -11,6 +11,7 @@ import java.awt.Insets;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
@@ -18,6 +19,9 @@ import br.univel.cadastros.Categoria;
 import br.univel.cadastros.Produto;
 import br.univel.cadastros.ProdutoDAOImpl;
 import br.univel.cadastros.Unidade;
+
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 /**
  * Classe com os campos do Produto para preencher
  * @author Thaís - 02/11/2015 - 16:01:49
@@ -31,6 +35,7 @@ public class MioloCadProduto extends JPanel {
 	private JTextField txtmargem;
 	private JComboBox cbxunidade;
 	private JComboBox cbxcategoria;
+	private ProdutoDAOImpl dao;
 
 	/**
 	 * Create the panel.
@@ -52,6 +57,12 @@ public class MioloCadProduto extends JPanel {
 		add(lblId, gbc_lblId);
 		
 		txtid = new JTextField();
+		txtid.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				buscarId();
+			}
+		});
 		GridBagConstraints gbc_txtid = new GridBagConstraints();
 		gbc_txtid.insets = new Insets(0, 0, 5, 5);
 		gbc_txtid.fill = GridBagConstraints.HORIZONTAL;
@@ -168,11 +179,42 @@ public class MioloCadProduto extends JPanel {
 
 	}
 
+	protected void buscarId() {
+		Produto p = new Produto();
+		dao = new ProdutoDAOImpl();
+		int id;
+		
+		try {
+			id = Integer.parseInt(txtid.getText());
+			System.out.println("id" + id);
+			try {
+				System.out.println("primeiro try");
+				p = dao.buscar(id);
+				
+			} catch (SQLException e) {
+				System.out.println("Erro ao buscar id");
+				e.printStackTrace();
+			}
+			
+		} catch (NumberFormatException e){
+			JOptionPane.showConfirmDialog(this, "Insira um id válido!");
+		}
+
+		if (p != null){
+			txtid.setText(String.valueOf(p.getId()));
+			txtcodbarras.setText(p.getCodBarras());
+			txtcusto.setText(String.valueOf(p.getCusto()));
+			txtmargem.setText(String.valueOf(p.getMargemLucro()));
+		}
+		
+		
+	}
+
 	public Runnable getAcaoSalvar() throws SQLException {
 		return () -> {
-			ProdutoDAOImpl dao = new ProdutoDAOImpl();
+			dao = new ProdutoDAOImpl();
 			Produto p = new Produto();
-		
+
 			p.setId(Integer.parseInt(txtid.getText()));
 			p.setCodBarras(txtcodbarras.getText());
 			p.setCategoria((Categoria)cbxcategoria.getSelectedItem());
