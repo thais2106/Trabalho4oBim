@@ -10,7 +10,7 @@ import java.util.List;
 public interface ProdutoDAO {
 	public void inserir(Produto p) throws SQLException;
 	
-	public void atualizar(Produto p);
+	public void atualizar(Produto p) throws SQLException;
 	
 	public void excluir (Produto p);
 	

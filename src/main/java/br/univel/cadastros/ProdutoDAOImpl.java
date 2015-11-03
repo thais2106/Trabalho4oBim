@@ -60,13 +60,28 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 	}
 
 	@Override
-	public void atualizar(Produto c) {
-		// TODO Auto-generated method stub
+	public void atualizar(Produto p) throws SQLException {
+		Connection con = getConnection();
+		
+		sql = "UPDATE PRODUTO SET id = ?, codbarras = ?, categoria = ?, descricao = ?, unidade = ?,"
+				+ " custo = ?, margemlucro = ? WHERE id = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, p.getId());
+		ps.setString(2, p.getCodBarras());
+		ps.setString(3, p.getCategoria().toString());
+		ps.setString(4, p.getDescricao());
+		ps.setBigDecimal(5, p.getCusto());
+		ps.setString(6, p.getUnidade().getNome());
+		ps.setBigDecimal(7, p.getMargemLucro());
+		
+		ps.executeUpdate();
+		ps.close();
 		
 	}
 
 	@Override
-	public void excluir(Produto c) {
+	public void excluir(Produto p) {
 		// TODO Auto-generated method stub
 		
 	}
