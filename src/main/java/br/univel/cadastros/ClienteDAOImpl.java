@@ -23,7 +23,6 @@ public class ClienteDAOImpl implements ClienteDAO{
 	private static Connection con;
 	
 	public Connection getConnection(){
-			
 			if (con == null){ //Se não ouver conexão instanciada
 				try{ // Tenta abrir uma nova conexão
 					String url = "jdbc:h2:~/sisvendas";
@@ -83,7 +82,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 
 	@Override
 	public List<Cliente> listar() throws SQLException {
-Connection con = getConnection();
+		Connection con = getConnection();
 		
 		List<Cliente> clientes = new ArrayList<Cliente>();
 				
