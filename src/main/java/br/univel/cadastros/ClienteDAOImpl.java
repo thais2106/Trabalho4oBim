@@ -180,4 +180,19 @@ public class ClienteDAOImpl implements ClienteDAO{
 		return clientes;
 	}
 	
+	public int buscarID() throws SQLException{
+		int cod = 0;
+		
+		sql = "SELECT MAX(ID) FROM CLIENTE";
+		
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		
+		if (rs.first()){
+			cod = rs.getInt(1);
+		}
+	
+		return cod + 1;
+	}
+	
 }
