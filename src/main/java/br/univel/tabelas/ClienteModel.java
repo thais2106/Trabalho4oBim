@@ -25,6 +25,28 @@ public class ClienteModel extends AbstractTableModel implements TableModel {
 	public int getRowCount() {
 		return clientes.size();
 	}
+	
+	@Override
+	public String getColumnName(int col) {
+		switch (col) {
+		case 0:
+			return "ID";
+		case 1:
+			return "NOME";
+		case 2:
+			return "ENDERECO";
+		case 3:
+			return "CIDADE";
+		case 4:
+			return "UF";
+		case 5:
+			return "EMAIL";
+		case 6:
+			return "TELEFONE";
+		default:
+			return "GENERO";
+		}
+	}
 
 	@Override
 	public Object getValueAt(int row, int col) {
