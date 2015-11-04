@@ -250,6 +250,53 @@ public class MioloCadCliente extends JPanel {
 			ClienteDAOImpl dao = new ClienteDAOImpl();
 			Cliente c = new Cliente();
 			
+			int id = Integer.parseInt(txtid.getText());
+			
+			try {
+				c = dao.buscar(id);
+			} catch (Exception e1) {
+				System.out.println("Erro ao buscar código do cliente!");
+				e1.printStackTrace();
+			}
+			
+			if (c.getId() != 0){
+				c.setId(id);
+				c.setNome(txtnome.getText());
+				c.setEndereco(txtendereco.getText());
+				c.setCidade(txtcidade.getText());
+				c.setUf((UF)cbxuf.getSelectedItem());
+				c.setEmail(txtemail.getText());
+				c.setTelefone(txttelefone.getText());
+				c.setGenero((Genero)cbxgenero.getSelectedItem());
+				
+				try {
+					dao.atualizar(c);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			} else {
+				c.setId(Integer.parseInt(txtid.getText()));
+				c.setNome(txtnome.getText());
+				c.setTelefone(txttelefone.getText());
+				c.setEndereco(txtendereco.getText());
+				c.setCidade(txtcidade.getText());
+				c.setUf((UF)cbxuf.getSelectedItem());
+				c.setEmail(txtemail.getText());
+				c.setGenero((Genero)cbxgenero.getSelectedItem());
+				
+				try {
+					dao.inserir(c);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				setModelTabela();
+			}
+			
+			/*
 			c.setId(Integer.parseInt(txtid.getText()));
 			c.setNome(txtnome.getText());
 			c.setTelefone(txttelefone.getText());
@@ -266,6 +313,7 @@ public class MioloCadCliente extends JPanel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			*/
 		};	
 	}
 

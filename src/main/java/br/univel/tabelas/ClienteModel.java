@@ -12,6 +12,10 @@ public class ClienteModel extends AbstractTableModel implements TableModel {
 	
 	private List<Cliente> clientes = new ArrayList<Cliente>();
 	
+	public ClienteModel(){
+		
+	}
+	
 	public ClienteModel(List<Cliente> c) {
 		clientes = c;
 	}
@@ -70,6 +74,17 @@ public class ClienteModel extends AbstractTableModel implements TableModel {
 		default:
 			return c.getGenero();
 		}
+	}
+	
+	public void incluir(Cliente c){
+		clientes.add(c);
+		super.fireTableDataChanged();
+	}
+	
+	@Override
+	public void fireTableStructureChanged() {
+		// TODO Auto-generated method stub
+		super.fireTableStructureChanged();
 	}
 
 }

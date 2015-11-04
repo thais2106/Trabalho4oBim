@@ -196,8 +196,9 @@ public class MioloCadProduto extends JPanel {
 				txtcodbarras.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 1)));
 				cbxcategoria.setSelectedItem(table.getValueAt(table.getSelectedRow(), 2));
 				txtdescricao.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 3)));
-				txtcusto.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 4)));
-				txtmargem.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 5)));
+				cbxunidade.setSelectedItem(String.valueOf(table.getValueAt(table.getSelectedRow(), 4)));
+				txtcusto.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 5)));
+				txtmargem.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 6)));
 			}
 		});
 		scrollPane.setViewportView(table);

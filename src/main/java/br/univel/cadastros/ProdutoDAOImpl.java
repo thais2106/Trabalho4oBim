@@ -96,9 +96,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 
 	@Override
 	public Produto buscar(int id) throws SQLException {
-		System.out.println("vai pegar a con");
 		Connection con = getConnection();
-		System.out.println("novo prod");
 		Produto p = new Produto();
 	
 		sql = "SELECT * FROM PRODUTO WHERE ID = ?";

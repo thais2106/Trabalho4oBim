@@ -64,20 +64,78 @@ public class ClienteDAOImpl implements ClienteDAO{
 	}
 
 	@Override
-	public void atualizar(Cliente c) {
+	public void atualizar(Cliente c) throws SQLException {
+		Connection con = getConnection();
 		
+		sql = "UPDATE CLIENTE SET id = ?, nome = ?, endereco = ?, cidade = ?, uf = ?,"
+				+ " email = ?, telefone = ?, genero = ? WHERE id = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, c.getId());
+		ps.setString(2, c.getNome());
+		ps.setString(3, c.getEndereco());
+		ps.setString(4, c.getCidade());
+		ps.setString(5, c.getUf().toString());
+		ps.setString(6, c.getEmail());
+		ps.setString(7, c.getTelefone());
+		ps.setString(8, c.getGenero().toString());
+		ps.setInt(9, c.getId());
+		
+		ps.executeUpdate();
+		ps.close();
+		
+		JOptionPane.showConfirmDialog(null, "Cadastro alterado com sucesso!");
 		
 	}
 
 	@Override
-	public void excluir(Cliente c) {
-		// TODO Auto-generated method stub
+	public void excluir(Cliente c) throws SQLException {
+		Connection con = getConnection();
+		sql = "DELETE FROM CLIENTE WHERE ID = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, c.getId());
+		ps.executeUpdate();
+		ps.close();
 		
 	}
 
 	@Override
-	public Cliente buscar(int id) {
-		return null;
+	public Cliente buscar(int id) throws SQLException {
+		Connection con = getConnection();
+		Cliente c = new Cliente();
+	
+		sql = "SELECT * FROM CLIENTE WHERE ID = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, id);
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()){
+			c.setId(rs.getInt(1));
+			c.setNome(rs.getString(2));
+			c.setTelefone(rs.getString(3));
+			c.setEndereco(rs.getString(4));
+			c.setCidade(rs.getString(5));
+			
+			for (UF uf : UF.values()) {
+				if (uf.toString().equals(rs.getString(6)))
+					c.setUf(uf);
+			}
+			
+			c.setEmail(rs.getString(7));
+			
+			for (Genero g : Genero.values()) {
+				if (g.toString().equals(rs.getString(8)))
+					c.setGenero(g);
+			}
+		}
+		
+		rs.close();
+		ps.close();
+		
+		return c;
+
 	}
 
 	@Override
