@@ -84,7 +84,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 		ps.executeUpdate();
 		ps.close();
 		
-		JOptionPane.showConfirmDialog(null, "Cadastro alterado com sucesso!");
+		JOptionPane.showMessageDialog(null, "Cadastro alterado com sucesso!");
 		
 	}
 
@@ -97,6 +97,8 @@ public class ClienteDAOImpl implements ClienteDAO{
 		ps.setInt(1, c.getId());
 		ps.executeUpdate();
 		ps.close();
+		
+		JOptionPane.showMessageDialog(null, "Cadastro excluído com sucesso!");
 		
 	}
 

@@ -16,13 +16,16 @@ public class TelaCadCliente extends MolduraAbstrata{
 
 	@Override
 	protected void configuraMiolo() {
-		MioloCadCliente mioloCadastroCliente = new MioloCadCliente();
-		super.add(mioloCadastroCliente, BorderLayout.CENTER);
+		MioloCadCliente mcc = new MioloCadCliente();
+		super.add(mcc, BorderLayout.CENTER);
+		
 		try {
-			super.setAcaoSalvar(mioloCadastroCliente.getAcaoSalvar());
+			super.setAcaoSalvar(mcc.getAcaoSalvar());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		super.setAcaoExcluir(mcc.getAcaoExcluir());
 	}
 }

@@ -1,5 +1,6 @@
 package br.univel.telas;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
@@ -260,14 +261,7 @@ public class MioloCadCliente extends JPanel {
 			}
 			
 			if (c.getId() != 0){
-				c.setId(id);
-				c.setNome(txtnome.getText());
-				c.setEndereco(txtendereco.getText());
-				c.setCidade(txtcidade.getText());
-				c.setUf((UF)cbxuf.getSelectedItem());
-				c.setEmail(txtemail.getText());
-				c.setTelefone(txttelefone.getText());
-				c.setGenero((Genero)cbxgenero.getSelectedItem());
+				c = setarValores();
 				
 				try {
 					dao.atualizar(c);
@@ -277,14 +271,8 @@ public class MioloCadCliente extends JPanel {
 				}
 				
 			} else {
-				c.setId(Integer.parseInt(txtid.getText()));
-				c.setNome(txtnome.getText());
-				c.setTelefone(txttelefone.getText());
-				c.setEndereco(txtendereco.getText());
-				c.setCidade(txtcidade.getText());
-				c.setUf((UF)cbxuf.getSelectedItem());
-				c.setEmail(txtemail.getText());
-				c.setGenero((Genero)cbxgenero.getSelectedItem());
+				
+				c = setarValores();				
 				
 				try {
 					dao.inserir(c);
@@ -315,6 +303,44 @@ public class MioloCadCliente extends JPanel {
 			}
 			*/
 		};	
+	}
+
+	public Runnable getAcaoExcluir() {
+		return () -> {
+			ClienteDAOImpl dao = new ClienteDAOImpl();
+		
+			int opcao = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir o registro?", "Aviso",
+					JOptionPane.YES_NO_OPTION);
+		
+			if (opcao == 0) {
+				Cliente c = new Cliente();
+				c = setarValores();
+			
+				try {
+					dao.excluir(c);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}; 
+	}
+		
+	
+	public Cliente setarValores(){
+		
+		Cliente c = new Cliente();
+		
+		c.setId(Integer.parseInt(txtid.getText()));
+		c.setNome(txtnome.getText());
+		c.setTelefone(txttelefone.getText());
+		c.setEndereco(txtendereco.getText());
+		c.setCidade(txtcidade.getText());
+		c.setUf((UF)cbxuf.getSelectedItem());
+		c.setEmail(txtemail.getText());
+		c.setGenero((Genero)cbxgenero.getSelectedItem());
+		
+		return c;
 	}
 
 }
