@@ -21,6 +21,8 @@ import br.univel.tabelas.ClienteModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
 /**
  * Tela "miolo" com os campos do cadastro de cliente
  * @author tcrivelatti - 28/10/2015 - 19:04
@@ -44,9 +46,9 @@ public class MioloCadCliente extends JPanel {
 	 */
 	public MioloCadCliente() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{252, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -60,12 +62,20 @@ public class MioloCadCliente extends JPanel {
 		
 		txtid = new JTextField();
 		GridBagConstraints gbc_txtid = new GridBagConstraints();
-		gbc_txtid.insets = new Insets(0, 0, 5, 5);
 		gbc_txtid.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtid.insets = new Insets(0, 0, 5, 5);
 		gbc_txtid.gridx = 0;
 		gbc_txtid.gridy = 1;
 		add(txtid, gbc_txtid);
 		txtid.setColumns(10);
+		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\tcrivelatti\\Pictures\\search.png"));
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton.gridx = 1;
+		gbc_btnNewButton.gridy = 1;
+		add(btnNewButton, gbc_btnNewButton);
 		
 		JLabel lblNome = new JLabel("Nome");
 		GridBagConstraints gbc_lblNome = new GridBagConstraints();
@@ -77,7 +87,7 @@ public class MioloCadCliente extends JPanel {
 		
 		txtnome = new JTextField();
 		GridBagConstraints gbc_txtnome = new GridBagConstraints();
-		gbc_txtnome.gridwidth = 6;
+		gbc_txtnome.gridwidth = 4;
 		gbc_txtnome.insets = new Insets(0, 0, 5, 0);
 		gbc_txtnome.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtnome.gridx = 0;
@@ -95,7 +105,7 @@ public class MioloCadCliente extends JPanel {
 		
 		txtendereco = new JTextField();
 		GridBagConstraints gbc_txtendereco = new GridBagConstraints();
-		gbc_txtendereco.gridwidth = 6;
+		gbc_txtendereco.gridwidth = 4;
 		gbc_txtendereco.insets = new Insets(0, 0, 5, 0);
 		gbc_txtendereco.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtendereco.gridx = 0;
@@ -115,13 +125,13 @@ public class MioloCadCliente extends JPanel {
 		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
 		gbc_lblEstado.anchor = GridBagConstraints.WEST;
 		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEstado.gridx = 4;
+		gbc_lblEstado.gridx = 2;
 		gbc_lblEstado.gridy = 6;
 		add(lblEstado, gbc_lblEstado);
 		
 		txtcidade = new JTextField();
 		GridBagConstraints gbc_txtcidade = new GridBagConstraints();
-		gbc_txtcidade.gridwidth = 3;
+		gbc_txtcidade.gridwidth = 2;
 		gbc_txtcidade.insets = new Insets(0, 0, 5, 5);
 		gbc_txtcidade.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtcidade.gridx = 0;
@@ -134,7 +144,7 @@ public class MioloCadCliente extends JPanel {
 		gbc_cbxuf.gridwidth = 2;
 		gbc_cbxuf.insets = new Insets(0, 0, 5, 0);
 		gbc_cbxuf.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbxuf.gridx = 4;
+		gbc_cbxuf.gridx = 2;
 		gbc_cbxuf.gridy = 7;
 		add(cbxuf, gbc_cbxuf);
 		
@@ -150,13 +160,12 @@ public class MioloCadCliente extends JPanel {
 		GridBagConstraints gbc_lblTelefone = new GridBagConstraints();
 		gbc_lblTelefone.anchor = GridBagConstraints.WEST;
 		gbc_lblTelefone.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTelefone.gridx = 4;
+		gbc_lblTelefone.gridx = 1;
 		gbc_lblTelefone.gridy = 8;
 		add(lblTelefone, gbc_lblTelefone);
 		
 		txtemail = new JTextField();
 		GridBagConstraints gbc_txtemail = new GridBagConstraints();
-		gbc_txtemail.gridwidth = 3;
 		gbc_txtemail.insets = new Insets(0, 0, 5, 5);
 		gbc_txtemail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtemail.gridx = 0;
@@ -166,10 +175,10 @@ public class MioloCadCliente extends JPanel {
 		
 		txttelefone = new JTextField();
 		GridBagConstraints gbc_txttelfone = new GridBagConstraints();
-		gbc_txttelfone.gridwidth = 2;
+		gbc_txttelfone.gridwidth = 3;
 		gbc_txttelfone.insets = new Insets(0, 0, 5, 0);
 		gbc_txttelfone.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txttelfone.gridx = 4;
+		gbc_txttelfone.gridx = 1;
 		gbc_txttelfone.gridy = 9;
 		add(txttelefone, gbc_txttelfone);
 		txttelefone.setColumns(10);
@@ -193,8 +202,7 @@ public class MioloCadCliente extends JPanel {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridwidth = 6;
-		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
+		gbc_scrollPane.gridwidth = 4;
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 12;

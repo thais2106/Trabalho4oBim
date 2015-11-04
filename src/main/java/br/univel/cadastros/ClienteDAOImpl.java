@@ -57,7 +57,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 		ps.setString(7, c.getEmail());
 		ps.setString(8, c.getGenero().toString());
 		
-		int res = ps.executeUpdate();
+		ps.executeUpdate();
 		ps.close();
 		
 		JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
