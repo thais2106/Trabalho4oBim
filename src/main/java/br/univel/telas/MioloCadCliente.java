@@ -23,6 +23,9 @@ import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 /**
  * Tela "miolo" com os campos do cadastro de cliente
  * @author tcrivelatti - 28/10/2015 - 19:04
@@ -209,6 +212,19 @@ public class MioloCadCliente extends JPanel {
 		add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				txtid.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 0)));
+				txtnome.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 1)));
+				txtendereco.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 2)));
+				txtcidade.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 3)));
+				cbxuf.setSelectedItem(table.getValueAt(table.getSelectedRow(), 4));
+				txtemail.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 5)));
+				txttelefone.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 6)));
+				cbxgenero.setSelectedItem(table.getValueAt(table.getSelectedRow(), 7));
+			}
+		});
 		scrollPane.setViewportView(table);
 		setModelTabela();
 		

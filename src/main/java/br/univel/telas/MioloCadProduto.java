@@ -23,6 +23,9 @@ import br.univel.tabelas.ProdutoModel;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 /**
  * Classe com os campos do Produto para preencher
  * @author Thaís - 02/11/2015 - 16:01:49
@@ -186,6 +189,17 @@ public class MioloCadProduto extends JPanel {
 		
 		// Declarações de tabela, setando Model.
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				txtid.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 0)));
+				txtcodbarras.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 1)));
+				cbxcategoria.setSelectedItem(table.getValueAt(table.getSelectedRow(), 2));
+				txtdescricao.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 3)));
+				txtcusto.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 4)));
+				txtmargem.setText(String.valueOf(table.getValueAt(table.getSelectedRow(), 5)));
+			}
+		});
 		scrollPane.setViewportView(table);
 		setModelTabela();
 

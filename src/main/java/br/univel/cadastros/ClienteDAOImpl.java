@@ -53,7 +53,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 		ps.setString(3, c.getTelefone());
 		ps.setString(4, c.getEndereco());
 		ps.setString(5, c.getCidade());
-		ps.setString(6, c.getUf().getNome());
+		ps.setString(6, c.getUf().toString());
 		ps.setString(7, c.getEmail());
 		ps.setString(8, c.getGenero().toString());
 		
@@ -100,7 +100,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 			c.setCidade(rs.getString(5));
 			
 			for (UF uf : UF.values()) {
-				if (uf.getNome().equals(rs.getString(6)))
+				if (uf.toString().equals(rs.getString(6)))
 					c.setUf(uf);
 			}
 			
