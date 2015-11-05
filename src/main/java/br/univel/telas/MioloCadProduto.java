@@ -289,7 +289,7 @@ public class MioloCadProduto extends JPanel {
 	private boolean verificaValores() {
 		
 		if (txtdescricao.getText().isEmpty() || txtcodbarras.getText().isEmpty()
-				|| txtdescricao.getText().isEmpty() || txtcusto.getText().isEmpty() || txtmargem.getText().isEmpty()){
+				|| txtdescricao.getText().isEmpty()){
 			
 			JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
 			return false;
