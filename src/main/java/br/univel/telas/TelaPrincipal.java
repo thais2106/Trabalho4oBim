@@ -13,6 +13,8 @@ import javax.swing.JTabbedPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Tela Principal da aplicação com o menu de cadastros
@@ -25,6 +27,8 @@ public class TelaPrincipal extends JFrame {
 	private JMenuItem mntmCliente;
 	private JTabbedPane tabbedPane;
 	private JMenuItem mntmProduto;
+	private JMenu mnRelatrios;
+	private JMenu mnVenda;
 
 	/**
 	 * Launch the application.
@@ -70,6 +74,18 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		mnCadastro.add(mntmProduto);
+		
+		mnVenda = new JMenu("Venda");
+		mnVenda.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				abrirTelaVenda();
+			}
+		});
+		menuBar.add(mnVenda);
+		
+		mnRelatrios = new JMenu("Relat\u00F3rios");
+		menuBar.add(mnRelatrios);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -77,6 +93,13 @@ public class TelaPrincipal extends JFrame {
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
+	}
+
+	protected void abrirTelaVenda() {
+		TelaCadVenda tcv = new TelaCadVenda();
+		tcv.setCloseAction(e -> tabbedPane.remove(tcv));
+		tabbedPane.addTab("Tela de Venda", tcv);
+		
 	}
 
 	protected void abrirTelaProduto() {
