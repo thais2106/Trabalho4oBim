@@ -181,6 +181,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 	}
 	
 	public int buscarID() throws SQLException{
+		Connection con = getConnection();
 		int cod = 0;
 		
 		sql = "SELECT MAX(ID) FROM CLIENTE";

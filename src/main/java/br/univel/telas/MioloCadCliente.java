@@ -22,9 +22,6 @@ import br.univel.tabelas.ClienteModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -77,15 +74,6 @@ public class MioloCadCliente extends JPanel {
 		gbc_txtid.gridy = 1;
 		add(txtid, gbc_txtid);
 		txtid.setColumns(10);
-
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(
-				"C:\\Users\\tcrivelatti\\Pictures\\search.png"));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 1;
-		gbc_btnNewButton.gridy = 1;
-		add(btnNewButton, gbc_btnNewButton);
 
 		JLabel lblNome = new JLabel("Nome");
 		GridBagConstraints gbc_lblNome = new GridBagConstraints();

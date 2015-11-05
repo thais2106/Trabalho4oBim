@@ -81,6 +81,8 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 		
 		ps.executeUpdate();
 		ps.close();
+		
+		JOptionPane.showMessageDialog(null, "Produto alterado com sucesso!");
 	}
 
 	@Override
@@ -92,6 +94,8 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 		ps.setInt(1, p.getId());
 		ps.executeUpdate();
 		ps.close();
+		
+		JOptionPane.showMessageDialog(null, "Produto excluído com sucesso!");
 	}
 
 	@Override
@@ -171,6 +175,22 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 		st.close();
 		
 		return produtos;
+	}
+	
+	public int buscarID() throws SQLException{
+		Connection con = getConnection();
+		int cod = 0;
+		
+		sql = "SELECT MAX(ID) FROM PRODUTO";
+		
+		Statement st = con.createStatement();
+		ResultSet rs = st.executeQuery(sql);
+		
+		if (rs.first()){
+			cod = rs.getInt(1);
+		}
+	
+		return cod + 1;
 	}
 
 }

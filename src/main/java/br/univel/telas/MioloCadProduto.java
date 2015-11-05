@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
@@ -32,14 +33,13 @@ import java.awt.event.MouseEvent;
  *
  */
 public class MioloCadProduto extends JPanel {
-	private JTextField txtid;
-	private JTextField txtcodbarras;
-	private JTextField txtdescricao;
-	private JTextField txtcusto;
-	private JTextField txtmargem;
+	protected JTextField txtid;
+	protected JTextField txtcodbarras;
+	protected JTextField txtdescricao;
+	protected JTextField txtcusto;
+	protected JTextField txtmargem;
 	private JComboBox cbxunidade;
 	private JComboBox cbxcategoria;
-	private ProdutoDAOImpl dao;
 	private JScrollPane scrollPane;
 	private JTable table;
 	private ProdutoModel model;
@@ -223,16 +223,42 @@ public class MioloCadProduto extends JPanel {
 
 	public Runnable getAcaoSalvar() throws SQLException {
 		return () -> {
-			dao = new ProdutoDAOImpl();
+			ProdutoDAOImpl dao = new ProdutoDAOImpl();
 			Produto p = new Produto();
+			
+			int id = Integer.parseInt(txtid.getText());
+			
+			try {
+				p = dao.buscar(id);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			if (verificaValores()){
+				if (p.getId() != 0){
+					p = setarValores();
+					
+					try {
+						dao.atualizar(p);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					p = setarValores();
+					try {
+						dao.inserir(p);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}
+			
+			/*
 
-			p.setId(Integer.parseInt(txtid.getText()));
-			p.setCodBarras(txtcodbarras.getText());
-			p.setCategoria((Categoria)cbxcategoria.getSelectedItem());
-			p.setDescricao(txtdescricao.getText());
-			p.setUnidade((Unidade)cbxunidade.getSelectedItem());
-			p.setCusto(BigDecimal.valueOf(Double.parseDouble(txtcusto.getText())));
-			p.setMargemLucro((BigDecimal.valueOf(Double.parseDouble(txtmargem.getText()))));
 		
 			try {
 				dao.inserir(p);
@@ -240,13 +266,57 @@ public class MioloCadProduto extends JPanel {
 				System.out.println("Erro ao inserir produto");
 				e.printStackTrace();
 			}
+			
+			*/
 		
 		};
 	}
 
+	private Produto setarValores() {
+		Produto p = new Produto();
+		
+		p.setId(Integer.parseInt(txtid.getText()));
+		p.setCodBarras(txtcodbarras.getText());
+		p.setCategoria((Categoria)cbxcategoria.getSelectedItem());
+		p.setDescricao(txtdescricao.getText());
+		p.setUnidade((Unidade)cbxunidade.getSelectedItem());
+		p.setCusto(BigDecimal.valueOf(Double.parseDouble(txtcusto.getText())));
+		p.setMargemLucro((BigDecimal.valueOf(Double.parseDouble(txtmargem.getText()))));
+		
+		return p;
+	}
+
+	private boolean verificaValores() {
+		
+		if (txtdescricao.getText().isEmpty() || txtcodbarras.getText().isEmpty()
+				|| txtdescricao.getText().isEmpty() || txtcusto.getText().isEmpty() || txtmargem.getText().isEmpty()){
+			
+			JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+			return false;
+		}
+		
+		try{
+			BigDecimal custo = new BigDecimal(txtcusto.getText());
+		} catch (NumberFormatException e){
+			JOptionPane.showMessageDialog(null, "Custo inválido! Digite um valor numérico.");
+			return false;
+		}
+		
+		try{
+			BigDecimal margem = new BigDecimal(txtmargem.getText());
+		} catch (NumberFormatException e){
+			JOptionPane.showMessageDialog(null, "Margem de lucro inválida! Digite um valor numérico.");
+			return false;
+		}
+		
+		
+		return true;
+		
+	}
+
 	public Runnable getAcaoExcluir() throws NumberFormatException, SQLException {
 		return () -> {
-			dao = new ProdutoDAOImpl();
+			ProdutoDAOImpl dao = new ProdutoDAOImpl();
 			
 			Produto p = new Produto();
 			
