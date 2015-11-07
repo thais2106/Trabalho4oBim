@@ -16,6 +16,8 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 
 import br.univel.cadastros.Cliente;
+import br.univel.cadastros.Venda;
+import br.univel.cadastros.VendaDAOImpl;
 
 /**
  * Campos da tela de venda
@@ -224,7 +226,9 @@ public class MioloCadVenda extends JPanel {
 	}
 
 	public Runnable getAcaoSalvar() {
-		// TODO Auto-generated method stub
+		VendaDAOImpl dao = new VendaDAOImpl();
+		Venda v = new Venda();
+		
 		return null;
 	}
 
