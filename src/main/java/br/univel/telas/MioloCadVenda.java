@@ -8,6 +8,9 @@ import javax.swing.JLabel;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
@@ -16,6 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 
 import br.univel.cadastros.Cliente;
+import br.univel.cadastros.ClienteDAOImpl;
 import br.univel.cadastros.Venda;
 import br.univel.cadastros.VendaDAOImpl;
 
@@ -26,15 +30,15 @@ import br.univel.cadastros.VendaDAOImpl;
  */
 
 public class MioloCadVenda extends JPanel {
-	private JTextField txtidvenda;
-	private JTextField txtvaltotal;
-	private JTextField txtpagamento;
-	private JTextField txttroco;
-	private JTextField txtidprod;
-	private JTextField txtquantidade;
-	private JTextField txtvalunit;
-	private JTable tableprodutos;
-	private JComboBox cbxcliente;
+	protected JTextField txtidvenda;
+	protected JTextField txtvaltotal;
+	protected JTextField txtpagamento;
+	protected JTextField txttroco;
+	protected JTextField txtidprod;
+	protected JTextField txtquantidade;
+	protected JTextField txtvalunit;
+	protected JTable tableprodutos;
+	protected JComboBox cbxcliente;
 
 	/**
 	 * Create the panel.
@@ -226,12 +230,37 @@ public class MioloCadVenda extends JPanel {
 	}
 
 	public Runnable getAcaoSalvar() {
-		VendaDAOImpl dao = new VendaDAOImpl();
+		return () -> {
+			VendaDAOImpl dao = new VendaDAOImpl();
+			Venda v = new Venda();
+		
+			//v = dao.buscar(id);
+		
+			//v = setarValores();
+			
+			try {
+				dao.inserir(v);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		};
+	}
+
+	private Venda setarValores() {
 		Venda v = new Venda();
+		/*
+		v.setIdVenda(Integer.parseInt(txtidvenda.getText()));
+		v.setIdCliente(idCliente);
+		v.setNomeCliente(nomeCliente);
+		v.setValorTotal(valorTotal);
+		v.setValorPagamento(valorPagamento);
+		
+		*/
 		
 		
-		
-		return null;
+		return v;
 	}
 
 	public Runnable getAcaoExcluir() {
