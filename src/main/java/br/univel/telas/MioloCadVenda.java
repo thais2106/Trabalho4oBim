@@ -229,6 +229,8 @@ public class MioloCadVenda extends JPanel {
 		VendaDAOImpl dao = new VendaDAOImpl();
 		Venda v = new Venda();
 		
+		
+		
 		return null;
 	}
 
