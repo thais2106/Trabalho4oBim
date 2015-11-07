@@ -1,15 +1,21 @@
 package br.univel.telas;
 
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+
+import br.univel.cadastros.Cliente;
 
 /**
  * Campos da tela de venda
@@ -26,6 +32,7 @@ public class MioloCadVenda extends JPanel {
 	private JTextField txtquantidade;
 	private JTextField txtvalunit;
 	private JTable tableprodutos;
+	private JComboBox cbxcliente;
 
 	/**
 	 * Create the panel.
@@ -64,7 +71,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblCliente.gridy = 2;
 		add(lblCliente, gbc_lblCliente);
 		
-		JComboBox cbxcliente = new JComboBox();
+		cbxcliente = new JComboBox();
 		GridBagConstraints gbc_cbxcliente = new GridBagConstraints();
 		gbc_cbxcliente.gridwidth = 5;
 		gbc_cbxcliente.insets = new Insets(0, 0, 5, 5);
@@ -214,6 +221,16 @@ public class MioloCadVenda extends JPanel {
 		gbc_txttroco.gridy = 10;
 		add(txttroco, gbc_txttroco);
 		txttroco.setColumns(10);
+	}
+
+	public Runnable getAcaoSalvar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Runnable getAcaoExcluir() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

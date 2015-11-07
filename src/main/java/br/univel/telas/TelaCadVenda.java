@@ -1,5 +1,6 @@
 package br.univel.telas;
 
+import java.awt.BorderLayout;
 import java.sql.SQLException;
 
 /**
@@ -9,10 +10,20 @@ import java.sql.SQLException;
  */
 
 public class TelaCadVenda extends MolduraAbstrata{
+	
+	public TelaCadVenda() {
+		super();
+	}
 
 	@Override
 	protected void configuraMiolo() throws SQLException {
+		MioloCadVenda mcv = new MioloCadVenda();
+		
+		super.add(mcv, BorderLayout.CENTER);
+		
+		super.setAcaoSalvar(mcv.getAcaoSalvar());
+		
+		super.setAcaoExcluir(mcv.getAcaoExcluir());
 		
 	}
-
 }
