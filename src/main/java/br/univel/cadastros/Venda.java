@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Venda {
 	private int idVenda;
 	private int idCliente;
-	private int nomeCliente;
+	private String nomeCliente;
 	private BigDecimal valorTotal;
 	private BigDecimal valorPagamento;
 	private ArrayList<Produto> itens;
@@ -27,10 +27,10 @@ public class Venda {
 	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
-	public int getNomeCliente() {
+	public String getNomeCliente() {
 		return nomeCliente;
 	}
-	public void setNomeCliente(int nomeCliente) {
+	public void setNomeCliente(String nomeCliente) {
 		this.nomeCliente = nomeCliente;
 	}
 	public BigDecimal getValorTotal() {

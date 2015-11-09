@@ -234,7 +234,14 @@ public class MioloCadVenda extends JPanel {
 			VendaDAOImpl dao = new VendaDAOImpl();
 			Venda v = new Venda();
 		
-			//v = dao.buscar(id);
+			try {
+				int id = dao.buscarID();
+				txtidvenda.setText(String.valueOf(id));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 		
 			//v = setarValores();
 			
