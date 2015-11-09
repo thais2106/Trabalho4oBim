@@ -20,8 +20,11 @@ import javax.swing.JButton;
 
 import br.univel.cadastros.Cliente;
 import br.univel.cadastros.ClienteDAOImpl;
+import br.univel.cadastros.Produto;
+import br.univel.cadastros.ProdutoDAOImpl;
 import br.univel.cadastros.Venda;
 import br.univel.cadastros.VendaDAOImpl;
+import br.univel.tabelas.ProdutoModel;
 
 /**
  * Campos da tela de venda
@@ -37,8 +40,10 @@ public class MioloCadVenda extends JPanel {
 	protected JTextField txtidprod;
 	protected JTextField txtquantidade;
 	protected JTextField txtvalunit;
-	protected JTable tableprodutos;
 	protected JComboBox cbxcliente;
+	private JTable tabProdutos;
+	private JTable tabItens;
+	private ProdutoModel model;
 
 	/**
 	 * Create the panel.
@@ -47,7 +52,7 @@ public class MioloCadVenda extends JPanel {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -165,16 +170,27 @@ public class MioloCadVenda extends JPanel {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridheight = 3;
-		gbc_scrollPane.gridwidth = 6;
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPane.gridwidth = 3;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 6;
 		add(scrollPane, gbc_scrollPane);
 		
-		tableprodutos = new JTable();
-		scrollPane.setViewportView(tableprodutos);
+		tabProdutos = new JTable();
+		scrollPane.setViewportView(tabProdutos);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+		gbc_scrollPane_1.gridwidth = 3;
+		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_1.gridx = 3;
+		gbc_scrollPane_1.gridy = 6;
+		add(scrollPane_1, gbc_scrollPane_1);
+		
+		tabItens = new JTable();
+		scrollPane_1.setViewportView(tabItens);
 		
 		JLabel lblValorTotal = new JLabel("Valor total");
 		GridBagConstraints gbc_lblValorTotal = new GridBagConstraints();
@@ -227,6 +243,25 @@ public class MioloCadVenda extends JPanel {
 		gbc_txttroco.gridy = 10;
 		add(txttroco, gbc_txttroco);
 		txttroco.setColumns(10);
+		
+		
+		scrollPane.setViewportView(tabProdutos);
+		setModelTabela();
+	
+	}
+	
+	private void setModelTabela() {
+		ProdutoDAOImpl dao = new ProdutoDAOImpl();
+		
+		List<Produto> lista;
+		try {
+			lista = dao.listar();
+			model = new ProdutoModel(lista);
+			tabProdutos.setModel(model);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public Runnable getAcaoSalvar() {
