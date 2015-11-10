@@ -11,6 +11,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import br.univel.conexao.ConexaoH2;
+
 /**
  * Implementação da classe ProdutoDAO
  * @author Thaís - 02/11/2015 - 16:37:23
@@ -19,31 +21,10 @@ import javax.swing.JOptionPane;
 
 public class ProdutoDAOImpl implements ProdutoDAO{
 	private String sql;
-	private static Connection con;
-	
-	public Connection getConnection(){
-			System.out.println("tenta iniciar a con classe produto");
-			if (con == null){
-				try{
-					String url = "jdbc:h2:~/sisvendas";
-					String user = "sa";
-					String pass = "sa";
-						
-					con = DriverManager.getConnection(url, user, pass);
-				} catch (SQLException e){
-					System.out.println("Erro ao abrir conexão");
-					e.printStackTrace();
-				}
-			}
-			synchronized (con) {
-			return con; //retorna conexão
-		}
-	}
-	
+	private static Connection con = ConexaoH2.getConnection();
 	
 	@Override
 	public void inserir(Produto p) throws SQLException {
-		Connection con = getConnection();
 		
 		sql = "INSERT INTO PRODUTO(id, codbarras, categoria, descricao, unidade, custo, margemlucro) "
 				+ "VALUES(?, ?, ?, ?, ?, ?, ?)";
@@ -65,7 +46,6 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 
 	@Override
 	public void atualizar(Produto p) throws SQLException {
-		Connection con = getConnection();
 		
 		sql = "UPDATE PRODUTO SET id = ?, codbarras = ?, categoria = ?, descricao = ?, unidade = ?,"
 				+ " custo = ?, margemlucro = ? WHERE id = ?";
@@ -87,7 +67,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 
 	@Override
 	public void excluir(Produto p) throws SQLException {
-		Connection con = getConnection();
+
 		sql = "DELETE FROM PRODUTO WHERE ID = ?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -100,7 +80,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 
 	@Override
 	public Produto buscar(int id) throws SQLException {
-		Connection con = getConnection();
+
 		Produto p = new Produto();
 	
 		sql = "SELECT * FROM PRODUTO WHERE ID = ?";
@@ -139,7 +119,6 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 
 	@Override
 	public List<Produto> listar() throws SQLException {
-		Connection con = getConnection();
 		
 		List<Produto> produtos = new ArrayList<Produto>();
 				
@@ -178,7 +157,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 	}
 	
 	public int buscarID() throws SQLException{
-		Connection con = getConnection();
+
 		int cod = 0;
 		
 		sql = "SELECT MAX(ID) FROM PRODUTO";
