@@ -22,7 +22,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 	private static Connection con;
 	
 	public Connection getConnection(){
-			System.out.println("tenta iniciar a con");
+			System.out.println("tenta iniciar a con classe produto");
 			if (con == null){
 				try{
 					String url = "jdbc:h2:~/sisvendas";
