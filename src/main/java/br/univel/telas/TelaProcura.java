@@ -51,6 +51,7 @@ public class TelaProcura extends JFrame {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JRadioButton radioCodBarras;
 	private JRadioButton radioDesc;
+	private List<Produto> lista;
 
 	/**
 	 * Launch the application.
@@ -73,7 +74,7 @@ public class TelaProcura extends JFrame {
 	 */
 	public TelaProcura() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 650, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -84,7 +85,7 @@ public class TelaProcura extends JFrame {
 		contentPane.add(lblCdigoDeBarras);
 		
 		txtpesquisa = new JTextField();
-		txtpesquisa.setBounds(5, 25, 190, 20);
+		txtpesquisa.setBounds(5, 25, 337, 20);
 		contentPane.add(txtpesquisa);
 		txtpesquisa.setColumns(10);
 		
@@ -94,11 +95,11 @@ public class TelaProcura extends JFrame {
 				procurar();
 			}
 		});
-		btnOk.setBounds(389, 24, 47, 23);
+		btnOk.setBounds(550, 24, 82, 23);
 		contentPane.add(btnOk);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(5, 52, 426, 216);
+		scrollPane.setBounds(5, 52, 627, 310);
 		contentPane.add(scrollPane);
 		
 		tabProdutos = new JTable();
@@ -106,22 +107,19 @@ public class TelaProcura extends JFrame {
 		
 		radioCodBarras = new JRadioButton("C\u00F3digo de barras");
 		buttonGroup.add(radioCodBarras);
-		radioCodBarras.setBounds(201, 24, 109, 23);
+		radioCodBarras.setBounds(348, 24, 109, 23);
 		contentPane.add(radioCodBarras);
 		
 		radioDesc = new JRadioButton("Descri\u00E7\u00E3o");
 		buttonGroup.add(radioDesc);
-		radioDesc.setBounds(312, 24, 71, 23);
+		radioDesc.setBounds(459, 24, 71, 23);
 		contentPane.add(radioDesc);
 		setModelTabela();
 		
 	}
 
 	protected void procurar() {
-		List<Produto> lista = new ArrayList<Produto>();
-		
-		if (txtpesquisa.getText().isEmpty())
-			setModelTabela();
+		lista = new ArrayList<Produto>();
 		
 		if (radioCodBarras.isSelected()){
 			try {
@@ -136,10 +134,12 @@ public class TelaProcura extends JFrame {
 			try {
 				lista = dao.listarDescricao(txtpesquisa.getText());
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
+		if (txtpesquisa.getText().isEmpty())
+			setModelTabela();
 		
 		if (lista.isEmpty())
 			JOptionPane.showMessageDialog(null, "Nenhum produto encontrado!");
@@ -152,7 +152,7 @@ public class TelaProcura extends JFrame {
 
 	private void setModelTabela() {
 		
-		List<Produto> lista;
+		lista = new ArrayList<>();
 		try {
 			lista = dao.listar();
 			model = new ProdutoModel(lista);
