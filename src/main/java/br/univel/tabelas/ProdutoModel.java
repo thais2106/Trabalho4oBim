@@ -17,6 +17,10 @@ public class ProdutoModel extends AbstractTableModel {
 	
 	private List<Produto> produtos = new ArrayList<Produto>();
 	
+	public ProdutoModel(){
+		
+	}
+	
 	public ProdutoModel(List<Produto> p) {
 		produtos = p;
 	}
@@ -72,6 +76,11 @@ public class ProdutoModel extends AbstractTableModel {
 		default:
 			return p.getMargemLucro();
 		}
+	}
+
+	public void incluir(Produto p) {
+		produtos.add(p);
+		super.fireTableDataChanged();
 	}
 
 }

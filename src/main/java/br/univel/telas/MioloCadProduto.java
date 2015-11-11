@@ -20,6 +20,7 @@ import br.univel.cadastros.Categoria;
 import br.univel.cadastros.Produto;
 import br.univel.cadastros.ProdutoDAOImpl;
 import br.univel.cadastros.Unidade;
+import br.univel.tabelas.ClienteModel;
 import br.univel.tabelas.ProdutoModel;
 
 import javax.swing.JScrollPane;
@@ -257,17 +258,7 @@ public class MioloCadProduto extends JPanel {
 				
 			}
 			
-			/*
-
-		
-			try {
-				dao.inserir(p);
-			} catch (Exception e) {
-				System.out.println("Erro ao inserir produto");
-				e.printStackTrace();
-			}
-			
-			*/
+			((ProdutoModel) model).incluir(p);
 		
 		};
 	}
