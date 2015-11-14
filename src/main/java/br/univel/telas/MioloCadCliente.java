@@ -13,15 +13,16 @@ import java.util.List;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
-import br.univel.cadastros.Cliente;
-import br.univel.cadastros.ClienteDAOImpl;
-import br.univel.cadastros.Genero;
-import br.univel.cadastros.UF;
+import br.univel.cliente.Cliente;
+import br.univel.cliente.ClienteDAOImpl;
+import br.univel.cliente.Genero;
+import br.univel.cliente.UF;
 import br.univel.tabelas.ClienteModel;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

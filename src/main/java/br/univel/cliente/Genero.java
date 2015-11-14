@@ -1,4 +1,4 @@
-package br.univel.cadastros;
+package br.univel.cliente;
 
 /**
  * Classe Enum de Gêneros

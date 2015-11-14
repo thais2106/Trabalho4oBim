@@ -3,7 +3,7 @@ package br.univel.telas;
 import java.awt.BorderLayout;
 import java.sql.SQLException;
 
-import br.univel.cadastros.ClienteDAOImpl;
+import br.univel.cliente.ClienteDAOImpl;
 
 /**
  * Tela que configura o MioloCadastroCliente e o DAOCliente na mesma tela

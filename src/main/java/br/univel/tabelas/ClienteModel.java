@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
-import br.univel.cadastros.Cliente;
+import br.univel.cliente.Cliente;
 
 public class ClienteModel extends AbstractTableModel implements TableModel {
 	

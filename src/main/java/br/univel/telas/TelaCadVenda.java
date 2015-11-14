@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.univel.cadastros.Cliente;
-import br.univel.cadastros.ClienteDAOImpl;
+import br.univel.cliente.Cliente;
+import br.univel.cliente.ClienteDAOImpl;
 
 /**
  * Classe que mostra os campos da tela de vendas na MolduraAbstrata
