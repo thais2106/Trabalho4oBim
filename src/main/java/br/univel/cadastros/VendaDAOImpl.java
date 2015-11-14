@@ -94,7 +94,7 @@ public class VendaDAOImpl implements VendaDAO {
 
 		int cod = 0;
 
-		sql = "SELECT MAX(ID) FROM VENDA";
+		sql = "SELECT MAX(IDVENDA) FROM VENDA";
 
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(sql);

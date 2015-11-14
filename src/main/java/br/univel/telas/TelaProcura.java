@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +26,11 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import br.univel.cadastros.Item;
 import br.univel.produto.Produto;
 import br.univel.produto.ProdutoDAOImpl;
+import br.univel.tabelas.ClienteModel;
+import br.univel.tabelas.ItemModel;
 import br.univel.tabelas.ProdutoModel;
 
 import java.awt.event.ActionListener;
@@ -34,6 +38,9 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Tela de Procura de Produtos
@@ -46,12 +53,14 @@ public class TelaProcura extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtpesquisa;
 	private JTable tabProdutos;
-	private ProdutoModel model;
+	private ProdutoModel produtomodel;
 	ProdutoDAOImpl dao = new ProdutoDAOImpl();
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JRadioButton radioCodBarras;
 	private JRadioButton radioDesc;
 	private List<Produto> lista;
+	MioloCadVenda mcv;
+	ItemModel itemmodel;
 
 	/**
 	 * Launch the application.
@@ -99,6 +108,14 @@ public class TelaProcura extends JFrame {
 		contentPane.add(btnOk);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				if (evt.getClickCount() == 2){
+					adicionarItem();
+				}
+			}
+		});
 		scrollPane.setBounds(5, 52, 627, 310);
 		contentPane.add(scrollPane);
 		
@@ -116,6 +133,19 @@ public class TelaProcura extends JFrame {
 		contentPane.add(radioDesc);
 		setModelTabela();
 		
+	}
+
+	protected void adicionarItem() {
+		
+		Item i = new Item();
+
+		i.setIdproduto((int) tabProdutos.getValueAt(tabProdutos.getSelectedRow(), 0));
+		i.setCodbarras(String.valueOf(tabProdutos.getValueAt(tabProdutos.getSelectedRow(), 1)));
+		i.setPrecounitario(BigDecimal.valueOf((double)(tabProdutos.getValueAt(tabProdutos.getSelectedRow(), 5))));
+		
+		((ItemModel) itemmodel).incluirItem(i);
+		
+			
 	}
 
 	protected void procurar() {
@@ -144,8 +174,8 @@ public class TelaProcura extends JFrame {
 		if (lista.isEmpty())
 			JOptionPane.showMessageDialog(null, "Nenhum produto encontrado!");
 		else {
-			model = new ProdutoModel(lista);
-			tabProdutos.setModel(model);
+			produtomodel = new ProdutoModel(lista);
+			tabProdutos.setModel(produtomodel);
 		}
 		
 	}
@@ -155,8 +185,8 @@ public class TelaProcura extends JFrame {
 		lista = new ArrayList<>();
 		try {
 			lista = dao.listar();
-			model = new ProdutoModel(lista);
-			tabProdutos.setModel(model);
+			produtomodel = new ProdutoModel(lista);
+			tabProdutos.setModel(produtomodel);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

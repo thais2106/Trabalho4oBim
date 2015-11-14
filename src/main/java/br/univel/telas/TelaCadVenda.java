@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.univel.cadastros.VendaDAOImpl;
 import br.univel.cliente.Cliente;
 import br.univel.cliente.ClienteDAOImpl;
 
@@ -23,10 +24,11 @@ public class TelaCadVenda extends MolduraAbstrata{
 	@Override
 	protected void configuraMiolo() throws SQLException {
 		MioloCadVenda mcv = new MioloCadVenda();
+		VendaDAOImpl vendadao = new VendaDAOImpl();
 		ClienteDAOImpl clienteDao = new ClienteDAOImpl();
+		List<Cliente> clientes = new ArrayList<Cliente>(); //array para popular combobox de clientes na tela de vendas
 		
-		List<Cliente> clientes = new ArrayList<Cliente>();
-		
+		//Criando lista de clientes do banco para popular combobox
 		try {
 			clientes = clienteDao.listarOrdemNome();
 		} catch (SQLException e) {
@@ -35,8 +37,12 @@ public class TelaCadVenda extends MolduraAbstrata{
 		}
 		
 		for (Cliente c : clientes) {
-			extracted(mcv, c);;
+			extracted(mcv, c);
 		}
+		
+		
+		//Pegando ID da venda automaticamente
+		mcv.txtidvenda.setText(String.valueOf(vendadao.buscarID()));
 		
 		
 		super.add(mcv, BorderLayout.CENTER);

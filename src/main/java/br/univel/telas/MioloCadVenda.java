@@ -15,6 +15,8 @@ import javax.swing.JTable;
 
 import br.univel.cliente.Cliente;
 import br.univel.cliente.ClienteDAOImpl;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MioloCadVenda extends JPanel {
 	protected JTextField txtidvenda;
@@ -48,9 +50,9 @@ public class MioloCadVenda extends JPanel {
 		add(lblVenda, gbc_lblVenda);
 		
 		txtidvenda = new JTextField();
+		txtidvenda.setEditable(false);
 		GridBagConstraints gbc_txtidvenda = new GridBagConstraints();
 		gbc_txtidvenda.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtidvenda.gridwidth = 3;
 		gbc_txtidvenda.insets = new Insets(0, 0, 5, 5);
 		gbc_txtidvenda.gridx = 0;
 		gbc_txtidvenda.gridy = 1;
@@ -118,6 +120,13 @@ public class MioloCadVenda extends JPanel {
 		panel.add(lblPreo, gbc_lblPreo);
 		
 		txtcodbarras = new JTextField();
+		txtcodbarras.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent evt) {
+				if (evt.getKeyCode() == KeyEvent.VK_INSERT)
+					ativaTelaProcura();
+			}
+		});
 		GridBagConstraints gbc_txtcodbarras = new GridBagConstraints();
 		gbc_txtcodbarras.insets = new Insets(0, 0, 5, 5);
 		gbc_txtcodbarras.fill = GridBagConstraints.HORIZONTAL;
@@ -217,6 +226,7 @@ public class MioloCadVenda extends JPanel {
 		txtpagamento.setColumns(10);
 		
 		txttroco = new JTextField();
+		txttroco.setEditable(false);
 		GridBagConstraints gbc_txttroco = new GridBagConstraints();
 		gbc_txttroco.gridwidth = 2;
 		gbc_txttroco.fill = GridBagConstraints.HORIZONTAL;
@@ -225,6 +235,12 @@ public class MioloCadVenda extends JPanel {
 		add(txttroco, gbc_txttroco);
 		txttroco.setColumns(10);
 
+	}
+
+	protected void ativaTelaProcura() {
+		TelaProcura tp = new TelaProcura();
+		tp.setVisible(true);
+		
 	}
 
 	public Runnable getAcaoSalvar() {
