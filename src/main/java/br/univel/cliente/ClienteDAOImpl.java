@@ -121,14 +121,12 @@ public class ClienteDAOImpl implements ClienteDAO{
 		return c;
 
 	}
-
+	
 	@Override
-	public List<Cliente> listar() throws SQLException {
+	public List<Cliente> listar(String sql) throws SQLException {
 		
 		List<Cliente> clientes = new ArrayList<Cliente>();
-				
-		sql = "SELECT * FROM CLIENTE ORDER BY id ASC";
-
+		
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(sql);
 		
@@ -159,6 +157,23 @@ public class ClienteDAOImpl implements ClienteDAO{
 		st.close();
 		
 		return clientes;
+			
+	}
+	
+
+	@Override
+	public List<Cliente> listarOrdemID() throws SQLException {
+		
+		sql = "SELECT * FROM CLIENTE ORDER BY id ASC";
+		return listar(sql);
+		
+	}
+	
+	@Override
+	public List<Cliente> listarOrdemNome() throws SQLException {
+				
+		sql = "SELECT * FROM CLIENTE ORDER BY nome";
+		return listar(sql);
 	}
 	
 	public int buscarID() throws SQLException{

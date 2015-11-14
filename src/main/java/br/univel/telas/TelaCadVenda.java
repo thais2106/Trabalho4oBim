@@ -28,7 +28,7 @@ public class TelaCadVenda extends MolduraAbstrata{
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		
 		try {
-			clientes = clienteDao.listar();
+			clientes = clienteDao.listarOrdemNome();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

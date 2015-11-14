@@ -19,5 +19,9 @@ public interface ClienteDAO {
 	
 	public Cliente buscar(int id) throws SQLException;
 	
-	public List<Cliente> listar() throws SQLException;
+	public List<Cliente> listar(String sql) throws SQLException;
+	
+	public List<Cliente> listarOrdemID() throws SQLException;
+	
+	public List<Cliente> listarOrdemNome() throws SQLException;
 }

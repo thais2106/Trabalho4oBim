@@ -239,7 +239,7 @@ public class MioloCadCliente extends JPanel {
 
 		List<Cliente> lista;
 		try {
-			lista = dao.listar();
+			lista = dao.listarOrdemID();
 			model = new ClienteModel(lista);
 			table.setModel(model);
 		} catch (SQLException e) {
