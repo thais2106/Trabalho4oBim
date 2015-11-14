@@ -12,6 +12,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import br.univel.conexao.ConexaoServidor;
+
 /**
  * Classe que implementa os métodos de manipulação de banco
  * 
@@ -20,30 +22,10 @@ import javax.swing.JOptionPane;
  */
 public class VendaDAOImpl implements VendaDAO {
 	private String sql;
-	private static Connection con;
-
-	public Connection getConnection() {
-		System.out.println("tenta iniciar a con");
-		if (con == null) {
-			try {
-				String url = "jdbc:h2:~/sisvendas";
-				String user = "sa";
-				String pass = "sa";
-
-				con = DriverManager.getConnection(url, user, pass);
-			} catch (SQLException e) {
-				System.out.println("Erro ao abrir conexão");
-				e.printStackTrace();
-			}
-		}
-		synchronized (con) {
-			return con; // retorna conexão
-		}
-	}
+	private static Connection con = ConexaoServidor.getConnection();
 
 	@Override
 	public void inserir(Venda v) throws SQLException {
-		Connection con = getConnection();
 		
 		sql = "INSERT INTO VENDA(idvenda, idcliente, nomecliente, valtotal, valpagamento, data, hora)"
 				+ "VALUES(?,?,?,?,?,?,?)";
@@ -66,7 +48,7 @@ public class VendaDAOImpl implements VendaDAO {
 
 	
 	private void inserirItens(int idvenda, ArrayList<Produto> itens) throws SQLException {
-		Connection con = getConnection();
+
 		sql = "INSERT INTO ITENS(idvenda, idproduto, valproduto)"
 				+ "VALUES(?,?,?)";
 		
@@ -108,7 +90,7 @@ public class VendaDAOImpl implements VendaDAO {
 	}
 
 	public int buscarID() throws SQLException {
-		Connection con = getConnection();
+
 		int cod = 0;
 
 		sql = "SELECT MAX(ID) FROM VENDA";
@@ -119,7 +101,7 @@ public class VendaDAOImpl implements VendaDAO {
 		if (rs.first()) {
 			cod = rs.getInt(1);
 		}
-
+		
 		return cod + 1;
 	}
 

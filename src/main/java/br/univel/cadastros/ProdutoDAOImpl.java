@@ -11,6 +11,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import br.univel.conexao.ConexaoServidor;
+
 /**
  * Implementação da classe ProdutoDAO
  * @author Thaís - 02/11/2015 - 16:37:23
@@ -19,31 +21,10 @@ import javax.swing.JOptionPane;
 
 public class ProdutoDAOImpl implements ProdutoDAO{
 	private String sql;
-	private static Connection con;
-	
-	public Connection getConnection(){
-			System.out.println("tenta iniciar a con");
-			if (con == null){
-				try{
-					String url = "jdbc:h2:~/sisvendas";
-					String user = "sa";
-					String pass = "sa";
-						
-					con = DriverManager.getConnection(url, user, pass);
-				} catch (SQLException e){
-					System.out.println("Erro ao abrir conexão");
-					e.printStackTrace();
-				}
-			}
-			synchronized (con) {
-			return con; //retorna conexão
-		}
-	}
-	
+	private static Connection con = ConexaoServidor.getConnection();
 	
 	@Override
 	public void inserir(Produto p) throws SQLException {
-		Connection con = getConnection();
 		
 		sql = "INSERT INTO PRODUTO(id, codbarras, categoria, descricao, unidade, custo, margemlucro) "
 				+ "VALUES(?, ?, ?, ?, ?, ?, ?)";
@@ -65,7 +46,6 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 
 	@Override
 	public void atualizar(Produto p) throws SQLException {
-		Connection con = getConnection();
 		
 		sql = "UPDATE PRODUTO SET id = ?, codbarras = ?, categoria = ?, descricao = ?, unidade = ?,"
 				+ " custo = ?, margemlucro = ? WHERE id = ?";
@@ -87,7 +67,7 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 
 	@Override
 	public void excluir(Produto p) throws SQLException {
-		Connection con = getConnection();
+
 		sql = "DELETE FROM PRODUTO WHERE ID = ?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -100,13 +80,13 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 
 	@Override
 	public Produto buscar(int id) throws SQLException {
-		Connection con = getConnection();
+
 		Produto p = new Produto();
 	
 		sql = "SELECT * FROM PRODUTO WHERE ID = ?";
 
 		PreparedStatement ps = con.prepareStatement(sql);
-		System.out.println("prepare stat");
+
 		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
 		
@@ -139,11 +119,9 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 
 	@Override
 	public List<Produto> listar() throws SQLException {
-		Connection con = getConnection();
 		
 		List<Produto> produtos = new ArrayList<Produto>();
-				
-				
+						
 		sql = "SELECT * FROM PRODUTO ORDER BY id ASC";
 
 		Statement st = con.createStatement();
@@ -178,10 +156,10 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 	}
 	
 	public int buscarID() throws SQLException{
-		Connection con = getConnection();
+
 		int cod = 0;
 		
-		sql = "SELECT MAX(ID) FROM PRODUTO";
+		sql = "SELECT MAX(id) FROM PRODUTO";
 		
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(sql);
@@ -192,5 +170,85 @@ public class ProdutoDAOImpl implements ProdutoDAO{
 	
 		return cod + 1;
 	}
+
+	@Override
+	public List<Produto> listarCodBarras(String codbarras) throws SQLException {
+		List<Produto> produtos = new ArrayList<Produto>();
+		Produto p = new Produto();
+		
+		sql = "SELECT * FROM PRODUTO WHERE CODBARRAS LIKE ? ORDER BY id ASC";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, "%" + codbarras + "%");
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()){
+			p.setId(rs.getInt(1));
+			p.setCodBarras(rs.getString(2));
+			
+			for (Categoria c : Categoria.values()) {
+				if (c.toString().equals(rs.getString(3)))
+					p.setCategoria(c);
+			}
+			
+			p.setDescricao(rs.getString(4));
+			
+			for (Unidade u : Unidade.values()) {
+				if (u.getNome().equals(rs.getString(5)))
+					p.setUnidade(u);
+			}
+			p.setCusto(rs.getBigDecimal(6));
+			p.setMargemLucro(rs.getBigDecimal(7));
+			
+			produtos.add(p);
+		}
+		
+		rs.close();
+		ps.close();
+		
+		return produtos;
+	}
+
+	@Override
+	public List<Produto> listarDescricao(String descricao) throws SQLException {
+		List<Produto> produtos = new ArrayList<Produto>();
+		Produto p = new Produto();
+		
+		sql = "SELECT * FROM PRODUTO WHERE DESCRICAO LIKE ? ORDER BY id ASC";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, "%" + descricao + "%");
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()){
+			p.setId(rs.getInt(1));
+			p.setCodBarras(rs.getString(2));
+			
+			for (Categoria c : Categoria.values()) {
+				if (c.toString().equals(rs.getString(3)))
+					p.setCategoria(c);
+			}
+			
+			p.setDescricao(rs.getString(4));
+			
+			for (Unidade u : Unidade.values()) {
+				if (u.getNome().equals(rs.getString(5)))
+					p.setUnidade(u);
+			}
+			p.setCusto(rs.getBigDecimal(6));
+			p.setMargemLucro(rs.getBigDecimal(7));
+			
+			produtos.add(p);
+		}
+		
+		rs.close();
+		ps.close();
+		
+		return produtos;
+	}
+	
+	
 
 }

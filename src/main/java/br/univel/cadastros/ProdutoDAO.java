@@ -17,4 +17,8 @@ public interface ProdutoDAO {
 	public Produto buscar(int id) throws SQLException;
 	
 	public List<Produto> listar() throws SQLException;
+	
+	public List<Produto> listarCodBarras(String codbarras) throws SQLException;
+	
+	public List<Produto> listarDescricao(String descricao) throws SQLException;
 }

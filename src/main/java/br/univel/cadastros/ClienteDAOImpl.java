@@ -11,6 +11,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import br.univel.conexao.ConexaoServidor;
+
 /**
  * Classe com implementações dos métodos de manipulação de banco para a classe Cliente
  * @author tcrivelatti - 29/10/2015 - 19:50:01
@@ -20,29 +22,10 @@ import javax.swing.JOptionPane;
 public class ClienteDAOImpl implements ClienteDAO{
 	
 	private String sql;
-	private static Connection con;
+	private static Connection con = ConexaoServidor.getConnection();
 	
-	public Connection getConnection(){
-			if (con == null){ //Se não ouver conexão instanciada
-				try{ // Tenta abrir uma nova conexão
-					String url = "jdbc:h2:~/sisvendas";
-					String user = "sa";
-					String pass = "sa";
-						
-					con = DriverManager.getConnection(url, user, pass);
-				} catch (SQLException e){ //Se não conseguir abrir conexão, retorna erro
-					System.out.println("Erro ao abrir conexão");
-					e.printStackTrace();
-				}
-			}
-			synchronized (con) {
-			return con; //retorna conexão
-		}
-	}
-
 	@Override
 	public void inserir(Cliente c) throws SQLException {
-		Connection con = getConnection();
 		
 		sql = "INSERT INTO CLIENTE(id, nome, telefone, endereco, cidade, uf, email, genero)"
 				+ "values(?,?,?,?,?,?,?,?)";
@@ -65,7 +48,6 @@ public class ClienteDAOImpl implements ClienteDAO{
 
 	@Override
 	public void atualizar(Cliente c) throws SQLException {
-		Connection con = getConnection();
 		
 		sql = "UPDATE CLIENTE SET id = ?, nome = ?, endereco = ?, cidade = ?, uf = ?,"
 				+ " email = ?, telefone = ?, genero = ? WHERE id = ?";
@@ -90,7 +72,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 
 	@Override
 	public void excluir(Cliente c) throws SQLException {
-		Connection con = getConnection();
+		
 		sql = "DELETE FROM CLIENTE WHERE ID = ?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -104,7 +86,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 
 	@Override
 	public Cliente buscar(int id) throws SQLException {
-		Connection con = getConnection();
+		
 		Cliente c = new Cliente();
 	
 		sql = "SELECT * FROM CLIENTE WHERE ID = ?";
@@ -142,7 +124,6 @@ public class ClienteDAOImpl implements ClienteDAO{
 
 	@Override
 	public List<Cliente> listar() throws SQLException {
-		Connection con = getConnection();
 		
 		List<Cliente> clientes = new ArrayList<Cliente>();
 				
@@ -181,7 +162,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 	}
 	
 	public int buscarID() throws SQLException{
-		Connection con = getConnection();
+		
 		int cod = 0;
 		
 		sql = "SELECT MAX(ID) FROM CLIENTE";
