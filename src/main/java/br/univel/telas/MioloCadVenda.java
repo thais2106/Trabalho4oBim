@@ -25,6 +25,8 @@ import br.univel.cadastros.ProdutoDAOImpl;
 import br.univel.cadastros.Venda;
 import br.univel.cadastros.VendaDAOImpl;
 import br.univel.tabelas.ProdutoModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Campos da tela de venda
@@ -178,6 +180,11 @@ public class MioloCadVenda extends JPanel {
 		add(scrollPane, gbc_scrollPane);
 		
 		tabProdutos = new JTable();
+		tabProdutos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			}
+		});
 		scrollPane.setViewportView(tabProdutos);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
