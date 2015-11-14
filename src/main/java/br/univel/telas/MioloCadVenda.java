@@ -13,27 +13,41 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import br.univel.cliente.Cliente;
-import br.univel.cliente.ClienteDAOImpl;
+import br.univel.cadastros.Item;
+import br.univel.tabelas.ItemModel;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.math.BigDecimal;
 
 public class MioloCadVenda extends JPanel {
+	private static MioloCadVenda instance;
 	protected JTextField txtidvenda;
 	protected JComboBox cbxcliente;
 	protected JTextField txtpreco;
 	protected JTextField txtquantidade;
 	protected JTextField txtdescricao;
-	protected JTextField txtcodbarras;
+	protected JTextField txtidproduto;
 	protected JTable tabitens;
 	protected JTextField txtpagamento;
 	protected JTextField txtvaltotal;
 	protected JTextField txttroco;
+	protected ItemModel model;
 
 	/**
 	 * Create the panel.
 	 */
-	public MioloCadVenda() {
+	
+	public synchronized static MioloCadVenda getInstance() {  
+        if(instance == null ) {  
+          instance = new MioloCadVenda();  
+        }  
+        return instance;  
+      }  
+	
+	private MioloCadVenda() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{89, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
@@ -66,10 +80,10 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblCliente.gridx = 0;
 		gbc_lblCliente.gridy = 2;
 		add(lblCliente, gbc_lblCliente);
-			
+		
 		cbxcliente = new JComboBox();
 		GridBagConstraints gbc_cbxcliente = new GridBagConstraints();
-		gbc_cbxcliente.gridwidth = 5;
+		gbc_cbxcliente.gridwidth = 4;
 		gbc_cbxcliente.insets = new Insets(0, 0, 5, 5);
 		gbc_cbxcliente.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cbxcliente.gridx = 0;
@@ -91,7 +105,7 @@ public class MioloCadVenda extends JPanel {
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
-		JLabel lblCdigoDeBarras = new JLabel("C\u00F3digo de barras");
+		JLabel lblCdigoDeBarras = new JLabel("C\u00F3digo produto");
 		GridBagConstraints gbc_lblCdigoDeBarras = new GridBagConstraints();
 		gbc_lblCdigoDeBarras.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCdigoDeBarras.gridx = 0;
@@ -119,21 +133,23 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblPreo.gridy = 0;
 		panel.add(lblPreo, gbc_lblPreo);
 		
-		txtcodbarras = new JTextField();
-		txtcodbarras.addKeyListener(new KeyAdapter() {
+		txtidproduto = new JTextField();
+		txtidproduto.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
-				if (evt.getKeyCode() == KeyEvent.VK_INSERT)
-					ativaTelaProcura();
+				if (evt.getKeyCode() == KeyEvent.VK_INSERT){
+					TelaProcura tp = new TelaProcura();
+					tp.setVisible(true);
+				}
 			}
 		});
-		GridBagConstraints gbc_txtcodbarras = new GridBagConstraints();
-		gbc_txtcodbarras.insets = new Insets(0, 0, 5, 5);
-		gbc_txtcodbarras.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtcodbarras.gridx = 0;
-		gbc_txtcodbarras.gridy = 1;
-		panel.add(txtcodbarras, gbc_txtcodbarras);
-		txtcodbarras.setColumns(10);
+		GridBagConstraints gbc_txtidproduto = new GridBagConstraints();
+		gbc_txtidproduto.insets = new Insets(0, 0, 5, 5);
+		gbc_txtidproduto.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtidproduto.gridx = 0;
+		gbc_txtidproduto.gridy = 1;
+		panel.add(txtidproduto, gbc_txtidproduto);
+		txtidproduto.setColumns(10);
 		
 		txtdescricao = new JTextField();
 		GridBagConstraints gbc_txtdescricao = new GridBagConstraints();
@@ -165,6 +181,11 @@ public class MioloCadVenda extends JPanel {
 		txtpreco.setColumns(10);
 		
 		JButton btnOk = new JButton("OK");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				adicionarItem();
+			}
+		});
 		GridBagConstraints gbc_btnOk = new GridBagConstraints();
 		gbc_btnOk.insets = new Insets(0, 0, 5, 0);
 		gbc_btnOk.gridx = 10;
@@ -234,7 +255,28 @@ public class MioloCadVenda extends JPanel {
 		gbc_txttroco.gridy = 6;
 		add(txttroco, gbc_txttroco);
 		txttroco.setColumns(10);
+		
+		setModelTabela();
 
+	}
+
+	protected void adicionarItem() {
+		
+		Item i = new Item();
+		
+		i.setIdproduto(Integer.parseInt(txtidproduto.getText()));
+		i.setDescricao(txtdescricao.getText());
+		i.setQuantidade(Integer.parseInt(txtquantidade.getText()));
+		i.setPrecounitario(BigDecimal.valueOf(Double.parseDouble(txtpreco.getText())));
+
+		model.incluirItem(i);
+		
+	}
+
+	private void setModelTabela() {
+		model = new ItemModel();
+		tabitens.setModel(model);
+		
 	}
 
 	protected void ativaTelaProcura() {

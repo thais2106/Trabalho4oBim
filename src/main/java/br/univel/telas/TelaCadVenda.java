@@ -23,7 +23,9 @@ public class TelaCadVenda extends MolduraAbstrata{
 
 	@Override
 	protected void configuraMiolo() throws SQLException {
-		MioloCadVenda mcv = new MioloCadVenda();
+		//MioloCadVenda mcv = new MioloCadVenda();
+		MioloCadVenda mcv = MioloCadVenda.getInstance();
+		
 		VendaDAOImpl vendadao = new VendaDAOImpl();
 		ClienteDAOImpl clienteDao = new ClienteDAOImpl();
 		List<Cliente> clientes = new ArrayList<Cliente>(); //array para popular combobox de clientes na tela de vendas

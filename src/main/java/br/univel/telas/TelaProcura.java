@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicBorders.RadioButtonBorder;
+import javax.swing.text.Utilities;
 
 import java.awt.GridBagLayout;
 
@@ -59,8 +60,7 @@ public class TelaProcura extends JFrame {
 	private JRadioButton radioCodBarras;
 	private JRadioButton radioDesc;
 	private List<Produto> lista;
-	MioloCadVenda mcv;
-	ItemModel itemmodel;
+	MioloCadVenda mcv = MioloCadVenda.getInstance();
 
 	/**
 	 * Launch the application.
@@ -108,7 +108,11 @@ public class TelaProcura extends JFrame {
 		contentPane.add(btnOk);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.addMouseListener(new MouseAdapter() {
+		scrollPane.setBounds(5, 52, 627, 310);
+		contentPane.add(scrollPane);
+		
+		tabProdutos = new JTable();
+		tabProdutos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				if (evt.getClickCount() == 2){
@@ -116,10 +120,6 @@ public class TelaProcura extends JFrame {
 				}
 			}
 		});
-		scrollPane.setBounds(5, 52, 627, 310);
-		contentPane.add(scrollPane);
-		
-		tabProdutos = new JTable();
 		scrollPane.setViewportView(tabProdutos);
 		
 		radioCodBarras = new JRadioButton("C\u00F3digo de barras");
@@ -132,20 +132,24 @@ public class TelaProcura extends JFrame {
 		radioDesc.setBounds(459, 24, 71, 23);
 		contentPane.add(radioDesc);
 		setModelTabela();
-		
+
 	}
 
-	protected void adicionarItem() {
+	public void adicionarItem() {
+		
+		System.out.println("Adicionar item");
 		
 		Item i = new Item();
 
 		i.setIdproduto((int) tabProdutos.getValueAt(tabProdutos.getSelectedRow(), 0));
-		i.setCodbarras(String.valueOf(tabProdutos.getValueAt(tabProdutos.getSelectedRow(), 1)));
-		i.setPrecounitario(BigDecimal.valueOf((double)(tabProdutos.getValueAt(tabProdutos.getSelectedRow(), 5))));
+		i.setDescricao(String.valueOf(tabProdutos.getValueAt(tabProdutos.getSelectedRow(), 2)));
+		i.setQuantidade(1);
 		
-		((ItemModel) itemmodel).incluirItem(i);
+		BigDecimal preco = new BigDecimal(String.valueOf(tabProdutos.getValueAt(tabProdutos.getSelectedRow(), 5)));
+		i.setPrecounitario(preco);
 		
-			
+		mcv.model.incluirItem(i);
+		
 	}
 
 	protected void procurar() {
