@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.univel.conexao.ConexaoServidor;
+import br.univel.produto.Produto;
 
 /**
  * Classe que implementa os métodos de manipulação de banco

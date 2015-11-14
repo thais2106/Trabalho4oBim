@@ -1,4 +1,4 @@
-package br.univel.cadastros;
+package br.univel.produto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

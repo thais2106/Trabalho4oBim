@@ -1,4 +1,4 @@
-package br.univel.cadastros;
+package br.univel.produto;
 /**
  * Classe Enum de Categorias de Produtos
  * @author tcrivelatti - 27/10/2015 - 20:11

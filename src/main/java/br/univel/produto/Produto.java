@@ -1,4 +1,4 @@
-package br.univel.cadastros;
+package br.univel.produto;
 
 import java.math.BigDecimal;
 

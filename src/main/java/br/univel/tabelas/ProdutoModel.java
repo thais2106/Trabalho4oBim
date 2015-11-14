@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import br.univel.cadastros.Produto;
+import br.univel.produto.Produto;
 
 /**
  * Modelo da tabela de produtos.

@@ -25,8 +25,8 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import br.univel.cadastros.Produto;
-import br.univel.cadastros.ProdutoDAOImpl;
+import br.univel.produto.Produto;
+import br.univel.produto.ProdutoDAOImpl;
 import br.univel.tabelas.ProdutoModel;
 
 import java.awt.event.ActionListener;

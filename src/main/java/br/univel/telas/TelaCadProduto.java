@@ -3,7 +3,7 @@ package br.univel.telas;
 import java.awt.BorderLayout;
 import java.sql.SQLException;
 
-import br.univel.cadastros.ProdutoDAOImpl;
+import br.univel.produto.ProdutoDAOImpl;
 
 /**
  * Tela que configura a MolduraAbstrata com o MioloCadProduto

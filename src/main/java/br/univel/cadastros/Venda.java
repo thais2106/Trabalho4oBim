@@ -3,6 +3,8 @@ package br.univel.cadastros;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+import br.univel.produto.Produto;
+
 /**
  * Classe com os atributos da venda
  * @author Thaís - 06/11/2015 - 22:15:08

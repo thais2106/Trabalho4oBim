@@ -16,10 +16,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
-import br.univel.cadastros.Categoria;
-import br.univel.cadastros.Produto;
-import br.univel.cadastros.ProdutoDAOImpl;
-import br.univel.cadastros.Unidade;
+import br.univel.produto.Categoria;
+import br.univel.produto.Produto;
+import br.univel.produto.ProdutoDAOImpl;
+import br.univel.produto.Unidade;
 import br.univel.tabelas.ClienteModel;
 import br.univel.tabelas.ProdutoModel;
 
