@@ -48,6 +48,6 @@ public class TelaCadVenda extends MolduraAbstrata{
 	}
 
 	private void extracted(MioloCadVenda mcv, Cliente c) {
-		//mcv.cbxcliente.addItem(c.getNome());
+		mcv.cbxcliente.addItem(c.getNome());
 	}
 }
