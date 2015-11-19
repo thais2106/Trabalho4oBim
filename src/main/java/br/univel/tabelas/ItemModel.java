@@ -75,5 +75,8 @@ public class ItemModel extends AbstractTableModel {
 		super.fireTableDataChanged();
 	}
 	
+	public List<Item> retornarItens(){
+		return itens;
+	}
 
 }

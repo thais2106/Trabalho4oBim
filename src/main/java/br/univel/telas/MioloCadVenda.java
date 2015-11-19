@@ -23,7 +23,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.List;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MioloCadVenda extends JPanel {
 	private static MioloCadVenda instance;
@@ -39,7 +42,6 @@ public class MioloCadVenda extends JPanel {
 	protected JTextField txtvaltotal;
 	protected JTextField txttroco;
 	protected ItemModel model;
-	private List<Item> itens;
 	
 	/**
 	 * Create the panel.
@@ -238,6 +240,14 @@ public class MioloCadVenda extends JPanel {
 		panel.add(scrollPane, gbc_scrollPane);
 		
 		tabitens = new JTable();
+		tabitens.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				if (evt.getClickCount()==2){
+					alterarItem();
+				}
+			}
+		});
 		tabitens.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
@@ -307,24 +317,37 @@ public class MioloCadVenda extends JPanel {
 
 	}
 
+	protected void alterarItem() {
+		txtidproduto.setText(String.valueOf(tabitens.getValueAt(tabitens.getSelectedRow(), 0)));
+		txtdescricao.setText(String.valueOf(tabitens.getValueAt(tabitens.getSelectedRow(), 1)));
+		txtquantidade.setText(String.valueOf(tabitens.getValueAt(tabitens.getSelectedRow(), 2)));
+		txtpreco.setText(String.valueOf(tabitens.getValueAt(tabitens.getSelectedRow(), 3)));
+		
+	}
+
 	protected void adicionarItem() {
-		itens = new ArrayList<Item>();
+		
+		List<Item> itens = model.retornarItens();
 		Item i = new Item();
 		
 		i.setIdproduto(Integer.parseInt(txtidproduto.getText()));
 		i.setDescricao(txtdescricao.getText());
 		i.setQuantidade(Integer.parseInt(txtquantidade.getText()));
-		
-		int qtd = Integer.parseInt(txtquantidade.getText());
-		
 		i.setPrecounitario(new BigDecimal(Double.parseDouble(txtpreco.getText())));
 		
+		int qtd = Integer.parseInt(txtquantidade.getText());
 		BigDecimal preco = new BigDecimal(txtpreco.getText());
 		
 		//Multiplicando o preco unitário pela quantidade
-		i.setTotalProduto(preco.multiply(new BigDecimal(qtd)));
+		preco = preco.multiply(new BigDecimal(qtd));
+		i.setTotalProduto(preco);
 		
 		model.incluirItem(i);
+		
+		
+		BigDecimal total = calcularTotal(itens);
+		
+		txtvaltotal.setText(String.valueOf(total));
 		
 	}
 
@@ -337,13 +360,25 @@ public class MioloCadVenda extends JPanel {
 	public Runnable getAcaoSalvar() {
 		return () -> {
 			VendaDAOImpl dao = new VendaDAOImpl();
-			Venda v = new Venda();
-			
-			
-			
+			setarValores();
+
 					
-			
 		};
+	}
+
+	private void salvarItens(List<Item> itens) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private BigDecimal calcularTotal(List<Item> itens) {
+		BigDecimal total = new BigDecimal(0);
+		
+		for (Item item : itens) {
+			total = total.add(item.getTotalProduto());
+		}
+		
+		return total;
 	}
 
 	public Runnable getAcaoExcluir() {
@@ -352,7 +387,20 @@ public class MioloCadVenda extends JPanel {
 	}
 
 	private void setarValores(){
+		BigDecimal total = new BigDecimal(0);
 		Venda v = new Venda();
+		
+		
+		//total = calcularTotal(itens);
+		
+		
+		
+		//salvarItens(itens);
+		
+		
+		
+		
+		//txtvaltotal.setText(String.valueOf(total));
 		
 		
 	}
