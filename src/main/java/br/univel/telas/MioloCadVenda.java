@@ -29,7 +29,6 @@ import java.util.List;
 public class MioloCadVenda extends JPanel {
 	private static MioloCadVenda instance;
 	protected JTextField txtidvenda;
-	protected JComboBox cbxcliente;
 	protected JTextField txtpreco;
 	protected JTextField txtquantidade;
 	protected JTextField txtdescricao;
@@ -40,6 +39,8 @@ public class MioloCadVenda extends JPanel {
 	protected JTextField txttroco;
 	protected ItemModel model;
 	private List<Item> itens;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Create the panel.
@@ -53,56 +54,30 @@ public class MioloCadVenda extends JPanel {
       }  
 	
 	private MioloCadVenda() {
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{89, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		setLayout(gridBagLayout);
+		setLayout(null);
 		
 		JLabel lblVenda = new JLabel("Venda");
-		GridBagConstraints gbc_lblVenda = new GridBagConstraints();
-		gbc_lblVenda.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblVenda.insets = new Insets(0, 0, 5, 5);
-		gbc_lblVenda.gridx = 0;
-		gbc_lblVenda.gridy = 0;
-		add(lblVenda, gbc_lblVenda);
+		lblVenda.setBounds(0, 0, 153, 14);
+		add(lblVenda);
 		
 		txtidvenda = new JTextField();
+		txtidvenda.setBounds(0, 19, 153, 20);
 		txtidvenda.setEditable(false);
-		GridBagConstraints gbc_txtidvenda = new GridBagConstraints();
-		gbc_txtidvenda.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtidvenda.insets = new Insets(0, 0, 5, 5);
-		gbc_txtidvenda.gridx = 0;
-		gbc_txtidvenda.gridy = 1;
-		add(txtidvenda, gbc_txtidvenda);
+		add(txtidvenda);
 		txtidvenda.setColumns(10);
 		
 		JLabel lblCliente = new JLabel("Cliente");
-		GridBagConstraints gbc_lblCliente = new GridBagConstraints();
-		gbc_lblCliente.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblCliente.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCliente.gridx = 0;
-		gbc_lblCliente.gridy = 2;
-		add(lblCliente, gbc_lblCliente);
+		lblCliente.setBounds(0, 44, 77, 14);
+		add(lblCliente);
 		
-		cbxcliente = new JComboBox();
-		GridBagConstraints gbc_cbxcliente = new GridBagConstraints();
-		gbc_cbxcliente.gridwidth = 4;
-		gbc_cbxcliente.insets = new Insets(0, 0, 5, 5);
-		gbc_cbxcliente.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbxcliente.gridx = 0;
-		gbc_cbxcliente.gridy = 3;
-		add(cbxcliente, gbc_cbxcliente);
+		textField = new JTextField();
+		textField.setBounds(0, 64, 77, 20);
+		add(textField);
+		textField.setColumns(10);
 		
 		JPanel panel = new JPanel();
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.insets = new Insets(0, 0, 5, 0);
-		gbc_panel.gridwidth = 5;
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 4;
-		add(panel, gbc_panel);
+		panel.setBounds(0, 90, 449, 232);
+		add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel.rowHeights = new int[]{0, 0, 0, 0};
@@ -148,8 +123,8 @@ public class MioloCadVenda extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent evt) {
 				if (evt.getKeyCode() == KeyEvent.VK_INSERT){
-					TelaProcura tp = new TelaProcura();
-					tp.setVisible(true);
+					TelaProcuraProduto tpp = new TelaProcuraProduto();
+					tpp.setVisible(true);
 				}
 			}
 		});
@@ -223,56 +198,37 @@ public class MioloCadVenda extends JPanel {
 		scrollPane.setViewportView(tabitens);
 		
 		JLabel lblTotal = new JLabel("Valor Total");
-		GridBagConstraints gbc_lblTotal = new GridBagConstraints();
-		gbc_lblTotal.anchor = GridBagConstraints.WEST;
-		gbc_lblTotal.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTotal.gridx = 0;
-		gbc_lblTotal.gridy = 5;
-		add(lblTotal, gbc_lblTotal);
+		lblTotal.setBounds(0, 327, 51, 14);
+		add(lblTotal);
 		
 		JLabel lblPagamento = new JLabel("Pagamento");
-		GridBagConstraints gbc_lblPagamento = new GridBagConstraints();
-		gbc_lblPagamento.anchor = GridBagConstraints.WEST;
-		gbc_lblPagamento.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPagamento.gridx = 1;
-		gbc_lblPagamento.gridy = 5;
-		add(lblPagamento, gbc_lblPagamento);
+		lblPagamento.setBounds(158, 327, 54, 14);
+		add(lblPagamento);
 		
 		JLabel lblTroco = new JLabel("Troco");
-		GridBagConstraints gbc_lblTroco = new GridBagConstraints();
-		gbc_lblTroco.anchor = GridBagConstraints.WEST;
-		gbc_lblTroco.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTroco.gridx = 3;
-		gbc_lblTroco.gridy = 5;
-		add(lblTroco, gbc_lblTroco);
+		lblTroco.setBounds(317, 327, 27, 14);
+		add(lblTroco);
 		
 		txtvaltotal = new JTextField();
-		GridBagConstraints gbc_txtvaltotal = new GridBagConstraints();
-		gbc_txtvaltotal.insets = new Insets(0, 0, 0, 5);
-		gbc_txtvaltotal.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtvaltotal.gridx = 0;
-		gbc_txtvaltotal.gridy = 6;
-		add(txtvaltotal, gbc_txtvaltotal);
+		txtvaltotal.setBounds(0, 346, 153, 20);
+		add(txtvaltotal);
 		txtvaltotal.setColumns(10);
 		
 		txtpagamento = new JTextField();
-		GridBagConstraints gbc_txtpagamento = new GridBagConstraints();
-		gbc_txtpagamento.insets = new Insets(0, 0, 0, 5);
-		gbc_txtpagamento.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtpagamento.gridx = 1;
-		gbc_txtpagamento.gridy = 6;
-		add(txtpagamento, gbc_txtpagamento);
+		txtpagamento.setBounds(158, 346, 124, 20);
+		add(txtpagamento);
 		txtpagamento.setColumns(10);
 		
 		txttroco = new JTextField();
+		txttroco.setBounds(317, 346, 132, 20);
 		txttroco.setEditable(false);
-		GridBagConstraints gbc_txttroco = new GridBagConstraints();
-		gbc_txttroco.gridwidth = 2;
-		gbc_txttroco.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txttroco.gridx = 3;
-		gbc_txttroco.gridy = 6;
-		add(txttroco, gbc_txttroco);
+		add(txttroco);
 		txttroco.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(87, 64, 353, 20);
+		add(textField_1);
+		textField_1.setColumns(10);
 		
 		setModelTabela();
 
@@ -300,12 +256,6 @@ public class MioloCadVenda extends JPanel {
 		
 	}
 
-	protected void ativaTelaProcura() {
-		TelaProcura tp = new TelaProcura();
-		tp.setVisible(true);
-		
-	}
-
 	public Runnable getAcaoSalvar() {
 		return () -> {
 			VendaDAOImpl dao = new VendaDAOImpl();
@@ -322,4 +272,12 @@ public class MioloCadVenda extends JPanel {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	private void setarValores(){
+		Venda v = new Venda();
+		
+		
+	}
+	
 }
+

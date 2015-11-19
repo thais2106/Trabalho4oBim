@@ -49,7 +49,7 @@ import java.awt.event.MouseEvent;
  *
  */
 
-public class TelaProcura extends JFrame {
+public class TelaProcuraProduto extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtpesquisa;
@@ -69,7 +69,7 @@ public class TelaProcura extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaProcura frame = new TelaProcura();
+					TelaProcuraProduto frame = new TelaProcuraProduto();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -81,7 +81,7 @@ public class TelaProcura extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaProcura() {
+	public TelaProcuraProduto() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 400);
 		contentPane = new JPanel();

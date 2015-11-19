@@ -70,6 +70,5 @@ public class ItemModel extends AbstractTableModel {
 		super.fireTableDataChanged();
 	}
 	
-	
 
 }

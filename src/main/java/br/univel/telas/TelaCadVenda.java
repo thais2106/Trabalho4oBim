@@ -38,10 +38,11 @@ public class TelaCadVenda extends MolduraAbstrata{
 			e.printStackTrace();
 		}
 		
+		/*
 		for (Cliente c : clientes) {
 			extracted(mcv, c);
 		}
-		
+		*/
 		
 		//Pegando ID da venda automaticamente
 		mcv.txtidvenda.setText(String.valueOf(vendadao.buscarID()));
@@ -54,8 +55,10 @@ public class TelaCadVenda extends MolduraAbstrata{
 		super.setAcaoExcluir(mcv.getAcaoExcluir());
 		
 	}
-
+/*
 	private void extracted(MioloCadVenda mcv, Cliente c) {
 		mcv.cbxcliente.addItem(c.getNome());
 	}
+	
+	*/
 }
