@@ -15,6 +15,7 @@ public class Item {
 	private String descricao;
 	private int quantidade;
 	private BigDecimal custo;
+	private BigDecimal totalProduto;
 	
 	public int getIdproduto() {
 		return idproduto;
@@ -39,6 +40,12 @@ public class Item {
 	}
 	public void setPrecounitario(BigDecimal precounitario) {
 		this.custo = precounitario;
+	}
+	public BigDecimal getTotalProduto() {
+		return totalProduto;
+	}
+	public void setTotalProduto(BigDecimal totalProduto) {
+		this.totalProduto = totalProduto;
 	}
 	
 	

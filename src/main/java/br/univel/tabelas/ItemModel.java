@@ -22,7 +22,7 @@ public class ItemModel extends AbstractTableModel {
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
-		return 4;
+		return 5;
 	}
 
 	@Override
@@ -39,8 +39,10 @@ public class ItemModel extends AbstractTableModel {
 			return "DESCRIÇÃO";
 		case 2:
 			return "QUANTIDADE";
-		default:
+		case 3:
 			return "PRECO UNITÁRIO";
+		default:
+			return "TOTAL";
 		}
 	}
 
@@ -55,8 +57,11 @@ public class ItemModel extends AbstractTableModel {
 			return i.getDescricao();
 		case 2:
 			return i.getQuantidade();
-		default:
+		case 3:
 			return i.getPrecounitario();
+		default:
+			return i.getTotalProduto();
+			
 		}
 	}
 	

@@ -8,7 +8,6 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 import javax.swing.JTextField;
-import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -29,6 +28,8 @@ import java.util.List;
 public class MioloCadVenda extends JPanel {
 	private static MioloCadVenda instance;
 	protected JTextField txtidvenda;
+	protected JTextField txtidcliente;
+	protected JTextField txtnomecliente;
 	protected JTextField txtpreco;
 	protected JTextField txtquantidade;
 	protected JTextField txtdescricao;
@@ -39,9 +40,7 @@ public class MioloCadVenda extends JPanel {
 	protected JTextField txttroco;
 	protected ItemModel model;
 	private List<Item> itens;
-	private JTextField textField;
-	private JTextField textField_1;
-
+	
 	/**
 	 * Create the panel.
 	 */
@@ -92,26 +91,35 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblCliente.gridy = 2;
 		add(lblCliente, gbc_lblCliente);
 		
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.anchor = GridBagConstraints.NORTH;
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.gridx = 0;
-		gbc_textField.gridy = 3;
-		add(textField, gbc_textField);
-		textField.setColumns(10);
+		txtidcliente = new JTextField();
+		txtidcliente.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent evt) {
+				if (evt.getKeyCode()==KeyEvent.VK_INSERT){
+					TelaProcuraCliente tpc = new TelaProcuraCliente();
+					tpc.setVisible(true);
+				}
+			}
+		});
+		GridBagConstraints gbc_txtidcliente = new GridBagConstraints();
+		gbc_txtidcliente.anchor = GridBagConstraints.NORTH;
+		gbc_txtidcliente.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtidcliente.insets = new Insets(0, 0, 5, 5);
+		gbc_txtidcliente.gridx = 0;
+		gbc_txtidcliente.gridy = 3;
+		add(txtidcliente, gbc_txtidcliente);
+		txtidcliente.setColumns(10);
 		
-		textField_1 = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.anchor = GridBagConstraints.NORTH;
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_1.gridwidth = 4;
-		gbc_textField_1.gridx = 1;
-		gbc_textField_1.gridy = 3;
-		add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		txtnomecliente = new JTextField();
+		GridBagConstraints gbc_txtnomecliente = new GridBagConstraints();
+		gbc_txtnomecliente.anchor = GridBagConstraints.NORTH;
+		gbc_txtnomecliente.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtnomecliente.insets = new Insets(0, 0, 5, 0);
+		gbc_txtnomecliente.gridwidth = 4;
+		gbc_txtnomecliente.gridx = 1;
+		gbc_txtnomecliente.gridy = 3;
+		add(txtnomecliente, gbc_txtnomecliente);
+		txtnomecliente.setColumns(10);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -307,10 +315,15 @@ public class MioloCadVenda extends JPanel {
 		i.setDescricao(txtdescricao.getText());
 		i.setQuantidade(Integer.parseInt(txtquantidade.getText()));
 		
-		//int qtd = Integer.parseInt(txtquantidade.getText());
+		int qtd = Integer.parseInt(txtquantidade.getText());
 		
-		i.setPrecounitario(BigDecimal.valueOf(Double.parseDouble(txtpreco.getText())));
-
+		i.setPrecounitario(new BigDecimal(Double.parseDouble(txtpreco.getText())));
+		
+		BigDecimal preco = new BigDecimal(txtpreco.getText());
+		
+		//Multiplicando o preco unitário pela quantidade
+		i.setTotalProduto(preco.multiply(new BigDecimal(qtd)));
+		
 		model.incluirItem(i);
 		
 	}

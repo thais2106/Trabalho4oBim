@@ -21,12 +21,15 @@ import br.univel.tabelas.ClienteModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TelaProcuraCliente extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtpesquisa;
 	private JTable tabClientes;
+	MioloCadVenda mcv = MioloCadVenda.getInstance();
 	private ClienteModel clienteModel;
 
 	/**
@@ -50,7 +53,7 @@ public class TelaProcuraCliente extends JFrame {
 	 */
 	public TelaProcuraCliente() {
 		setTitle("Procura de Cliente");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 568, 356);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -80,6 +83,15 @@ public class TelaProcuraCliente extends JFrame {
 		contentPane.add(scrollPane);
 		
 		tabClientes = new JTable();
+		tabClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				if (evt.getClickCount()==2){
+					mcv.txtidcliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 0)));
+					mcv.txtnomecliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 1)));
+				}
+			}
+		});
 		scrollPane.setViewportView(tabClientes);
 		
 		setModelTabela();
