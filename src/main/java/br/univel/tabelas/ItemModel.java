@@ -66,6 +66,16 @@ public class ItemModel extends AbstractTableModel {
 	}
 	
 	public void incluirItem(Item i){	
+		
+		for (Iterator<Item> iterator = itens.iterator(); iterator.hasNext();) {
+			Item item = (Item) iterator.next();
+			
+			if (item.getIdproduto()==i.getIdproduto()){
+				iterator.remove();
+			}
+			
+		}
+		
 		itens.add(i);
 		super.fireTableDataChanged();
 	}
