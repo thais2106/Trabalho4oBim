@@ -39,8 +39,8 @@ public class MioloCadProduto extends JPanel {
 	protected JTextField txtdescricao;
 	protected JTextField txtcusto;
 	protected JTextField txtmargem;
-	private JComboBox cbxunidade;
-	private JComboBox cbxcategoria;
+	private JComboBox<Unidade> cbxunidade;
+	private JComboBox<Categoria> cbxcategoria;
 	private JScrollPane scrollPane;
 	private JTable table;
 	private ProdutoModel model;
@@ -99,7 +99,7 @@ public class MioloCadProduto extends JPanel {
 		add(txtcodbarras, gbc_txtcodbarras);
 		txtcodbarras.setColumns(10);
 		
-		cbxcategoria = new JComboBox(Categoria.values());
+		cbxcategoria = new JComboBox<Categoria>(Categoria.values());
 		GridBagConstraints gbc_cbxcategoria = new GridBagConstraints();
 		gbc_cbxcategoria.gridwidth = 2;
 		gbc_cbxcategoria.insets = new Insets(0, 0, 5, 0);
@@ -142,7 +142,7 @@ public class MioloCadProduto extends JPanel {
 		gbc_lblCusto.gridy = 6;
 		add(lblCusto, gbc_lblCusto);
 		
-		cbxunidade = new JComboBox(Unidade.values());
+		cbxunidade = new JComboBox<Unidade>(Unidade.values());
 		GridBagConstraints gbc_cbxunidade = new GridBagConstraints();
 		gbc_cbxunidade.gridwidth = 2;
 		gbc_cbxunidade.insets = new Insets(0, 0, 5, 5);

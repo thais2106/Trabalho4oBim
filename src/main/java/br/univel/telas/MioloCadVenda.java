@@ -54,30 +54,73 @@ public class MioloCadVenda extends JPanel {
       }  
 	
 	private MioloCadVenda() {
-		setLayout(null);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{77, 66, 124, 35, 132, 0};
+		gridBagLayout.rowHeights = new int[]{14, 20, 14, 20, 232, 14, 20, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		setLayout(gridBagLayout);
 		
 		JLabel lblVenda = new JLabel("Venda");
-		lblVenda.setBounds(0, 0, 153, 14);
-		add(lblVenda);
+		GridBagConstraints gbc_lblVenda = new GridBagConstraints();
+		gbc_lblVenda.anchor = GridBagConstraints.NORTH;
+		gbc_lblVenda.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblVenda.insets = new Insets(0, 0, 5, 5);
+		gbc_lblVenda.gridwidth = 2;
+		gbc_lblVenda.gridx = 0;
+		gbc_lblVenda.gridy = 0;
+		add(lblVenda, gbc_lblVenda);
 		
 		txtidvenda = new JTextField();
-		txtidvenda.setBounds(0, 19, 153, 20);
 		txtidvenda.setEditable(false);
-		add(txtidvenda);
+		GridBagConstraints gbc_txtidvenda = new GridBagConstraints();
+		gbc_txtidvenda.anchor = GridBagConstraints.NORTH;
+		gbc_txtidvenda.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtidvenda.insets = new Insets(0, 0, 5, 5);
+		gbc_txtidvenda.gridwidth = 2;
+		gbc_txtidvenda.gridx = 0;
+		gbc_txtidvenda.gridy = 1;
+		add(txtidvenda, gbc_txtidvenda);
 		txtidvenda.setColumns(10);
 		
 		JLabel lblCliente = new JLabel("Cliente");
-		lblCliente.setBounds(0, 44, 77, 14);
-		add(lblCliente);
+		GridBagConstraints gbc_lblCliente = new GridBagConstraints();
+		gbc_lblCliente.anchor = GridBagConstraints.NORTH;
+		gbc_lblCliente.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblCliente.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCliente.gridx = 0;
+		gbc_lblCliente.gridy = 2;
+		add(lblCliente, gbc_lblCliente);
 		
 		textField = new JTextField();
-		textField.setBounds(0, 64, 77, 20);
-		add(textField);
+		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.anchor = GridBagConstraints.NORTH;
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField.insets = new Insets(0, 0, 5, 5);
+		gbc_textField.gridx = 0;
+		gbc_textField.gridy = 3;
+		add(textField, gbc_textField);
 		textField.setColumns(10);
 		
+		textField_1 = new JTextField();
+		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+		gbc_textField_1.anchor = GridBagConstraints.NORTH;
+		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
+		gbc_textField_1.gridwidth = 4;
+		gbc_textField_1.gridx = 1;
+		gbc_textField_1.gridy = 3;
+		add(textField_1, gbc_textField_1);
+		textField_1.setColumns(10);
+		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 90, 449, 232);
-		add(panel);
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.insets = new Insets(0, 0, 5, 0);
+		gbc_panel.gridwidth = 5;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 4;
+		add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel.rowHeights = new int[]{0, 0, 0, 0};
@@ -198,37 +241,59 @@ public class MioloCadVenda extends JPanel {
 		scrollPane.setViewportView(tabitens);
 		
 		JLabel lblTotal = new JLabel("Valor Total");
-		lblTotal.setBounds(0, 327, 51, 14);
-		add(lblTotal);
+		GridBagConstraints gbc_lblTotal = new GridBagConstraints();
+		gbc_lblTotal.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblTotal.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTotal.gridx = 0;
+		gbc_lblTotal.gridy = 5;
+		add(lblTotal, gbc_lblTotal);
 		
 		JLabel lblPagamento = new JLabel("Pagamento");
-		lblPagamento.setBounds(158, 327, 54, 14);
-		add(lblPagamento);
+		GridBagConstraints gbc_lblPagamento = new GridBagConstraints();
+		gbc_lblPagamento.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblPagamento.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPagamento.gridx = 2;
+		gbc_lblPagamento.gridy = 5;
+		add(lblPagamento, gbc_lblPagamento);
 		
 		JLabel lblTroco = new JLabel("Troco");
-		lblTroco.setBounds(317, 327, 27, 14);
-		add(lblTroco);
+		GridBagConstraints gbc_lblTroco = new GridBagConstraints();
+		gbc_lblTroco.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblTroco.insets = new Insets(0, 0, 5, 0);
+		gbc_lblTroco.gridx = 4;
+		gbc_lblTroco.gridy = 5;
+		add(lblTroco, gbc_lblTroco);
 		
 		txtvaltotal = new JTextField();
-		txtvaltotal.setBounds(0, 346, 153, 20);
-		add(txtvaltotal);
+		GridBagConstraints gbc_txtvaltotal = new GridBagConstraints();
+		gbc_txtvaltotal.anchor = GridBagConstraints.NORTH;
+		gbc_txtvaltotal.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtvaltotal.insets = new Insets(0, 0, 0, 5);
+		gbc_txtvaltotal.gridwidth = 2;
+		gbc_txtvaltotal.gridx = 0;
+		gbc_txtvaltotal.gridy = 6;
+		add(txtvaltotal, gbc_txtvaltotal);
 		txtvaltotal.setColumns(10);
 		
 		txtpagamento = new JTextField();
-		txtpagamento.setBounds(158, 346, 124, 20);
-		add(txtpagamento);
+		GridBagConstraints gbc_txtpagamento = new GridBagConstraints();
+		gbc_txtpagamento.anchor = GridBagConstraints.NORTH;
+		gbc_txtpagamento.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtpagamento.insets = new Insets(0, 0, 0, 5);
+		gbc_txtpagamento.gridx = 2;
+		gbc_txtpagamento.gridy = 6;
+		add(txtpagamento, gbc_txtpagamento);
 		txtpagamento.setColumns(10);
 		
 		txttroco = new JTextField();
-		txttroco.setBounds(317, 346, 132, 20);
 		txttroco.setEditable(false);
-		add(txttroco);
+		GridBagConstraints gbc_txttroco = new GridBagConstraints();
+		gbc_txttroco.anchor = GridBagConstraints.NORTH;
+		gbc_txttroco.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txttroco.gridx = 4;
+		gbc_txttroco.gridy = 6;
+		add(txttroco, gbc_txttroco);
 		txttroco.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(87, 64, 353, 20);
-		add(textField_1);
-		textField_1.setColumns(10);
 		
 		setModelTabela();
 

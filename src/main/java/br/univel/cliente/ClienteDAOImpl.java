@@ -158,8 +158,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 		rs.close();
 		st.close();
 		
-		return clientes;
-			
+		return clientes;	
 	}
 	
 	@Override
