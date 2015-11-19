@@ -148,7 +148,12 @@ public class TelaProcura extends JFrame {
 		BigDecimal preco = new BigDecimal(String.valueOf(tabProdutos.getValueAt(tabProdutos.getSelectedRow(), 5)));
 		i.setPrecounitario(preco);
 		
-		mcv.model.incluirItem(i);
+		mcv.txtidproduto.setText(String.valueOf(tabProdutos.getValueAt(tabProdutos.getSelectedRow(), 0)));
+		mcv.txtdescricao.setText(String.valueOf(tabProdutos.getValueAt(tabProdutos.getSelectedRow(), 3)));
+		mcv.txtquantidade.setText(String.valueOf(1));
+		mcv.txtpreco.setText(String.valueOf(tabProdutos.getValueAt(tabProdutos.getSelectedRow(), 5)));
+		
+		//mcv.model.incluirItem(i);
 		
 	}
 

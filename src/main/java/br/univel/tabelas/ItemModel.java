@@ -60,23 +60,16 @@ public class ItemModel extends AbstractTableModel {
 		}
 	}
 	
-	public void incluirItem(Item i){
-		
-		if (!itens.isEmpty()){
-			
-			for (Iterator<Item> iterator = itens.iterator(); iterator.hasNext();) {
-				Item item = (Item) iterator.next();
-				
-				if (item.getIdproduto()==i.getIdproduto()){
-					i.setQuantidade(item.getQuantidade() + 1);
-					iterator.remove();
-				}
-			}
-		}
-		
+	public void incluirItem(Item i){	
 		itens.add(i);
-		
 		super.fireTableDataChanged();
 	}
+	
+	public void excluirItem(int row){
+		itens.remove(row);
+		super.fireTableDataChanged();
+	}
+	
+	
 
 }

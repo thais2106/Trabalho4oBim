@@ -14,6 +14,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import br.univel.cadastros.Item;
+import br.univel.cadastros.Venda;
+import br.univel.cadastros.VendaDAOImpl;
 import br.univel.tabelas.ItemModel;
 
 import java.awt.event.KeyAdapter;
@@ -21,6 +23,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MioloCadVenda extends JPanel {
 	private static MioloCadVenda instance;
@@ -35,6 +39,7 @@ public class MioloCadVenda extends JPanel {
 	protected JTextField txtvaltotal;
 	protected JTextField txttroco;
 	protected ItemModel model;
+	private List<Item> itens;
 
 	/**
 	 * Create the panel.
@@ -107,6 +112,7 @@ public class MioloCadVenda extends JPanel {
 		
 		JLabel lblCdigoDeBarras = new JLabel("C\u00F3digo produto");
 		GridBagConstraints gbc_lblCdigoDeBarras = new GridBagConstraints();
+		gbc_lblCdigoDeBarras.anchor = GridBagConstraints.WEST;
 		gbc_lblCdigoDeBarras.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCdigoDeBarras.gridx = 0;
 		gbc_lblCdigoDeBarras.gridy = 0;
@@ -114,6 +120,7 @@ public class MioloCadVenda extends JPanel {
 		
 		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o");
 		GridBagConstraints gbc_lblDescrio = new GridBagConstraints();
+		gbc_lblDescrio.anchor = GridBagConstraints.WEST;
 		gbc_lblDescrio.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDescrio.gridx = 1;
 		gbc_lblDescrio.gridy = 0;
@@ -121,13 +128,16 @@ public class MioloCadVenda extends JPanel {
 		
 		JLabel lblQuantidade = new JLabel("Quantidade");
 		GridBagConstraints gbc_lblQuantidade = new GridBagConstraints();
+		gbc_lblQuantidade.anchor = GridBagConstraints.WEST;
 		gbc_lblQuantidade.insets = new Insets(0, 0, 5, 5);
 		gbc_lblQuantidade.gridx = 7;
 		gbc_lblQuantidade.gridy = 0;
 		panel.add(lblQuantidade, gbc_lblQuantidade);
 		
-		JLabel lblPreo = new JLabel("Pre\u00E7o");
+		JLabel lblPreo = new JLabel("Pre\u00E7o unit\u00E1rio");
 		GridBagConstraints gbc_lblPreo = new GridBagConstraints();
+		gbc_lblPreo.gridwidth = 2;
+		gbc_lblPreo.anchor = GridBagConstraints.WEST;
 		gbc_lblPreo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPreo.gridx = 8;
 		gbc_lblPreo.gridy = 0;
@@ -202,6 +212,14 @@ public class MioloCadVenda extends JPanel {
 		panel.add(scrollPane, gbc_scrollPane);
 		
 		tabitens = new JTable();
+		tabitens.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent evt) {
+				if (evt.getKeyCode()==KeyEvent.VK_DELETE){
+					model.excluirItem(tabitens.getSelectedRow());
+				}
+			}
+		});
 		scrollPane.setViewportView(tabitens);
 		
 		JLabel lblTotal = new JLabel("Valor Total");
@@ -261,12 +279,15 @@ public class MioloCadVenda extends JPanel {
 	}
 
 	protected void adicionarItem() {
-		
+		itens = new ArrayList<Item>();
 		Item i = new Item();
 		
 		i.setIdproduto(Integer.parseInt(txtidproduto.getText()));
 		i.setDescricao(txtdescricao.getText());
 		i.setQuantidade(Integer.parseInt(txtquantidade.getText()));
+		
+		//int qtd = Integer.parseInt(txtquantidade.getText());
+		
 		i.setPrecounitario(BigDecimal.valueOf(Double.parseDouble(txtpreco.getText())));
 
 		model.incluirItem(i);
@@ -286,8 +307,15 @@ public class MioloCadVenda extends JPanel {
 	}
 
 	public Runnable getAcaoSalvar() {
-		// TODO Auto-generated method stub
-		return null;
+		return () -> {
+			VendaDAOImpl dao = new VendaDAOImpl();
+			Venda v = new Venda();
+			
+			
+			
+					
+			
+		};
 	}
 
 	public Runnable getAcaoExcluir() {
