@@ -3,6 +3,8 @@ package br.univel.cliente;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+
+import br.univel.produto.Produto;
 /**
  * Interface de métodos da classe Cliente
  * @author tcrivelatti - 27/10/2015
@@ -19,9 +21,8 @@ public interface ClienteDAO {
 	
 	public Cliente buscar(int id) throws SQLException;
 	
-	public List<Cliente> listar(String sql) throws SQLException;
+	public List<Cliente> listar() throws SQLException;
 	
-	public List<Cliente> listarOrdemID() throws SQLException;
-	
-	public List<Cliente> listarOrdemNome() throws SQLException;
+	public List<Cliente> listarNome(String nome) throws SQLException;
+
 }

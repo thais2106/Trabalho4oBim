@@ -123,9 +123,11 @@ public class ClienteDAOImpl implements ClienteDAO{
 	}
 	
 	@Override
-	public List<Cliente> listar(String sql) throws SQLException {
+	public List<Cliente> listar() throws SQLException {
 		
 		List<Cliente> clientes = new ArrayList<Cliente>();
+		
+		sql = "SELECT * FROM CLIENTE";
 		
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(sql);
@@ -160,22 +162,45 @@ public class ClienteDAOImpl implements ClienteDAO{
 			
 	}
 	
+	@Override
+	public List<Cliente> listarNome(String nome) throws SQLException {
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		
+		sql = "SELECT * FROM CLIENTE WHERE NOME LIKE ? ORDER BY id ASC";
 
-	@Override
-	public List<Cliente> listarOrdemID() throws SQLException {
+		PreparedStatement ps = con.prepareStatement(sql);
 		
-		sql = "SELECT * FROM CLIENTE ORDER BY id ASC";
-		return listar(sql);
+		ps.setString(1, "%" + nome + "%");
+		ResultSet rs = ps.executeQuery();
 		
-	}
-	
-	@Override
-	public List<Cliente> listarOrdemNome() throws SQLException {
+		while (rs.next()){
+			Cliente c = new Cliente();
+			c.setId(rs.getInt(1));
+			c.setNome(rs.getString(2));
+			c.setTelefone(rs.getString(3));
+			c.setEndereco(rs.getString(4));
+			c.setCidade(rs.getString(5));
+			
+			for (UF uf : UF.values()) {
+				if (uf.toString().equals(rs.getString(6)))
+					c.setUf(uf);
+			}
+			
+			c.setEmail(rs.getString(7));
+			
+			for (Genero g : Genero.values()) {
+				if (g.toString().equals(rs.getString(8)))
+					c.setGenero(g);
+			}
+			
+			clientes.add(c);
+		}
+		
+		rs.close();
 				
-		sql = "SELECT * FROM CLIENTE ORDER BY nome";
-		return listar(sql);
+		return clientes;
 	}
-	
+
 	public int buscarID() throws SQLException{
 		
 		int cod = 0;

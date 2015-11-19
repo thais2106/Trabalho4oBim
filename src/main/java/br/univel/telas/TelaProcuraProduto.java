@@ -55,11 +55,11 @@ public class TelaProcuraProduto extends JFrame {
 	private JTextField txtpesquisa;
 	private JTable tabProdutos;
 	private ProdutoModel produtomodel;
-	ProdutoDAOImpl dao = new ProdutoDAOImpl();
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JRadioButton radioCodBarras;
 	private JRadioButton radioDesc;
 	private List<Produto> lista;
+	ProdutoDAOImpl dao = new ProdutoDAOImpl();
 	MioloCadVenda mcv = MioloCadVenda.getInstance();
 
 	/**
@@ -82,6 +82,7 @@ public class TelaProcuraProduto extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaProcuraProduto() {
+		setTitle("Procura de Produto");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 400);
 		contentPane = new JPanel();

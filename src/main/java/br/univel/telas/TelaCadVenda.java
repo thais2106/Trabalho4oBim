@@ -23,26 +23,10 @@ public class TelaCadVenda extends MolduraAbstrata{
 
 	@Override
 	protected void configuraMiolo() throws SQLException {
-		//MioloCadVenda mcv = new MioloCadVenda();
 		MioloCadVenda mcv = MioloCadVenda.getInstance();
 		
 		VendaDAOImpl vendadao = new VendaDAOImpl();
 		ClienteDAOImpl clienteDao = new ClienteDAOImpl();
-		List<Cliente> clientes = new ArrayList<Cliente>(); //array para popular combobox de clientes na tela de vendas
-		
-		//Criando lista de clientes do banco para popular combobox
-		try {
-			clientes = clienteDao.listarOrdemNome();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		/*
-		for (Cliente c : clientes) {
-			extracted(mcv, c);
-		}
-		*/
 		
 		//Pegando ID da venda automaticamente
 		mcv.txtidvenda.setText(String.valueOf(vendadao.buscarID()));
@@ -55,10 +39,5 @@ public class TelaCadVenda extends MolduraAbstrata{
 		super.setAcaoExcluir(mcv.getAcaoExcluir());
 		
 	}
-/*
-	private void extracted(MioloCadVenda mcv, Cliente c) {
-		mcv.cbxcliente.addItem(c.getNome());
-	}
-	
-	*/
+
 }
