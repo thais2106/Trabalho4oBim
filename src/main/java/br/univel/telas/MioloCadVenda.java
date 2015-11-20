@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -294,6 +295,13 @@ public class MioloCadVenda extends JPanel {
 		txtvaltotal.setColumns(10);
 		
 		txtpagamento = new JTextField();
+		txtpagamento.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent evt) {
+				if (evt.getKeyCode()==KeyEvent.VK_ENTER)
+					calcularTroco();
+			}
+		});
 		GridBagConstraints gbc_txtpagamento = new GridBagConstraints();
 		gbc_txtpagamento.anchor = GridBagConstraints.NORTH;
 		gbc_txtpagamento.fill = GridBagConstraints.HORIZONTAL;
@@ -315,6 +323,15 @@ public class MioloCadVenda extends JPanel {
 		
 		setModelTabela();
 
+	}
+
+	protected void calcularTroco() {
+		BigDecimal troco = new BigDecimal(0);
+		BigDecimal pagamento = new BigDecimal(txtpagamento.getText());
+		
+		troco = pagamento.subtract(new BigDecimal(txtvaltotal.getText()));
+		
+		txttroco.setText(String.valueOf(troco));
 	}
 
 	protected void alterarItem() {
@@ -342,28 +359,74 @@ public class MioloCadVenda extends JPanel {
 		preco = preco.multiply(new BigDecimal(qtd));
 		i.setTotalProduto(preco);
 		
+		//Adicionando na tabela de Itens
 		model.incluirItem(i);
 		
-		
 		BigDecimal total = calcularTotal(itens);
-		
 		txtvaltotal.setText(String.valueOf(total));
 		
 	}
 
 	private void setModelTabela() {
 		model = new ItemModel();
-		tabitens.setModel(model);
-		
+		tabitens.setModel(model);	
 	}
 
 	public Runnable getAcaoSalvar() {
 		return () -> {
 			VendaDAOImpl dao = new VendaDAOImpl();
 			setarValores();
+			
+			if (verificarValores()){
+				
+				
+			}
+			
+			
 
 					
 		};
+	}
+
+	private boolean verificarValores() {
+		int id;
+		
+		if (txtidcliente.getText().isEmpty() || txtnomecliente.getText().isEmpty() ||
+				txtidproduto.getText().isEmpty() || txtdescricao.getText().isEmpty()
+				|| txtquantidade.getText().isEmpty() || txtvaltotal.getText().isEmpty() || txtpagamento.getText().isEmpty()){
+			JOptionPane.showMessageDialog(null, "Preencha todos os campos para salvar!");
+			return false;
+		}
+		
+		if (model.retornarItens().isEmpty()){
+			JOptionPane.showMessageDialog(null, "Não é possível salvar uma venda sem produtos!");
+			return false;
+		}
+		
+		
+		try {
+			 id = Integer.parseInt(txtidcliente.getText());
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Código do cliente inválido! \n Informe um valor numérico.");
+			//return false;
+		}
+		
+		try {
+			id = Integer.parseInt(txtidproduto.getText());
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Código do produto inválido! \n Informe um valor numérico.");
+		}
+		
+		try {
+			id = Integer.parseInt(txtquantidade.getText());
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Quantidade inválida! \n Informe um valor numérico.");
+		}
+		
+		
+		
+		return true;
+		
 	}
 
 	private void salvarItens(List<Item> itens) {
@@ -389,19 +452,6 @@ public class MioloCadVenda extends JPanel {
 	private void setarValores(){
 		BigDecimal total = new BigDecimal(0);
 		Venda v = new Venda();
-		
-		
-		//total = calcularTotal(itens);
-		
-		
-		
-		//salvarItens(itens);
-		
-		
-		
-		
-		//txtvaltotal.setText(String.valueOf(total));
-		
 		
 	}
 	
