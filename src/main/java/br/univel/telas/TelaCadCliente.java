@@ -21,14 +21,6 @@ public class TelaCadCliente extends MolduraAbstrata{
 	@Override
 	protected void configuraMiolo() {
 		MioloCadCliente mcc = new MioloCadCliente();
-		dao = new ClienteDAOImpl();
-		
-		try {
-			mcc.txtid.setText(String.valueOf(dao.buscarID()));
-		} catch (SQLException e1) {
-			System.out.println("Erro ao buscar código do cliente!");
-			e1.printStackTrace();
-		}
 		
 		super.add(mcc, BorderLayout.CENTER);
 		

@@ -11,6 +11,7 @@ import br.univel.produto.Produto;
  */
 
 public class Item {
+	private int idvenda;
 	private int idproduto;
 	private String descricao;
 	private int quantidade;
@@ -46,6 +47,12 @@ public class Item {
 	}
 	public void setTotalProduto(BigDecimal totalProduto) {
 		this.totalProduto = totalProduto;
+	}
+	public int getIdvenda() {
+		return idvenda;
+	}
+	public void setIdvenda(int idvenda) {
+		this.idvenda = idvenda;
 	}
 	
 	

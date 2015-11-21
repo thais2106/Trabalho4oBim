@@ -23,7 +23,6 @@ public abstract class MolduraAbstrata extends JPanel {
 	private JPanel panel;
 	private JButton btnFechar;
 	private JButton btnSalvar;
-	private JButton btnAtualizar;
 	private JButton btnExcluir;
 
 	protected abstract void configuraMiolo() throws SQLException;
@@ -61,16 +60,9 @@ public abstract class MolduraAbstrata extends JPanel {
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
 		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton.gridx = 0;
+		gbc_btnNewButton.gridx = 1;
 		gbc_btnNewButton.gridy = 0;
 		panel_1.add(btnSalvar, gbc_btnNewButton);
-		
-		btnAtualizar = new JButton("Atualizar");
-		GridBagConstraints gbc_btnAtualizar = new GridBagConstraints();
-		gbc_btnAtualizar.insets = new Insets(0, 0, 0, 5);
-		gbc_btnAtualizar.gridx = 1;
-		gbc_btnAtualizar.gridy = 0;
-		panel_1.add(btnAtualizar, gbc_btnAtualizar);
 		
 		btnExcluir = new JButton("Excluir");
 		GridBagConstraints gbc_btnExcluir = new GridBagConstraints();
