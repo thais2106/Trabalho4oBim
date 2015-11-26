@@ -1,7 +1,7 @@
 package br.univel.venda;
 
 import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Interface com a chamada de métodos da venda
@@ -18,5 +18,5 @@ public interface VendaDAO {
 	
 	public Venda buscar(int id) throws SQLException;
 	
-	public List<Venda> listar() throws SQLException;
+	public ArrayList<Venda> listar() throws SQLException;
 }

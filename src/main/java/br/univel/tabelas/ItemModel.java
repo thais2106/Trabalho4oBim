@@ -13,7 +13,7 @@ import br.univel.venda.Item;
 
 public class ItemModel extends AbstractTableModel {
 	
-	private List<Item> itens = new ArrayList<Item>();
+	private ArrayList<Item> itens = new ArrayList<Item>();
 	
 	public ItemModel(){
 
@@ -85,7 +85,7 @@ public class ItemModel extends AbstractTableModel {
 		super.fireTableDataChanged();
 	}
 	
-	public List<Item> retornarItens(){
+	public ArrayList<Item> retornarItens(){
 		return itens;
 	}
 

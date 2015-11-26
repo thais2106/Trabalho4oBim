@@ -28,7 +28,7 @@ public class VendaDAOImpl implements VendaDAO {
 	@Override
 	public void inserir(Venda v) throws SQLException {
 		
-		sql = "INSERT INTO VENDA(idvenda, idcliente, nomecliente, valtotal, valpagamento, data, hora)"
+		sql = "INSERT INTO VENDA(idvenda, idcliente, nomecliente, valortotal, valorpagamento, datavenda, horavenda)"
 				+ "VALUES(?,?,?,?,?,?,?)";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -37,6 +37,8 @@ public class VendaDAOImpl implements VendaDAO {
 		ps.setString(3, v.getNomeCliente());
 		ps.setBigDecimal(4, v.getValorTotal());
 		ps.setBigDecimal(5, v.getValorPagamento());
+		ps.setString(6, v.getData());
+		ps.setString(7, v.getHora());
 		
 		ps.executeUpdate();
 		ps.close();
@@ -48,17 +50,18 @@ public class VendaDAOImpl implements VendaDAO {
 	}
 
 	
-	private void inserirItens(int idvenda, ArrayList<Produto> itens) throws SQLException {
+	private void inserirItens(int idvenda, ArrayList<Item> arrayList) throws SQLException {
 
-		sql = "INSERT INTO ITENS(idvenda, idproduto, valproduto)"
-				+ "VALUES(?,?,?)";
+		sql = "INSERT INTO ITEM(idvenda, idproduto, descricao, quantidade, custo)"
+				+ "VALUES(?,?,?,?,?)";
 		
-		for (Produto p : itens) {
+		for (Item i : arrayList) {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, idvenda);
-			ps.setInt(2, p.getId());
-			ps.setString(3, p.getDescricao());
-			ps.setBigDecimal(4, p.getCusto());
+			ps.setInt(2, i.getIdproduto());
+			ps.setString(3, i.getDescricao());
+			ps.setInt(4, i.getQuantidade());
+			ps.setBigDecimal(5, i.getPrecounitario());
 			ps.executeUpdate();
 			ps.close();
 		}
@@ -85,7 +88,7 @@ public class VendaDAOImpl implements VendaDAO {
 	}
 
 	@Override
-	public List<Venda> listar() throws SQLException {
+	public ArrayList<Venda> listar() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

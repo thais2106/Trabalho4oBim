@@ -20,7 +20,7 @@ public class ConexaoServidor {
 	private ConexaoServidor(){
 		url = "jdbc:mysql://localhost/sisvendas";
 		user = "root";
-		pass = "";
+		pass = "root";
 		
 		try {
 			//Conectando banco de dados

@@ -1,33 +1,33 @@
 package br.univel.telas;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 import br.univel.tabelas.ItemModel;
 import br.univel.venda.Item;
 import br.univel.venda.Venda;
 import br.univel.venda.VendaDAOImpl;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.List;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class MioloCadVenda extends JPanel {
 	private static MioloCadVenda instance;
@@ -375,21 +375,34 @@ public class MioloCadVenda extends JPanel {
 	public Runnable getAcaoSalvar() {
 		return () -> {
 			VendaDAOImpl dao = new VendaDAOImpl();
-			setarValores();
+			Venda v = new Venda();
+			
 			
 			if (verificarValores()){
+				v = setarValores();
+				try {
+					dao.inserir(v);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				/*
+				if (v.getIdVenda() != 0){
+					v = setarValores();
+					
+					
+				}
+				*/
 				
 				
 			}
-			
-			
-
 					
 		};
 	}
 
 	private boolean verificarValores() {
-		int id;
+		int id=0;
 		
 		if (txtidcliente.getText().isEmpty() || txtnomecliente.getText().isEmpty() ||
 				txtidproduto.getText().isEmpty() || txtdescricao.getText().isEmpty()
@@ -423,8 +436,6 @@ public class MioloCadVenda extends JPanel {
 			JOptionPane.showMessageDialog(null, "Quantidade inválida! \n Informe um valor numérico.");
 		}
 		
-		
-		
 		return true;
 		
 	}
@@ -449,10 +460,25 @@ public class MioloCadVenda extends JPanel {
 		return null;
 	}
 
-	private void setarValores(){
-		BigDecimal total = new BigDecimal(0);
+	private Venda setarValores(){
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:h");
+		Date hora = Calendar.getInstance().getTime();
+		
+		SimpleDateFormat sdf2 = new SimpleDateFormat("dd/mm/yyyy");
+		Date data = new Date(System.currentTimeMillis());
+		
 		Venda v = new Venda();
 		
+		v.setIdVenda(Integer.parseInt(txtidvenda.getText()));
+		v.setIdCliente(Integer.parseInt(txtidcliente.getText()));
+		v.setNomeCliente(txtnomecliente.getText());
+		v.setValorPagamento(new BigDecimal(txtpagamento.getText()));
+		v.setValorTotal(new BigDecimal(txtvaltotal.getText()));
+		v.setItens(model.retornarItens());
+		v.setData(sdf2.format(data));
+		v.setHora(sdf.format(hora));
+		
+		return v;
 	}
 	
 }
