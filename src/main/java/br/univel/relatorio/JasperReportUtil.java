@@ -15,7 +15,7 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
-public class Util {
+public class JasperReportUtil {
 
 	public static void geraRelatorioEmPdfConsulta(String SQL, String jasper, String nomeRelatorio) {
 		try {
@@ -23,7 +23,7 @@ public class Util {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("SQL", SQL);
 
-			InputStream jasperTemplate = Util.class.getClass().getResourceAsStream(jasper);
+			InputStream jasperTemplate = JasperReportUtil.class.getClass().getResourceAsStream(jasper);
 			
 			JasperPrint print = JasperFillManager.fillReport(jasperTemplate, map, ConexaoServidor.getConnection());
 			saida = "C:\\Users\\tcrivelatti\\Downloads\\" + nomeRelatorio + ".pdf";
