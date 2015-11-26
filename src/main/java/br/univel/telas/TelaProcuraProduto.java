@@ -27,12 +27,12 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import br.univel.cadastros.Item;
 import br.univel.produto.Produto;
 import br.univel.produto.ProdutoDAOImpl;
 import br.univel.tabelas.ClienteModel;
 import br.univel.tabelas.ItemModel;
 import br.univel.tabelas.ProdutoModel;
+import br.univel.venda.Item;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

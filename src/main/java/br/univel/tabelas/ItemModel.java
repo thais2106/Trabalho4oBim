@@ -6,8 +6,8 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import br.univel.cadastros.Item;
 import br.univel.produto.Produto;
+import br.univel.venda.Item;
 
 
 

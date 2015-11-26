@@ -13,10 +13,10 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import br.univel.cadastros.Item;
-import br.univel.cadastros.Venda;
-import br.univel.cadastros.VendaDAOImpl;
 import br.univel.tabelas.ItemModel;
+import br.univel.venda.Item;
+import br.univel.venda.Venda;
+import br.univel.venda.VendaDAOImpl;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

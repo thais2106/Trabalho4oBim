@@ -1,4 +1,4 @@
-package br.univel.cadastros;
+package br.univel.venda;
 
 import java.sql.SQLException;
 import java.util.List;
