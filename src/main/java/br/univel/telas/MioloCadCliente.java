@@ -48,6 +48,7 @@ public class MioloCadCliente extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	
 	public MioloCadCliente() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 252, 0, 0, 0, 0 };

@@ -12,10 +12,6 @@ public interface VendaDAO {
 	
 	public void inserir(Venda v) throws SQLException;
 	
-	public void atualizar(Venda v) throws SQLException;
-	
-	public void excluir (Venda v) throws SQLException;
-	
 	public Venda buscar(int id) throws SQLException;
 	
 	public ArrayList<Venda> listar() throws SQLException;

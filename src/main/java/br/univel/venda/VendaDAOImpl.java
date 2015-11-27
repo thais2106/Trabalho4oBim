@@ -66,21 +66,8 @@ public class VendaDAOImpl implements VendaDAO {
 			ps.close();
 		}
 		
-		
 	}
-
-	@Override
-	public void atualizar(Venda v) throws SQLException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void excluir(Venda v) throws SQLException {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 	@Override
 	public Venda buscar(int id) throws SQLException {
 		// TODO Auto-generated method stub

@@ -2,19 +2,20 @@ package br.univel.telas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JTabbedPane;
-
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.border.EmptyBorder;
+
+import br.univel.relatorio.TelaRelatorio;
 
 /**
  * Tela Principal da aplicação com o menu de cadastros
@@ -29,6 +30,7 @@ public class TelaPrincipal extends JFrame {
 	private JMenuItem mntmProduto;
 	private JMenu mnRelatrios;
 	private JMenu mnVenda;
+	private JMenuItem mntmClientes;
 
 	/**
 	 * Launch the application.
@@ -88,6 +90,14 @@ public class TelaPrincipal extends JFrame {
 		
 		mnRelatrios = new JMenu("Relat\u00F3rios");
 		menuBar.add(mnRelatrios);
+		
+		mntmClientes = new JMenuItem("Clientes");
+		mntmClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				abrirTelaRelatorioCliente();
+			}
+		});
+		mnRelatrios.add(mntmClientes);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -120,6 +130,12 @@ public class TelaPrincipal extends JFrame {
 		TelaCadCliente tcc = new TelaCadCliente();
 		tcc.setCloseAction(e -> tabbedPane.remove(tcc));
 		tabbedPane.addTab("Cadastro de Cliente", tcc);
+	}
+	
+	protected void abrirTelaRelatorioCliente(){
+		TelaRelatorio trc = new TelaRelatorio();
+		trc.setCloseAction(e -> tabbedPane.remove(trc));
+		tabbedPane.addTab("Cadastro de Cliente", trc);
 	}
 
 }
