@@ -51,7 +51,7 @@ public class MioloRelatorioCliente extends JPanel {
 
 	}
 	
-	public Runnable getAcaoSalvar() throws SQLException {
+	public Runnable getAcaoGerarRelatorio() throws SQLException {
 		return () -> {
 			
 			String sql = "select * from cliente where ";

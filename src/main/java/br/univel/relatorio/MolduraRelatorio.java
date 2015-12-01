@@ -63,8 +63,8 @@ public abstract class MolduraRelatorio extends JPanel {
 
 	}
 	
-	public void setAcaoSalvar(Runnable acaoSalvar) {
-		btnGerarRelatrio.addActionListener(e -> acaoSalvar.run());
+	public void setAcaoGerarRelatorio(Runnable acaoGerar) {
+		btnGerarRelatrio.addActionListener(e -> acaoGerar.run());
 	}
 
 }

@@ -17,7 +17,7 @@ public class TelaRelatorioCliente extends MolduraRelatorio{
 		MioloRelatorioCliente mrc = new MioloRelatorioCliente();
 		super.add(mrc, BorderLayout.CENTER);
 		
-		super.setAcaoSalvar(mrc.getAcaoSalvar());
+		super.setAcaoGerarRelatorio(mrc.getAcaoGerarRelatorio());
 	}
 	
 

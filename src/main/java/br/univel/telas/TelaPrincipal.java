@@ -17,6 +17,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
 import br.univel.relatorio.TelaRelatorioCliente;
+import br.univel.relatorio.TelaRelatorioProduto;
 
 /**
  * Tela Principal da aplicação com o menu de cadastros
@@ -32,6 +33,7 @@ public class TelaPrincipal extends JFrame {
 	private JMenu mnRelatrios;
 	private JMenu mnVenda;
 	private JMenuItem mntmClientes;
+	private JMenuItem mntmProdutos;
 
 	/**
 	 * Launch the application.
@@ -104,6 +106,19 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		mnRelatrios.add(mntmClientes);
+		
+		mntmProdutos = new JMenuItem("Produtos");
+		mntmProdutos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					abrirTelaRelatorioProduto();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		mnRelatrios.add(mntmProdutos);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -141,7 +156,14 @@ public class TelaPrincipal extends JFrame {
 	protected void abrirTelaRelatorioCliente() throws SQLException{
 		TelaRelatorioCliente trc = new TelaRelatorioCliente();
 		trc.setCloseAction(e -> tabbedPane.remove(trc));
-		tabbedPane.addTab("Cadastro de Cliente", trc);
+		tabbedPane.addTab("Relatório de Clientes", trc);
+	}
+	
+	protected void abrirTelaRelatorioProduto() throws SQLException {
+		TelaRelatorioProduto trp = new TelaRelatorioProduto();
+		trp.setCloseAction(e -> tabbedPane.remove(trp));
+		tabbedPane.addTab("Relatório de Produtos", trp);
+		
 	}
 
 }
