@@ -1,17 +1,23 @@
 package br.univel.relatorio;
 
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import java.sql.SQLException;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
-import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JButton;
+import javax.swing.JTextField;
+
+import br.univel.cliente.UF;
 
 public class MioloRelatorioCliente extends JPanel {
-	private JTextField textField;
+	private JTextField txtcidade;
+	private ButtonGroup buttongroup = new ButtonGroup();
+	private JRadioButton radioUf;
+	private JRadioButton radioCidade;
+	private JComboBox cbxuf;
 
 	/**
 	 * Create the panel.
@@ -23,22 +29,50 @@ public class MioloRelatorioCliente extends JPanel {
 		lblPesquisaDeClientes.setBounds(0, 0, 98, 14);
 		add(lblPesquisaDeClientes);
 		
-		JRadioButton rdbtnCidade = new JRadioButton("Cidade");
-		rdbtnCidade.setBounds(0, 19, 59, 23);
-		add(rdbtnCidade);
+		radioCidade = new JRadioButton("Cidade");
+		radioCidade.setBounds(0, 19, 76, 23);
+		add(radioCidade);
+		buttongroup.add(radioCidade);
 		
-		textField = new JTextField();
-		textField.setBounds(65, 20, 165, 20);
-		add(textField);
-		textField.setColumns(10);
+		txtcidade = new JTextField();
+		txtcidade.setBounds(82, 20, 192, 20);
+		add(txtcidade);
+		txtcidade.setColumns(10);
 		
-		JRadioButton rdbtnEstado = new JRadioButton("Estado");
-		rdbtnEstado.setBounds(240, 19, 59, 23);
-		add(rdbtnEstado);
+		radioUf = new JRadioButton("Estado");
+		radioUf.setBounds(280, 19, 64, 23);
+		add(radioUf);
+		buttongroup.add(radioUf);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(305, 19, 82, 22);
-		add(comboBox);
+		
+		cbxuf = new JComboBox(UF.values());
+		cbxuf.setBounds(350, 19, 82, 22);
+		add(cbxuf);
 
+	}
+	
+	public Runnable getAcaoSalvar() throws SQLException {
+		return () -> {
+			
+			String sql = "select * from cliente where ";
+			
+			if (radioCidade.isSelected()){
+				
+				if (txtcidade.getText().isEmpty()){
+					JOptionPane.showMessageDialog(null, "Informe uma cidade!");
+				} else {
+					sql += "cidade like \"%" + txtcidade.getText()  + "%\" ";
+				}
+			}
+			
+			if (radioUf.isSelected()) {
+				UF uf = (UF) cbxuf.getSelectedItem();
+				
+				sql += "uf like \"%" + uf.toString() + "%\" ";
+			}
+			
+			JasperReportUtil.geraRelatorioEmPdfConsulta(sql, "/RelatorioClientes.jasper", "RelatorioClientes");
+			
+		};
 	}
 }

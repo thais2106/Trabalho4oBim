@@ -25,8 +25,9 @@ public abstract class MolduraRelatorio extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @throws SQLException 
 	 */
-	public MolduraRelatorio() {
+	public MolduraRelatorio() throws SQLException {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
@@ -58,7 +59,7 @@ public abstract class MolduraRelatorio extends JPanel {
 		gbc_btnFechar.gridy = 0;
 		panel_1.add(btnFechar, gbc_btnFechar);
 		
-		//configuraMiolo();
+		configuraMiolo();
 
 	}
 	

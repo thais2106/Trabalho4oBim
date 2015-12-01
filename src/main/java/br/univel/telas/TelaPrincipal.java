@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -15,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
-import br.univel.relatorio.TelaRelatorio;
+import br.univel.relatorio.TelaRelatorioCliente;
 
 /**
  * Tela Principal da aplicação com o menu de cadastros
@@ -94,7 +95,12 @@ public class TelaPrincipal extends JFrame {
 		mntmClientes = new JMenuItem("Clientes");
 		mntmClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				abrirTelaRelatorioCliente();
+				try {
+					abrirTelaRelatorioCliente();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		mnRelatrios.add(mntmClientes);
@@ -132,8 +138,8 @@ public class TelaPrincipal extends JFrame {
 		tabbedPane.addTab("Cadastro de Cliente", tcc);
 	}
 	
-	protected void abrirTelaRelatorioCliente(){
-		TelaRelatorio trc = new TelaRelatorio();
+	protected void abrirTelaRelatorioCliente() throws SQLException{
+		TelaRelatorioCliente trc = new TelaRelatorioCliente();
 		trc.setCloseAction(e -> tabbedPane.remove(trc));
 		tabbedPane.addTab("Cadastro de Cliente", trc);
 	}
