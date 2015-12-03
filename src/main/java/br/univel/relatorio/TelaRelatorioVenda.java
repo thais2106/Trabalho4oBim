@@ -8,9 +8,9 @@ import java.sql.SQLException;
  * @author tcrivelatti - 03/12/2015 - 19:36:27
  *
  */
-public class TelaRelatorioVendas extends MolduraRelatorio{
+public class TelaRelatorioVenda extends MolduraRelatorio{
 	
-	public TelaRelatorioVendas() throws SQLException {
+	public TelaRelatorioVenda() throws SQLException {
 		super();
 	}
 
