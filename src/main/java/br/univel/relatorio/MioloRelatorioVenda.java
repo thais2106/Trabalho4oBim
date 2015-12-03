@@ -10,18 +10,23 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
 import br.univel.cliente.ClienteDAO;
 import br.univel.cliente.ClienteDAOImpl;
 import br.univel.produto.Categoria;
-
+/**
+ * Campos do relatório de venda
+ * @author tcrivelatti - 03/12/2015 - 19:56:08
+ *
+ */
 public class MioloRelatorioVenda extends JPanel {
 	private JTextField txtdatafim;
 	private JTextField txtdataini;
 	private JComboBox cbxCliente;
-	private JComboBox cbxProduto;
+	private JComboBox cbxCategoria;
 
 	/**
 	 * Create the panel.
@@ -34,7 +39,7 @@ public class MioloRelatorioVenda extends JPanel {
 		add(lblVenda);
 		
 		JLabel lblDia = new JLabel("Per\u00EDodo");
-		lblDia.setBounds(10, 25, 36, 14);
+		lblDia.setBounds(10, 25, 86, 14);
 		add(lblDia);
 		
 		txtdataini = new JTextField();
@@ -52,7 +57,7 @@ public class MioloRelatorioVenda extends JPanel {
 		txtdatafim.setColumns(10);
 		
 		JLabel lblCliente = new JLabel("Cliente");
-		lblCliente.setBounds(10, 72, 46, 14);
+		lblCliente.setBounds(10, 72, 86, 14);
 		add(lblCliente);
 		
 		cbxCliente = new JComboBox();
@@ -60,15 +65,24 @@ public class MioloRelatorioVenda extends JPanel {
 		add(cbxCliente);
 		
 		JLabel lblCategoria = new JLabel("Categoria do produto");
-		lblCategoria.setBounds(10, 119, 118, 14);
+		lblCategoria.setBounds(10, 119, 162, 14);
 		add(lblCategoria);
 		
-		cbxProduto = new JComboBox(Categoria.values());
-		cbxProduto.setBounds(10, 136, 300, 20);
-		add(cbxProduto);
-		
-		preencherCbxCliente();
+		cbxCategoria = new JComboBox();
+		cbxCategoria.setBounds(10, 136, 300, 20);
+		add(cbxCategoria);
 
+		preencherCbxCliente();
+		preencherCbxCategoria();
+
+	}
+
+	private void preencherCbxCategoria() {
+		cbxCategoria.addItem("Selecionar categoria");
+
+		for (Categoria categoria : Categoria.values()) {
+			cbxCategoria.addItem(categoria);
+		}
 	}
 
 	private void preencherCbxCliente() {
@@ -84,6 +98,44 @@ public class MioloRelatorioVenda extends JPanel {
 	public Runnable setAcaoGerarRelatorio() {
 		return () -> {
 			
+			String sql = "SELECT * FROM venda WHERE ";
+			
+			if (validarPeriodo()){
+				
+				sql += "data BETWEEN";
+				
+				if (cbxCliente.getSelectedIndex() != 0){
+					String cliente = cbxCliente.getSelectedItem().toString();
+					sql += "AND nomecliente like \"%" + cliente + "%\" ";
+				}
+				
+				if (cbxCategoria.getSelectedIndex() != 0){
+					String categoria = cbxCategoria.getSelectedItem().toString();
+					sql += "AND categoria like \"%" + categoria + "%\" ";
+				}
+				
+				
+				
+			}
+			
+			
 		};
+	}
+
+	private boolean validarPeriodo() {
+		
+		if (!txtdataini.getText().isEmpty() && txtdatafim.getText().isEmpty()){
+			JOptionPane.showMessageDialog(null, "Insira uma data final!");
+			txtdatafim.requestFocus();
+			return false;
+		}
+		
+		if (txtdataini.getText().isEmpty() && !txtdatafim.getText().isEmpty()){
+			JOptionPane.showMessageDialog(null, "Insira uma data inicial!");
+			txtdataini.requestFocus();
+			return false;
+		}
+		
+		return true;
 	}
 }
