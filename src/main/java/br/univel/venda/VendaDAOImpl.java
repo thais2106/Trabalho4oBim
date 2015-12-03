@@ -1,23 +1,18 @@
 package br.univel.venda;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import br.univel.conexao.ConexaoServidor;
-import br.univel.produto.Produto;
 
 /**
  * Classe que implementa os métodos de manipulação de banco
- * 
  * @author Thaís - 06/11/2015 - 22:14:53
  *
  */
@@ -37,8 +32,8 @@ public class VendaDAOImpl implements VendaDAO {
 		ps.setString(3, v.getNomeCliente());
 		ps.setBigDecimal(4, v.getValorTotal());
 		ps.setBigDecimal(5, v.getValorPagamento());
-		ps.setString(6, v.getData());
-		ps.setString(7, v.getHora());
+		ps.setDate(6, new java.sql.Date(v.getData().getTime()));
+		ps.setTime(7, new java.sql.Time(v.getHora()));
 		
 		ps.executeUpdate();
 		ps.close();

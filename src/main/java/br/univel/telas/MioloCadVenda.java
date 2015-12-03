@@ -461,11 +461,11 @@ public class MioloCadVenda extends JPanel {
 	}
 
 	private Venda setarValores(){
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:h");
-		Date hora = Calendar.getInstance().getTime();
+		//SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:h");
+		//Date hora = Calendar.getInstance().getTime();
 		
-		SimpleDateFormat sdf2 = new SimpleDateFormat("dd/mm/yyyy");
-		Date data = new Date(System.currentTimeMillis());
+		//SimpleDateFormat sdf2 = new SimpleDateFormat("dd/mm/yyyy");
+		//Date data = new Date(System.currentTimeMillis());
 		
 		Venda v = new Venda();
 		
@@ -475,8 +475,8 @@ public class MioloCadVenda extends JPanel {
 		v.setValorPagamento(new BigDecimal(txtpagamento.getText()));
 		v.setValorTotal(new BigDecimal(txtvaltotal.getText()));
 		v.setItens(model.retornarItens());
-		v.setData(sdf2.format(data));
-		v.setHora(sdf.format(hora));
+		v.setData(new Date());
+		v.setHora(System.currentTimeMillis());
 		
 		return v;
 	}

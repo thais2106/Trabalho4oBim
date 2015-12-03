@@ -1,8 +1,8 @@
 package br.univel.venda;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Classe com os atributos da venda
@@ -16,8 +16,8 @@ public class Venda {
 	private BigDecimal valorTotal;
 	private BigDecimal valorPagamento;
 	private ArrayList<Item> itens;
-	private String data;
-	private String hora;
+	private Date data;
+	private long hora;
 	
 	public int getIdVenda() {
 		return idVenda;
@@ -55,16 +55,16 @@ public class Venda {
 	public void setItens(ArrayList<Item> list) {
 		this.itens = list;
 	}
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
-	public void setData(String data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
-	public String getHora() {
+	public long getHora() {
 		return hora;
 	}
-	public void setHora(String hora) {
+	public void setHora(long hora) {
 		this.hora = hora;
 	}
 	
