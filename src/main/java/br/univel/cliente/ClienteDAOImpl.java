@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import br.univel.conexao.ConexaoServidor;
@@ -215,5 +216,25 @@ public class ClienteDAOImpl implements ClienteDAO{
 	
 		return cod + 1;
 	}
+
+	@Override
+	public void preencherCombobox(JComboBox cbx) throws SQLException {
+		
+		sql = "SELECT * FROM CLIENTE ORDER BY nome";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		cbx.removeAllItems(); //Primeiro remove itens do combobox, para esvaziá-lo
+		cbx.addItem("Selecionar cliente");
+		
+		while (rs.next()){
+			String nome = rs.getString("nome");
+			cbx.addItem(nome); //Adiciona os nomes encontrados na consulta.
+		}
+	}
+	
+	
+	
 	
 }

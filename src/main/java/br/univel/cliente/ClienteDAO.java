@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.JComboBox;
+
 import br.univel.produto.Produto;
 /**
  * Interface de métodos da classe Cliente
@@ -24,5 +26,7 @@ public interface ClienteDAO {
 	public List<Cliente> listar() throws SQLException;
 	
 	public List<Cliente> listarNome(String nome) throws SQLException;
+	
+	public void preencherCombobox(JComboBox cbx) throws SQLException;
 
 }
