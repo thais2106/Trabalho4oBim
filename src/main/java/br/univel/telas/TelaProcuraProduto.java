@@ -84,7 +84,7 @@ public class TelaProcuraProduto extends JFrame {
 	public TelaProcuraProduto() {
 		setTitle("Procura de Produto");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 650, 400);
+		setBounds(100, 100, 653, 407);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

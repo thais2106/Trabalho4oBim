@@ -54,7 +54,7 @@ public class TelaProcuraCliente extends JFrame {
 	public TelaProcuraCliente() {
 		setTitle("Procura de Cliente");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 568, 356);
+		setBounds(100, 100, 569, 366);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -65,7 +65,7 @@ public class TelaProcuraCliente extends JFrame {
 		contentPane.add(lblPesquisar);
 		
 		txtpesquisa = new JTextField();
-		txtpesquisa.setBounds(10, 28, 439, 20);
+		txtpesquisa.setBounds(5, 28, 439, 20);
 		contentPane.add(txtpesquisa);
 		txtpesquisa.setColumns(10);
 		
@@ -75,11 +75,11 @@ public class TelaProcuraCliente extends JFrame {
 				pesquisarCliente();
 			}
 		});
-		btnProcurar.setBounds(459, 27, 91, 23);
+		btnProcurar.setBounds(454, 27, 91, 23);
 		contentPane.add(btnProcurar);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 59, 540, 259);
+		scrollPane.setBounds(5, 59, 540, 259);
 		contentPane.add(scrollPane);
 		
 		tabClientes = new JTable();
