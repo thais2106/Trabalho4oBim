@@ -1,5 +1,7 @@
 package br.univel.cliente;
 
+import javax.swing.JComboBox;
+
 /**
  * Classe Enum de siglas de estado (UF)
  * @author tcrivelatti - 27/10/2015 - 19:52
@@ -43,4 +45,12 @@ public enum UF {
 	private UF(String nome){
 		this.nome = nome;
 	}
+	
+	public void comboboxUf(JComboBox cbx) {
+		cbx.addItem("Selecionar");
+		
+		for (UF uf : UF.values()) {
+			cbx.addItem(uf);
+		}
+	}	
 }
