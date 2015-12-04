@@ -17,11 +17,11 @@ import net.sf.jasperreports.engine.JasperPrint;
 
 public class JasperReportUtil {
 
-	public static void geraRelatorioEmPdfConsulta(String SQL, String jasper, String nomeRelatorio) {
+	public static void geraRelatorioEmPdfConsulta(String sql, String jasper, String nomeRelatorio) {
 		try {
 			String saida = null;
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("SQL", SQL);
+			map.put("SQL", sql);
 
 			InputStream jasperTemplate = JasperReportUtil.class.getClass().getResourceAsStream(jasper);
 			

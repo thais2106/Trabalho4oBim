@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -27,6 +28,7 @@ public class MioloRelatorioVenda extends JPanel {
 	private JTextField txtdataini;
 	private JComboBox cbxCliente;
 	private JComboBox cbxCategoria;
+	private JComboBox cbxTipoRelatorio;
 
 	/**
 	 * Create the panel.
@@ -38,43 +40,81 @@ public class MioloRelatorioVenda extends JPanel {
 		lblVenda.setBounds(10, 0, 118, 14);
 		add(lblVenda);
 		
-		JLabel lblDia = new JLabel("Per\u00EDodo");
-		lblDia.setBounds(10, 25, 86, 14);
-		add(lblDia);
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 25, 405, 61);
+		add(panel);
+		panel.setLayout(null);
 		
-		txtdataini = new JTextField();
-		txtdataini.setBounds(10, 41, 86, 20);
-		add(txtdataini);
-		txtdataini.setColumns(10);
+		JLabel lblTiposDeRelatrios = new JLabel("Tipos de Relat\u00F3rios");
+		lblTiposDeRelatrios.setBounds(10, 9, 91, 14);
+		panel.add(lblTiposDeRelatrios);
 		
-		JLabel lblA = new JLabel("a");
-		lblA.setBounds(102, 44, 26, 14);
-		add(lblA);
+		cbxTipoRelatorio = new JComboBox();
+		cbxTipoRelatorio.setBounds(10, 28, 385, 22);
+		panel.add(cbxTipoRelatorio);
 		
-		txtdatafim = new JTextField();
-		txtdatafim.setBounds(112, 41, 86, 20);
-		add(txtdatafim);
-		txtdatafim.setColumns(10);
-		
-		JLabel lblCliente = new JLabel("Cliente");
-		lblCliente.setBounds(10, 72, 86, 14);
-		add(lblCliente);
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(10, 90, 405, 61);
+		add(panel_1);
+		panel_1.setLayout(null);
 		
 		cbxCliente = new JComboBox();
-		cbxCliente.setBounds(10, 89, 300, 20);
-		add(cbxCliente);
+		cbxCliente.setEditable(true);
+		cbxCliente.setEnabled(false);
+		cbxCliente.setBounds(10, 28, 385, 20);
+		panel_1.add(cbxCliente);
+		
+		JLabel lblCliente = new JLabel("Cliente");
+		lblCliente.setBounds(10, 11, 86, 14);
+		panel_1.add(lblCliente);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setLayout(null);
+		panel_2.setBounds(10, 158, 200, 61);
+		add(panel_2);
 		
 		JLabel lblCategoria = new JLabel("Categoria do produto");
-		lblCategoria.setBounds(10, 119, 162, 14);
-		add(lblCategoria);
+		lblCategoria.setBounds(10, 11, 162, 14);
+		panel_2.add(lblCategoria);
 		
 		cbxCategoria = new JComboBox();
-		cbxCategoria.setBounds(10, 136, 300, 20);
-		add(cbxCategoria);
+		cbxCategoria.setEditable(true);
+		cbxCategoria.setEnabled(false);
+		cbxCategoria.setBounds(10, 28, 180, 20);
+		panel_2.add(cbxCategoria);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setLayout(null);
+		panel_3.setBounds(215, 158, 200, 61);
+		add(panel_3);
+		
+		JLabel lblDia = new JLabel("Per\u00EDodo");
+		lblDia.setBounds(10, 11, 86, 14);
+		panel_3.add(lblDia);
+		
+		txtdataini = new JTextField();
+		txtdataini.setEnabled(false);
+		txtdataini.setBounds(10, 27, 86, 20);
+		panel_3.add(txtdataini);
+		txtdataini.setColumns(10);
+		
+		txtdatafim = new JTextField();
+		txtdatafim.setEnabled(false);
+		txtdatafim.setBounds(106, 27, 86, 20);
+		panel_3.add(txtdatafim);
+		txtdatafim.setColumns(10);
 
+		popularCbxTipoRelatorio();
 		preencherCbxCliente();
 		preencherCbxCategoria();
 
+	}
+
+	private void popularCbxTipoRelatorio() {
+		cbxTipoRelatorio.addItem("Todas as vendas");
+		cbxTipoRelatorio.addItem("Vendas por período")
+		cbxTipoRelatorio.addItem("Vendas por cliente");
+		cbxTipoRelatorio.addItem("Vendas por categoria");
 	}
 
 	private void preencherCbxCategoria() {
@@ -97,29 +137,41 @@ public class MioloRelatorioVenda extends JPanel {
 
 	public Runnable setAcaoGerarRelatorio() {
 		return () -> {
+			String sql = "SELECT * FROM VENDA";
 			
-			String sql = "SELECT * FROM venda WHERE ";
+			/*
+			if (cbxTipoRelatorio.getSelectedIndex()==0)
+				sql = ;
+				*/
 			
-			if (validarPeriodo()){
-				
-				sql += "data BETWEEN";
-				
-				if (cbxCliente.getSelectedIndex() != 0){
-					String cliente = cbxCliente.getSelectedItem().toString();
-					sql += "AND nomecliente like \"%" + cliente + "%\" ";
-				}
-				
-				if (cbxCategoria.getSelectedIndex() != 0){
-					String categoria = cbxCategoria.getSelectedItem().toString();
-					sql += "AND categoria like \"%" + categoria + "%\" ";
-				}
-				
-				
-				
-			}
+			if (cbxTipoRelatorio.getSelectedIndex()==1)
+				sql += gerarVendasPeriodo();
+			
+			if (cbxTipoRelatorio.getSelectedIndex()==2)
+				sql += gerarVendasCliente();
+			
+			if (cbxTipoRelatorio.getSelectedIndex()==3)
+				sql += gerarVendasCategoria;
+			
+			JasperReportUtil.geraRelatorioEmPdfConsulta(sql, "/RelatorioVendas.jasper", "RelatorioVendas");
 			
 			
 		};
+	}
+
+	
+			
+
+
+
+	private String gerarVendasPeriodo(String sql) {
+		txtdataini.setEnabled(true);
+		txtdatafim.setEnabled(true);
+		
+		if (validarPeriodo()){
+			
+			
+		}
 	}
 
 	private boolean validarPeriodo() {
