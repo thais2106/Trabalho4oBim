@@ -16,8 +16,8 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
 public class JasperReportUtil {
-
-	public static void geraRelatorioEmPdfConsulta(String sql, String jasper, String nomeRelatorio) {
+	public static void geraRelatorioEmPdfConsulta(String sql, String jasper, String caminho) {
+	//public static void geraRelatorioEmPdfConsulta(String sql, String jasper, String nomeRelatorio) {
 		try {
 			String saida = null;
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -26,7 +26,8 @@ public class JasperReportUtil {
 			InputStream jasperTemplate = JasperReportUtil.class.getClass().getResourceAsStream(jasper);
 			
 			JasperPrint print = JasperFillManager.fillReport(jasperTemplate, map, ConexaoServidor.getConnection());
-			saida = "C:\\Users\\tcrivelatti\\Downloads\\" + nomeRelatorio + ".pdf";
+			saida = caminho + ".pdf";
+			//saida = "C:\\Users\\tcrivelatti\\Downloads\\" + nomeRelatorio + ".pdf";
 			JasperExportManager.exportReportToPdfFile(print, saida);
 			JOptionPane.showMessageDialog(null, "<html>Arquivo exportado para PDF!<br><br>A aplicação vai pedir"
 					+ " ao Sistema operacional <br>para abrir com o visualizador" + " padrão.");

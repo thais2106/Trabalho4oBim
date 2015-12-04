@@ -11,6 +11,7 @@ import java.awt.Insets;
 import java.sql.SQLException;
 import java.util.Date;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -18,91 +19,158 @@ import javax.swing.JComboBox;
 import br.univel.cliente.ClienteDAO;
 import br.univel.cliente.ClienteDAOImpl;
 import br.univel.produto.Categoria;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.GridLayout;
+
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
+import java.awt.Color;
+
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+import javax.swing.border.SoftBevelBorder;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.io.File;
+
+import javax.swing.JButton;
+
 /**
  * Campos do relatório de venda
+ * 
  * @author tcrivelatti - 03/12/2015 - 19:56:08
  *
  */
 public class MioloRelatorioVenda extends JPanel {
-	private JTextField txtdatafim;
-	private JTextField txtdataini;
-	private JComboBox cbxCliente;
+	private JTextField txtDataInicial;
+	private JTextField txtDataFinal;
 	private JComboBox cbxCategoria;
+	private JComboBox cbxCliente;
 	private JComboBox cbxTipoRelatorio;
+	private StatusBar statusBar = new StatusBar();
+	private JTextField txtLocal;
 
 	/**
 	 * Create the panel.
 	 */
 	public MioloRelatorioVenda() {
-		setLayout(null);
-		
-		JLabel lblVenda = new JLabel("Relat\u00F3rio de Vendas");
-		lblVenda.setBounds(10, 0, 118, 14);
-		add(lblVenda);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 25, 405, 61);
-		add(panel);
-		panel.setLayout(null);
-		
-		JLabel lblTiposDeRelatrios = new JLabel("Tipos de Relat\u00F3rios");
-		lblTiposDeRelatrios.setBounds(10, 9, 91, 14);
-		panel.add(lblTiposDeRelatrios);
-		
-		cbxTipoRelatorio = new JComboBox();
-		cbxTipoRelatorio.setBounds(10, 28, 385, 22);
-		panel.add(cbxTipoRelatorio);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 90, 405, 61);
-		add(panel_1);
-		panel_1.setLayout(null);
-		
-		cbxCliente = new JComboBox();
-		cbxCliente.setEditable(true);
-		cbxCliente.setEnabled(false);
-		cbxCliente.setBounds(10, 28, 385, 20);
-		panel_1.add(cbxCliente);
-		
-		JLabel lblCliente = new JLabel("Cliente");
-		lblCliente.setBounds(10, 11, 86, 14);
-		panel_1.add(lblCliente);
-		
-		JPanel panel_2 = new JPanel();
-		panel_2.setLayout(null);
-		panel_2.setBounds(10, 158, 200, 61);
-		add(panel_2);
-		
-		JLabel lblCategoria = new JLabel("Categoria do produto");
-		lblCategoria.setBounds(10, 11, 162, 14);
-		panel_2.add(lblCategoria);
-		
+		setLayout(new BorderLayout(0, 0));
+
+		JPanel panel_status = new JPanel();
+		panel_status.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null,
+				null, null, null));
+		add(panel_status, BorderLayout.SOUTH);
+		GridBagLayout gbl_panel_status = new GridBagLayout();
+		gbl_panel_status.columnWidths = new int[] { 165, 0 };
+		gbl_panel_status.rowHeights = new int[] { 16, 0 };
+		gbl_panel_status.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
+		gbl_panel_status.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
+		panel_status.setLayout(gbl_panel_status);
+		GridBagConstraints gbc_statusBar = new GridBagConstraints();
+		gbc_statusBar.fill = GridBagConstraints.HORIZONTAL;
+		gbc_statusBar.gridx = 0;
+		gbc_statusBar.gridy = 0;
+		panel_status.add(statusBar, gbc_statusBar);
+		statusBar
+				.setMessage("Deixe o período em branco para listar todas as vendas.");
+
+		JPanel panel_content = new JPanel();
+		add(panel_content, BorderLayout.CENTER);
+		panel_content.setLayout(null);
+
+		JPanel panel_periodo = new JPanel();
+		panel_periodo.setBorder(new TitledBorder(UIManager
+				.getBorder("TitledBorder.border"), "Per\u00EDodo",
+				TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
+		panel_periodo.setBounds(10, 86, 205, 50);
+		panel_content.add(panel_periodo);
+		panel_periodo.setLayout(null);
+
+		txtDataInicial = new JTextField();
+		txtDataInicial.setBounds(10, 19, 86, 20);
+		panel_periodo.add(txtDataInicial);
+		txtDataInicial.setColumns(10);
+
+		txtDataFinal = new JTextField();
+		txtDataFinal.setBounds(106, 19, 86, 20);
+		panel_periodo.add(txtDataFinal);
+		txtDataFinal.setColumns(10);
+
+		JPanel panel_categoria = new JPanel();
+		panel_categoria.setBorder(new TitledBorder(UIManager
+				.getBorder("TitledBorder.border"), "Categoria",
+				TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
+		panel_categoria.setBounds(217, 86, 204, 50);
+		panel_content.add(panel_categoria);
+		panel_categoria.setLayout(null);
+
 		cbxCategoria = new JComboBox();
-		cbxCategoria.setEditable(true);
 		cbxCategoria.setEnabled(false);
-		cbxCategoria.setBounds(10, 28, 180, 20);
-		panel_2.add(cbxCategoria);
+		cbxCategoria.setBounds(10, 19, 184, 20);
+		panel_categoria.add(cbxCategoria);
+
+		JPanel panel_cliente = new JPanel();
+		panel_cliente.setBorder(new TitledBorder(UIManager
+				.getBorder("TitledBorder.border"), "Cliente",
+				TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
+		panel_cliente.setBounds(10, 147, 411, 50);
+		panel_content.add(panel_cliente);
+		panel_cliente.setLayout(null);
+
+		cbxCliente = new JComboBox();
+		cbxCliente.setEnabled(false);
+		cbxCliente.setBounds(10, 19, 391, 20);
+		panel_cliente.add(cbxCliente);
+
+		JPanel panel_tipo = new JPanel();
+		panel_tipo.setBorder(new TitledBorder(UIManager
+				.getBorder("TitledBorder.border"), "Tipo de Relat\u00F3rio",
+				TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
+		panel_tipo.setBounds(10, 29, 411, 50);
+		panel_content.add(panel_tipo);
+		panel_tipo.setLayout(null);
+
+		cbxTipoRelatorio = new JComboBox();
+		cbxTipoRelatorio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				habilitarCampos();
+			}
+		});
+		cbxTipoRelatorio.setBounds(10, 20, 391, 20);
+		panel_tipo.add(cbxTipoRelatorio);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setLayout(null);
-		panel_3.setBounds(215, 158, 200, 61);
-		add(panel_3);
+		JPanel panel_salvar = new JPanel();
+		panel_salvar.setBorder(new TitledBorder(null, "Salvar como", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_salvar.setBounds(10, 208, 411, 50);
+		panel_content.add(panel_salvar);
+		panel_salvar.setLayout(null);
 		
-		JLabel lblDia = new JLabel("Per\u00EDodo");
-		lblDia.setBounds(10, 11, 86, 14);
-		panel_3.add(lblDia);
+		JButton btnLocal = new JButton("Local");
+		btnLocal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				escolherLocal();
+			}
+		});
+		btnLocal.setBounds(312, 16, 89, 23);
+		panel_salvar.add(btnLocal);
 		
-		txtdataini = new JTextField();
-		txtdataini.setEnabled(false);
-		txtdataini.setBounds(10, 27, 86, 20);
-		panel_3.add(txtdataini);
-		txtdataini.setColumns(10);
-		
-		txtdatafim = new JTextField();
-		txtdatafim.setEnabled(false);
-		txtdatafim.setBounds(106, 27, 86, 20);
-		panel_3.add(txtdatafim);
-		txtdatafim.setColumns(10);
+		txtLocal = new JTextField();
+		txtLocal.setEditable(false);
+		txtLocal.setBounds(10, 17, 292, 20);
+		panel_salvar.add(txtLocal);
+		txtLocal.setColumns(10);
 
 		popularCbxTipoRelatorio();
 		preencherCbxCliente();
@@ -110,14 +178,27 @@ public class MioloRelatorioVenda extends JPanel {
 
 	}
 
+	protected void escolherLocal() {
+		JFileChooser file = new JFileChooser();
+		int i = file.showSaveDialog(null);
+		
+		if (i==1){
+			txtLocal.setText("");
+		} else {
+			File arquivo = file.getSelectedFile();
+			txtLocal.setText(arquivo.getPath());
+		}
+		
+	}
+
 	private void popularCbxTipoRelatorio() {
-		cbxTipoRelatorio.addItem("Todas as vendas");
-		cbxTipoRelatorio.addItem("Vendas por período")
+		cbxTipoRelatorio.addItem("Vendas por período");
 		cbxTipoRelatorio.addItem("Vendas por cliente");
 		cbxTipoRelatorio.addItem("Vendas por categoria");
 	}
 
 	private void preencherCbxCategoria() {
+
 		cbxCategoria.addItem("Selecionar categoria");
 
 		for (Categoria categoria : Categoria.values()) {
@@ -135,59 +216,77 @@ public class MioloRelatorioVenda extends JPanel {
 		}
 	}
 
+	protected void habilitarCampos() {
+
+		if (cbxTipoRelatorio.getSelectedIndex() == 1) {
+			cbxCategoria.setEnabled(false);
+			cbxCliente.setEnabled(true);
+		} else if (cbxTipoRelatorio.getSelectedIndex() == 2) {
+			cbxCliente.setEnabled(false);
+			cbxCategoria.setEnabled(true);
+		} else {
+			cbxCliente.setEnabled(false);
+			cbxCategoria.setEnabled(false);
+		}
+
+	}
+
 	public Runnable setAcaoGerarRelatorio() {
 		return () -> {
+			String caminho = txtLocal.getText();
 			String sql = "SELECT * FROM VENDA";
-			
-			/*
-			if (cbxTipoRelatorio.getSelectedIndex()==0)
-				sql = ;
-				*/
-			
-			if (cbxTipoRelatorio.getSelectedIndex()==1)
-				sql += gerarVendasPeriodo();
-			
-			if (cbxTipoRelatorio.getSelectedIndex()==2)
-				sql += gerarVendasCliente();
-			
-			if (cbxTipoRelatorio.getSelectedIndex()==3)
-				sql += gerarVendasCategoria;
-			
-			JasperReportUtil.geraRelatorioEmPdfConsulta(sql, "/RelatorioVendas.jasper", "RelatorioVendas");
-			
-			
+
+			if (cbxTipoRelatorio.getSelectedIndex() == 0)
+				sql += gerarVendasPeriodo(sql);
+
+			if (cbxTipoRelatorio.getSelectedIndex() == 1)
+				// sql += gerarVendasCliente();
+
+				if (cbxTipoRelatorio.getSelectedIndex() == 2)
+					// sql += gerarVendasCategoria;
+
+					System.out.println("sql " + sql);
+
+			JasperReportUtil.geraRelatorioEmPdfConsulta(sql,
+					"/RelatorioVendas.jasper", caminho);
+
 		};
 	}
 
-	
-			
-
-
-
 	private String gerarVendasPeriodo(String sql) {
-		txtdataini.setEnabled(true);
-		txtdatafim.setEnabled(true);
+		System.out.println("entrou gerar vendas " + sql);
 		
-		if (validarPeriodo()){
+		String dataInicial = txtDataInicial.getText();
+		String dataFinal = txtDataFinal.getText();
+		
+		if (dataInicial.isEmpty() && dataFinal.isEmpty())
+			return sql;
+		else {
+			if (validarPeriodo())
+				sql += "WHERE data BETWEEN CONVERT(DATETIME, " + dataInicial
+				+ ", 103) " + "AND CONVERT(DATETIME, " + dataFinal
+				+ ", 103);";
 			
-			
+			return sql;
 		}
 	}
 
 	private boolean validarPeriodo() {
-		
-		if (!txtdataini.getText().isEmpty() && txtdatafim.getText().isEmpty()){
+
+		if (!txtDataInicial.getText().isEmpty()
+				&& txtDataFinal.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira uma data final!");
-			txtdatafim.requestFocus();
+			txtDataFinal.requestFocus();
 			return false;
 		}
-		
-		if (txtdataini.getText().isEmpty() && !txtdatafim.getText().isEmpty()){
+
+		if (txtDataInicial.getText().isEmpty()
+				&& !txtDataFinal.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira uma data inicial!");
-			txtdataini.requestFocus();
+			txtDataInicial.requestFocus();
 			return false;
 		}
-		
+
 		return true;
 	}
 }
