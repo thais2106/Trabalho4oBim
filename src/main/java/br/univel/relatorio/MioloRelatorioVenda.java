@@ -44,6 +44,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
 
 /**
  * Campos do relatório de venda
@@ -55,10 +56,11 @@ public class MioloRelatorioVenda extends JPanel {
 	private JTextField txtDataInicial;
 	private JTextField txtDataFinal;
 	private JComboBox cbxCategoria;
-	private JComboBox cbxCliente;
 	private JComboBox cbxTipoRelatorio;
 	private StatusBar statusBar = new StatusBar();
 	private JTextField txtLocal;
+	private JTextField txtcliente;
+	private JButton btnProcurar;
 
 	/**
 	 * Create the panel.
@@ -129,11 +131,17 @@ public class MioloRelatorioVenda extends JPanel {
 		panel_cliente.setBounds(10, 147, 411, 50);
 		panel_content.add(panel_cliente);
 		panel_cliente.setLayout(null);
-
-		cbxCliente = new JComboBox();
-		cbxCliente.setEnabled(false);
-		cbxCliente.setBounds(10, 19, 391, 20);
-		panel_cliente.add(cbxCliente);
+		
+		txtcliente = new JTextField();
+		txtcliente.setEnabled(false);
+		txtcliente.setBounds(10, 19, 332, 20);
+		panel_cliente.add(txtcliente);
+		txtcliente.setColumns(10);
+		
+		btnProcurar = new JButton("");
+		btnProcurar.setIcon(new ImageIcon(MioloRelatorioVenda.class.getResource("/br/univel/icones/procura.png")));
+		btnProcurar.setBounds(352, 18, 49, 23);
+		panel_cliente.add(btnProcurar);
 
 		JPanel panel_tipo = new JPanel();
 		panel_tipo.setBorder(new TitledBorder(UIManager
@@ -175,9 +183,8 @@ public class MioloRelatorioVenda extends JPanel {
 		txtLocal.setColumns(10);
 
 		popularCbxTipoRelatorio();
-		preencherCbxCliente();
-		preencherCbxCategoria();
-
+		Categoria.comboboxCategoria(cbxCategoria);
+		
 	}
 
 	protected void escolherLocal() {
@@ -198,36 +205,22 @@ public class MioloRelatorioVenda extends JPanel {
 		cbxTipoRelatorio.addItem("Vendas por cliente");
 		cbxTipoRelatorio.addItem("Vendas por categoria");
 	}
-
-	private void preencherCbxCategoria() {
-
-		cbxCategoria.addItem("Selecionar categoria");
-
-		for (Categoria categoria : Categoria.values()) {
-			cbxCategoria.addItem(categoria);
-		}
-	}
-
-	private void preencherCbxCliente() {
-		ClienteDAOImpl dao = new ClienteDAOImpl();
-		try {
-			dao.preencherCombobox(cbxCliente);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
+	
 
 	protected void habilitarCampos() {
 
 		if (cbxTipoRelatorio.getSelectedIndex() == 1) {
 			cbxCategoria.setEnabled(false);
-			cbxCliente.setEnabled(true);
+			btnProcurar.setEnabled(true);
+			txtcliente.setEnabled(true);
 		} else if (cbxTipoRelatorio.getSelectedIndex() == 2) {
-			cbxCliente.setEnabled(false);
+			txtcliente.setEnabled(false);
+			btnProcurar.setEnabled(false);
 			cbxCategoria.setEnabled(true);
 		} else {
-			cbxCliente.setEnabled(false);
+			txtcliente.setEnabled(false);
+			btnProcurar.setEnabled(false);
 			cbxCategoria.setEnabled(false);
 		}
 

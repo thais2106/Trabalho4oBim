@@ -13,7 +13,6 @@ import br.univel.produto.Produto;
  *
  */
 public interface ClienteDAO {
-	//Connection getConnection() throws SQLException;
 	
 	public void inserir(Cliente c) throws SQLException;
 	
@@ -28,7 +27,5 @@ public interface ClienteDAO {
 	public List<Cliente> listar() throws SQLException;
 	
 	public List<Cliente> listarNome(String nome) throws SQLException;
-	
-	public void preencherCombobox(JComboBox cbx) throws SQLException;
 
 }

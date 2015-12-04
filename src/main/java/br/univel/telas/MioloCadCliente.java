@@ -1,38 +1,32 @@
 package br.univel.telas;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-
-import java.awt.GridBagLayout;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.TableModel;
 
 import br.univel.cliente.Cliente;
 import br.univel.cliente.ClienteDAOImpl;
 import br.univel.cliente.Genero;
 import br.univel.cliente.UF;
-import br.univel.produto.Categoria;
 import br.univel.tabelas.ClienteModel;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.TableModel;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
-
-import java.awt.Color;
-import java.awt.BorderLayout;
-import java.awt.Font;
 
 /**
  * Tela "miolo" com os campos do cadastro de cliente
@@ -194,7 +188,7 @@ public class MioloCadCliente extends JPanel {
 		panel_dados.add(txtcidade, gbc_txtcidade);
 		txtcidade.setColumns(10);
 
-		cbxuf = new JComboBox(UF.values());
+		cbxuf = new JComboBox();
 		GridBagConstraints gbc_cbxuf = new GridBagConstraints();
 		gbc_cbxuf.anchor = GridBagConstraints.NORTH;
 		gbc_cbxuf.fill = GridBagConstraints.BOTH;
@@ -293,6 +287,7 @@ public class MioloCadCliente extends JPanel {
 		scrollPane.setViewportView(table);
 		setModelTabela();
 		Genero.comboboxGenero(cbxgenero);
+		UF.comboboxUf(cbxuf);
 		buscarID();
 
 	}
@@ -373,14 +368,13 @@ public class MioloCadCliente extends JPanel {
 	}
 
 	private void limparCampos() {
-
+		buscarID();
 		txtnome.setText("");
 		txtcidade.setText("");
 		txtemail.setText("");
 		txtendereco.setText("");
 		txttelefone.setText("");
 		cbxgenero.setSelectedIndex(0);
-		cbxuf.setSelectedIndex(0);
 
 	}
 

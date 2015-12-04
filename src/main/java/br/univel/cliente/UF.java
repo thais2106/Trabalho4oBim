@@ -46,7 +46,7 @@ public enum UF {
 		this.nome = nome;
 	}
 	
-	public void comboboxUf(JComboBox cbx) {
+	public static void comboboxUf(JComboBox cbx) {
 		cbx.addItem("Selecionar");
 		
 		for (UF uf : UF.values()) {

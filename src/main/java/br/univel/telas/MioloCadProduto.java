@@ -32,6 +32,12 @@ import javax.swing.border.TitledBorder;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.UIManager;
+import java.awt.Color;
 /**
  * Classe com os campos do Produto para preencher
  * @author Thaís - 02/11/2015 - 16:01:49
@@ -51,6 +57,8 @@ public class MioloCadProduto extends JPanel {
 	private JPanel panel_codigo;
 	private JPanel panel_dados;
 	private JPanel panel_tabela;
+	private JButton btnNovoProduto;
+	private JButton btnExcluir;
 
 	/**
 	 * Create the panel.
@@ -58,9 +66,9 @@ public class MioloCadProduto extends JPanel {
 	public MioloCadProduto() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{430, 0};
-		gridBagLayout.rowHeights = new int[]{39, 181, 144, 0};
+		gridBagLayout.rowHeights = new int[]{0, 39, 181, 144, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		panel_codigo = new JPanel();
@@ -68,28 +76,65 @@ public class MioloCadProduto extends JPanel {
 		gbc_panel_codigo.fill = GridBagConstraints.BOTH;
 		gbc_panel_codigo.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_codigo.gridx = 0;
-		gbc_panel_codigo.gridy = 0;
+		gbc_panel_codigo.gridy = 1;
 		add(panel_codigo, gbc_panel_codigo);
-		panel_codigo.setLayout(null);
+		GridBagLayout gbl_panel_codigo = new GridBagLayout();
+		gbl_panel_codigo.columnWidths = new int[]{113, 100, 88, 88, 0};
+		gbl_panel_codigo.rowHeights = new int[]{23, 0};
+		gbl_panel_codigo.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_codigo.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel_codigo.setLayout(gbl_panel_codigo);
 		
-		JLabel lblId = new JLabel("C\u00F3digo do Produto");
+		JLabel lblId = new JLabel("C\u00F3digo Produto");
 		lblId.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblId.setBounds(10, 11, 127, 14);
-		panel_codigo.add(lblId);
+		GridBagConstraints gbc_lblId = new GridBagConstraints();
+		gbc_lblId.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblId.insets = new Insets(0, 0, 0, 5);
+		gbc_lblId.gridx = 0;
+		gbc_lblId.gridy = 0;
+		panel_codigo.add(lblId, gbc_lblId);
 		
 		txtid = new JTextField();
-		txtid.setBounds(136, 9, 100, 20);
-		panel_codigo.add(txtid);
+		GridBagConstraints gbc_txtid = new GridBagConstraints();
+		gbc_txtid.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtid.insets = new Insets(0, 0, 0, 5);
+		gbc_txtid.gridx = 1;
+		gbc_txtid.gridy = 0;
+		panel_codigo.add(txtid, gbc_txtid);
 		txtid.setEditable(false);
 		txtid.setColumns(10);
 		
+		btnNovoProduto = new JButton("Novo");
+		btnNovoProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limparCampos();
+			}
+		});
+		btnNovoProduto.setIcon(new ImageIcon(MioloCadProduto.class.getResource("/br/univel/icones/add.png")));
+		GridBagConstraints gbc_btnNovoProduto = new GridBagConstraints();
+		gbc_btnNovoProduto.anchor = GridBagConstraints.EAST;
+		gbc_btnNovoProduto.fill = GridBagConstraints.VERTICAL;
+		gbc_btnNovoProduto.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNovoProduto.gridx = 2;
+		gbc_btnNovoProduto.gridy = 0;
+		panel_codigo.add(btnNovoProduto, gbc_btnNovoProduto);
+		
+		btnExcluir = new JButton("Excluir");
+		btnExcluir.setIcon(new ImageIcon(MioloCadProduto.class.getResource("/br/univel/icones/delete.png")));
+		GridBagConstraints gbc_btnExcluir = new GridBagConstraints();
+		gbc_btnExcluir.anchor = GridBagConstraints.EAST;
+		gbc_btnExcluir.fill = GridBagConstraints.VERTICAL;
+		gbc_btnExcluir.gridx = 3;
+		gbc_btnExcluir.gridy = 0;
+		panel_codigo.add(btnExcluir, gbc_btnExcluir);
+		
 		panel_dados = new JPanel();
-		panel_dados.setBorder(new TitledBorder(null, "Dados do Produto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_dados.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Dados do Produto", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel_dados = new GridBagConstraints();
 		gbc_panel_dados.fill = GridBagConstraints.BOTH;
 		gbc_panel_dados.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_dados.gridx = 0;
-		gbc_panel_dados.gridy = 1;
+		gbc_panel_dados.gridy = 2;
 		add(panel_dados, gbc_panel_dados);
 		GridBagLayout gbl_panel_dados = new GridBagLayout();
 		gbl_panel_dados.columnWidths = new int[]{100, 82, 105, 94, 0};
@@ -125,11 +170,11 @@ public class MioloCadProduto extends JPanel {
 		panel_dados.add(txtcodbarras, gbc_txtcodbarras);
 		txtcodbarras.setColumns(10);
 		
-		cbxcategoria = new JComboBox(Categoria.values());
+		cbxcategoria = new JComboBox();
 		GridBagConstraints gbc_cbxcategoria = new GridBagConstraints();
 		gbc_cbxcategoria.anchor = GridBagConstraints.NORTH;
 		gbc_cbxcategoria.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbxcategoria.insets = new Insets(0, 0, 5, 0);
+		gbc_cbxcategoria.insets = new Insets(0, 0, 5, 5);
 		gbc_cbxcategoria.gridwidth = 2;
 		gbc_cbxcategoria.gridx = 2;
 		gbc_cbxcategoria.gridy = 1;
@@ -162,11 +207,11 @@ public class MioloCadProduto extends JPanel {
 		panel_dados.add(txtdescricao, gbc_txtdescricao);
 		txtdescricao.setColumns(10);
 		
-		cbxunidade = new JComboBox(Unidade.values());
+		cbxunidade = new JComboBox();
 		GridBagConstraints gbc_cbxunidade = new GridBagConstraints();
 		gbc_cbxunidade.anchor = GridBagConstraints.NORTH;
 		gbc_cbxunidade.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbxunidade.insets = new Insets(0, 0, 5, 0);
+		gbc_cbxunidade.insets = new Insets(0, 0, 5, 5);
 		gbc_cbxunidade.gridx = 3;
 		gbc_cbxunidade.gridy = 3;
 		panel_dados.add(cbxunidade, gbc_cbxunidade);
@@ -212,7 +257,7 @@ public class MioloCadProduto extends JPanel {
 		GridBagConstraints gbc_panel_tabela = new GridBagConstraints();
 		gbc_panel_tabela.fill = GridBagConstraints.BOTH;
 		gbc_panel_tabela.gridx = 0;
-		gbc_panel_tabela.gridy = 2;
+		gbc_panel_tabela.gridy = 3;
 		add(panel_tabela, gbc_panel_tabela);
 		panel_tabela.setLayout(new BorderLayout(0, 0));
 		
@@ -235,7 +280,34 @@ public class MioloCadProduto extends JPanel {
 		});
 		scrollPane.setViewportView(table);
 		setModelTabela();
+		Categoria.comboboxCategoria(cbxcategoria);
+		Unidade.comboboxUnidade(cbxunidade);
 
+	}
+
+	protected void limparCampos() {
+		 txtid.setText(String.valueOf(buscarID()));
+		 txtcodbarras.setText("");
+		 txtdescricao.setText("");
+		 txtcusto.setText("");
+		 txtmargem.setText("");
+		 cbxcategoria.setSelectedIndex(0);
+		 cbxcategoria.setSelectedIndex(0);
+	}
+
+	private int buscarID() {
+		ProdutoDAOImpl dao = new ProdutoDAOImpl();
+		int id = 0;
+		
+		try {
+			id = dao.buscarID();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return id;
+		
 	}
 
 	private void setModelTabela() {
@@ -290,7 +362,6 @@ public class MioloCadProduto extends JPanel {
 			}
 			
 			((ProdutoModel) model).incluir(p);
-		
 		};
 	}
 
