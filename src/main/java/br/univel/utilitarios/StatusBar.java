@@ -1,4 +1,4 @@
-package br.univel.relatorio;
+package br.univel.utilitarios;
 
 import java.awt.Dimension;
 

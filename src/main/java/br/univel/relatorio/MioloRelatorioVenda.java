@@ -19,6 +19,8 @@ import javax.swing.JComboBox;
 import br.univel.cliente.ClienteDAO;
 import br.univel.cliente.ClienteDAOImpl;
 import br.univel.produto.Categoria;
+import br.univel.utilitarios.JasperReportUtil;
+import br.univel.utilitarios.StatusBar;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

@@ -11,6 +11,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import br.univel.cliente.UF;
+import br.univel.utilitarios.JasperReportUtil;
 
 public class MioloRelatorioCliente extends JPanel {
 	private JTextField txtcidade;

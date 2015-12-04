@@ -17,6 +17,7 @@ import javax.swing.JRadioButton;
 
 import net.sf.jasperreports.engine.util.JRStyledText.Run;
 import br.univel.produto.Categoria;
+import br.univel.utilitarios.JasperReportUtil;
 
 /**
  * Tela para gerar relatório de produto.
