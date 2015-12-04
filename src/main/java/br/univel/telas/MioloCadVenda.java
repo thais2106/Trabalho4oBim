@@ -28,6 +28,12 @@ import br.univel.tabelas.ItemModel;
 import br.univel.venda.Item;
 import br.univel.venda.Venda;
 import br.univel.venda.VendaDAOImpl;
+import javax.swing.border.TitledBorder;
+import javax.swing.ImageIcon;
+import java.awt.Font;
+import java.awt.BorderLayout;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class MioloCadVenda extends JPanel {
 	private static MioloCadVenda instance;
@@ -56,45 +62,33 @@ public class MioloCadVenda extends JPanel {
       }  
 	
 	private MioloCadVenda() {
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{77, 66, 124, 35, 132, 0};
-		gridBagLayout.rowHeights = new int[]{14, 20, 14, 20, 232, 14, 20, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		setLayout(gridBagLayout);
+		setLayout(null);
 		
-		JLabel lblVenda = new JLabel("Venda");
-		GridBagConstraints gbc_lblVenda = new GridBagConstraints();
-		gbc_lblVenda.anchor = GridBagConstraints.NORTH;
-		gbc_lblVenda.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblVenda.insets = new Insets(0, 0, 5, 5);
-		gbc_lblVenda.gridwidth = 2;
-		gbc_lblVenda.gridx = 0;
-		gbc_lblVenda.gridy = 0;
-		add(lblVenda, gbc_lblVenda);
+		JPanel panel_codigo = new JPanel();
+		panel_codigo.setBounds(10, 0, 485, 28);
+		add(panel_codigo);
+		panel_codigo.setLayout(null);
 		
 		txtidvenda = new JTextField();
+		txtidvenda.setBounds(112, 6, 86, 20);
+		panel_codigo.add(txtidvenda);
 		txtidvenda.setEditable(false);
-		GridBagConstraints gbc_txtidvenda = new GridBagConstraints();
-		gbc_txtidvenda.anchor = GridBagConstraints.NORTH;
-		gbc_txtidvenda.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtidvenda.insets = new Insets(0, 0, 5, 5);
-		gbc_txtidvenda.gridwidth = 2;
-		gbc_txtidvenda.gridx = 0;
-		gbc_txtidvenda.gridy = 1;
-		add(txtidvenda, gbc_txtidvenda);
 		txtidvenda.setColumns(10);
 		
-		JLabel lblCliente = new JLabel("Cliente");
-		GridBagConstraints gbc_lblCliente = new GridBagConstraints();
-		gbc_lblCliente.anchor = GridBagConstraints.NORTH;
-		gbc_lblCliente.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblCliente.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCliente.gridx = 0;
-		gbc_lblCliente.gridy = 2;
-		add(lblCliente, gbc_lblCliente);
+		JLabel lblVendaNmero = new JLabel("Venda n\u00FAmero");
+		lblVendaNmero.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblVendaNmero.setBounds(10, 8, 102, 14);
+		panel_codigo.add(lblVendaNmero);
+		
+		JPanel panel_cliente = new JPanel();
+		panel_cliente.setBounds(10, 33, 614, 47);
+		panel_cliente.setBorder(new TitledBorder(null, "Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		add(panel_cliente);
+		panel_cliente.setLayout(null);
 		
 		txtidcliente = new JTextField();
+		txtidcliente.setBounds(7, 16, 120, 20);
+		panel_cliente.add(txtidcliente);
 		txtidcliente.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
@@ -104,75 +98,35 @@ public class MioloCadVenda extends JPanel {
 				}
 			}
 		});
-		GridBagConstraints gbc_txtidcliente = new GridBagConstraints();
-		gbc_txtidcliente.anchor = GridBagConstraints.NORTH;
-		gbc_txtidcliente.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtidcliente.insets = new Insets(0, 0, 5, 5);
-		gbc_txtidcliente.gridx = 0;
-		gbc_txtidcliente.gridy = 3;
-		add(txtidcliente, gbc_txtidcliente);
 		txtidcliente.setColumns(10);
 		
 		txtnomecliente = new JTextField();
-		GridBagConstraints gbc_txtnomecliente = new GridBagConstraints();
-		gbc_txtnomecliente.anchor = GridBagConstraints.NORTH;
-		gbc_txtnomecliente.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtnomecliente.insets = new Insets(0, 0, 5, 0);
-		gbc_txtnomecliente.gridwidth = 4;
-		gbc_txtnomecliente.gridx = 1;
-		gbc_txtnomecliente.gridy = 3;
-		add(txtnomecliente, gbc_txtnomecliente);
+		txtnomecliente.setBounds(137, 16, 406, 20);
+		panel_cliente.add(txtnomecliente);
 		txtnomecliente.setColumns(10);
 		
-		JPanel panel = new JPanel();
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.insets = new Insets(0, 0, 5, 0);
-		gbc_panel.gridwidth = 5;
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 4;
-		add(panel, gbc_panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0};
-		gbl_panel.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
+		JButton btnProcura = new JButton("");
+		btnProcura.setBounds(553, 11, 50, 25);
+		btnProcura.setIcon(new ImageIcon(MioloCadVenda.class.getResource("/br/univel/icones/procura.png")));
+		panel_cliente.add(btnProcura);
 		
-		JLabel lblCdigoDeBarras = new JLabel("C\u00F3digo produto");
-		GridBagConstraints gbc_lblCdigoDeBarras = new GridBagConstraints();
-		gbc_lblCdigoDeBarras.anchor = GridBagConstraints.WEST;
-		gbc_lblCdigoDeBarras.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCdigoDeBarras.gridx = 0;
-		gbc_lblCdigoDeBarras.gridy = 0;
-		panel.add(lblCdigoDeBarras, gbc_lblCdigoDeBarras);
+		JPanel panel_produto = new JPanel();
+		panel_produto.setBounds(10, 91, 614, 122);
+		panel_produto.setBorder(new TitledBorder(null, "Produto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		add(panel_produto);
+		panel_produto.setLayout(null);
+		
+		JLabel lblCdigoDeBarras = new JLabel("C\u00F3d. produto");
+		lblCdigoDeBarras.setBounds(10, 23, 74, 14);
+		panel_produto.add(lblCdigoDeBarras);
 		
 		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o");
-		GridBagConstraints gbc_lblDescrio = new GridBagConstraints();
-		gbc_lblDescrio.anchor = GridBagConstraints.WEST;
-		gbc_lblDescrio.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDescrio.gridx = 1;
-		gbc_lblDescrio.gridy = 0;
-		panel.add(lblDescrio, gbc_lblDescrio);
-		
-		JLabel lblQuantidade = new JLabel("Quantidade");
-		GridBagConstraints gbc_lblQuantidade = new GridBagConstraints();
-		gbc_lblQuantidade.anchor = GridBagConstraints.WEST;
-		gbc_lblQuantidade.insets = new Insets(0, 0, 5, 5);
-		gbc_lblQuantidade.gridx = 7;
-		gbc_lblQuantidade.gridy = 0;
-		panel.add(lblQuantidade, gbc_lblQuantidade);
-		
-		JLabel lblPreo = new JLabel("Pre\u00E7o unit\u00E1rio");
-		GridBagConstraints gbc_lblPreo = new GridBagConstraints();
-		gbc_lblPreo.gridwidth = 2;
-		gbc_lblPreo.anchor = GridBagConstraints.WEST;
-		gbc_lblPreo.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPreo.gridx = 8;
-		gbc_lblPreo.gridy = 0;
-		panel.add(lblPreo, gbc_lblPreo);
+		lblDescrio.setBounds(94, 23, 265, 14);
+		panel_produto.add(lblDescrio);
 		
 		txtidproduto = new JTextField();
+		txtidproduto.setBounds(10, 48, 75, 20);
+		panel_produto.add(txtidproduto);
 		txtidproduto.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
@@ -182,63 +136,61 @@ public class MioloCadVenda extends JPanel {
 				}
 			}
 		});
-		GridBagConstraints gbc_txtidproduto = new GridBagConstraints();
-		gbc_txtidproduto.insets = new Insets(0, 0, 5, 5);
-		gbc_txtidproduto.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtidproduto.gridx = 0;
-		gbc_txtidproduto.gridy = 1;
-		panel.add(txtidproduto, gbc_txtidproduto);
 		txtidproduto.setColumns(10);
 		
 		txtdescricao = new JTextField();
-		GridBagConstraints gbc_txtdescricao = new GridBagConstraints();
-		gbc_txtdescricao.gridwidth = 6;
-		gbc_txtdescricao.insets = new Insets(0, 0, 5, 5);
-		gbc_txtdescricao.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtdescricao.gridx = 1;
-		gbc_txtdescricao.gridy = 1;
-		panel.add(txtdescricao, gbc_txtdescricao);
+		txtdescricao.setBounds(94, 48, 265, 20);
+		panel_produto.add(txtdescricao);
 		txtdescricao.setColumns(10);
 		
+		JButton button = new JButton("");
+		button.setBounds(369, 43, 55, 25);
+		button.setIcon(new ImageIcon(MioloCadVenda.class.getResource("/br/univel/icones/procura.png")));
+		panel_produto.add(button);
+		
+		JLabel lblQuantidade = new JLabel("Quantidade");
+		lblQuantidade.setBounds(434, 23, 66, 14);
+		panel_produto.add(lblQuantidade);
+		
+		JLabel lblPreo = new JLabel("Pre\u00E7o unit\u00E1rio");
+		lblPreo.setBounds(510, 24, 94, 14);
+		panel_produto.add(lblPreo);
+		
 		txtquantidade = new JTextField();
-		GridBagConstraints gbc_txtquantidade = new GridBagConstraints();
-		gbc_txtquantidade.insets = new Insets(0, 0, 5, 5);
-		gbc_txtquantidade.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtquantidade.gridx = 7;
-		gbc_txtquantidade.gridy = 1;
-		panel.add(txtquantidade, gbc_txtquantidade);
+		txtquantidade.setBounds(434, 48, 68, 20);
+		panel_produto.add(txtquantidade);
 		txtquantidade.setColumns(10);
 		
 		txtpreco = new JTextField();
-		GridBagConstraints gbc_txtpreco = new GridBagConstraints();
-		gbc_txtpreco.gridwidth = 2;
-		gbc_txtpreco.insets = new Insets(0, 0, 5, 5);
-		gbc_txtpreco.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtpreco.gridx = 8;
-		gbc_txtpreco.gridy = 1;
-		panel.add(txtpreco, gbc_txtpreco);
+		txtpreco.setBounds(510, 48, 94, 20);
+		panel_produto.add(txtpreco);
 		txtpreco.setColumns(10);
 		
-		JButton btnOk = new JButton("OK");
+		JButton btnOk = new JButton("Adicionar");
+		btnOk.setBounds(377, 78, 110, 33);
+		btnOk.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnOk.setIcon(new ImageIcon(MioloCadVenda.class.getResource("/br/univel/icones/add.png")));
+		panel_produto.add(btnOk);
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				adicionarItem();
 			}
 		});
-		GridBagConstraints gbc_btnOk = new GridBagConstraints();
-		gbc_btnOk.insets = new Insets(0, 0, 5, 0);
-		gbc_btnOk.gridx = 10;
-		gbc_btnOk.gridy = 1;
-		panel.add(btnOk, gbc_btnOk);
+		
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.setBounds(494, 78, 110, 33);
+		btnExcluir.setIcon(new ImageIcon(MioloCadVenda.class.getResource("/br/univel/icones/delete.png")));
+		panel_produto.add(btnExcluir);
+		
+		JPanel panel_venda = new JPanel();
+		panel_venda.setBounds(10, 224, 614, 206);
+		panel_venda.setBorder(new TitledBorder(null, "Itens da Venda", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		add(panel_venda);
+		panel_venda.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridwidth = 11;
-		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 2;
-		panel.add(scrollPane, gbc_scrollPane);
+		scrollPane.setBounds(6, 16, 598, 145);
+		panel_venda.add(scrollPane);
 		
 		tabitens = new JTable();
 		tabitens.addMouseListener(new MouseAdapter() {
@@ -259,42 +211,37 @@ public class MioloCadVenda extends JPanel {
 		});
 		scrollPane.setViewportView(tabitens);
 		
-		JLabel lblTotal = new JLabel("Valor Total");
-		GridBagConstraints gbc_lblTotal = new GridBagConstraints();
-		gbc_lblTotal.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblTotal.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTotal.gridx = 0;
-		gbc_lblTotal.gridy = 5;
-		add(lblTotal, gbc_lblTotal);
-		
-		JLabel lblPagamento = new JLabel("Pagamento");
-		GridBagConstraints gbc_lblPagamento = new GridBagConstraints();
-		gbc_lblPagamento.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblPagamento.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPagamento.gridx = 2;
-		gbc_lblPagamento.gridy = 5;
-		add(lblPagamento, gbc_lblPagamento);
-		
-		JLabel lblTroco = new JLabel("Troco");
-		GridBagConstraints gbc_lblTroco = new GridBagConstraints();
-		gbc_lblTroco.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblTroco.insets = new Insets(0, 0, 5, 0);
-		gbc_lblTroco.gridx = 4;
-		gbc_lblTroco.gridy = 5;
-		add(lblTroco, gbc_lblTroco);
-		
 		txtvaltotal = new JTextField();
-		GridBagConstraints gbc_txtvaltotal = new GridBagConstraints();
-		gbc_txtvaltotal.anchor = GridBagConstraints.NORTH;
-		gbc_txtvaltotal.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtvaltotal.insets = new Insets(0, 0, 0, 5);
-		gbc_txtvaltotal.gridwidth = 2;
-		gbc_txtvaltotal.gridx = 0;
-		gbc_txtvaltotal.gridy = 6;
-		add(txtvaltotal, gbc_txtvaltotal);
+		txtvaltotal.setForeground(new Color(255, 0, 0));
+		txtvaltotal.setText("Teste");
+		txtvaltotal.setBounds(432, 172, 166, 23);
+		panel_venda.add(txtvaltotal);
+		txtvaltotal.setFont(new Font("Tahoma", Font.BOLD, 14));
+		txtvaltotal.setEditable(false);
 		txtvaltotal.setColumns(10);
 		
+		JLabel lblTotal = new JLabel("Total");
+		lblTotal.setBounds(348, 176, 74, 14);
+		panel_venda.add(lblTotal);
+		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 14));
+		
+		JPanel panel_pagamento = new JPanel();
+		panel_pagamento.setBounds(10, 441, 614, 90);
+		panel_pagamento.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Pagamento", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		add(panel_pagamento);
+		panel_pagamento.setLayout(null);
+		
+		JLabel lblPagamento = new JLabel("Valor ");
+		lblPagamento.setBounds(10, 28, 54, 14);
+		panel_pagamento.add(lblPagamento);
+		
+		JLabel lblTroco = new JLabel("Troco");
+		lblTroco.setBounds(140, 29, 54, 14);
+		panel_pagamento.add(lblTroco);
+		
 		txtpagamento = new JTextField();
+		txtpagamento.setBounds(10, 47, 120, 20);
+		panel_pagamento.add(txtpagamento);
 		txtpagamento.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
@@ -302,23 +249,12 @@ public class MioloCadVenda extends JPanel {
 					calcularTroco();
 			}
 		});
-		GridBagConstraints gbc_txtpagamento = new GridBagConstraints();
-		gbc_txtpagamento.anchor = GridBagConstraints.NORTH;
-		gbc_txtpagamento.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtpagamento.insets = new Insets(0, 0, 0, 5);
-		gbc_txtpagamento.gridx = 2;
-		gbc_txtpagamento.gridy = 6;
-		add(txtpagamento, gbc_txtpagamento);
 		txtpagamento.setColumns(10);
 		
 		txttroco = new JTextField();
+		txttroco.setBounds(140, 48, 120, 20);
+		panel_pagamento.add(txttroco);
 		txttroco.setEditable(false);
-		GridBagConstraints gbc_txttroco = new GridBagConstraints();
-		gbc_txttroco.anchor = GridBagConstraints.NORTH;
-		gbc_txttroco.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txttroco.gridx = 4;
-		gbc_txttroco.gridy = 6;
-		add(txttroco, gbc_txttroco);
 		txttroco.setColumns(10);
 		
 		setModelTabela();
