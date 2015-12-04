@@ -201,6 +201,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 		return clientes;
 	}
 
+	@Override
 	public int buscarID() throws SQLException{
 		
 		int cod = 0;
@@ -232,9 +233,5 @@ public class ClienteDAOImpl implements ClienteDAO{
 			String nome = rs.getString("nome");
 			cbx.addItem(nome); //Adiciona os nomes encontrados na consulta.
 		}
-	}
-	
-	
-	
-	
+	}	
 }

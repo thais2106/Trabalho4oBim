@@ -23,6 +23,8 @@ public interface ClienteDAO {
 	
 	public Cliente buscar(int id) throws SQLException;
 	
+	public int buscarID() throws SQLException;
+	
 	public List<Cliente> listar() throws SQLException;
 	
 	public List<Cliente> listarNome(String nome) throws SQLException;
