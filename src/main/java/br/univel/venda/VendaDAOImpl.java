@@ -39,8 +39,6 @@ public class VendaDAOImpl implements VendaDAO {
 		ps.close();
 		
 		inserirItens(v.getIdVenda(), v.getItens());
-		
-		JOptionPane.showMessageDialog(null, "Venda salva com sucesso!");
 	
 	}
 

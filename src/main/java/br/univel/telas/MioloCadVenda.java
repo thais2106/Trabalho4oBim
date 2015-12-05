@@ -49,27 +49,28 @@ public class MioloCadVenda extends JPanel {
 	protected JTextField txtvaltotal;
 	protected JTextField txttroco;
 	protected ItemModel model;
-	
+
 	/**
 	 * Create the panel.
 	 */
-	
-	public synchronized static MioloCadVenda getInstance() {  
-        if(instance == null ) {  
-          instance = new MioloCadVenda();  
-        }  
-        return instance;  
-      }  
-	
+
+	public synchronized static MioloCadVenda getInstance() {
+		if (instance == null) {
+			instance = new MioloCadVenda();
+		}
+		return instance;
+	}
+
 	private MioloCadVenda() {
 		super();
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{632, 0};
-		gridBagLayout.rowHeights = new int[]{35, 48, 97, 191, 79, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] { 632, 0 };
+		gridBagLayout.rowHeights = new int[] { 35, 48, 97, 191, 79, 0 };
+		gridBagLayout.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
-		
+
 		JPanel panel_codigo = new JPanel();
 		GridBagConstraints gbc_panel_codigo = new GridBagConstraints();
 		gbc_panel_codigo.anchor = GridBagConstraints.NORTH;
@@ -79,12 +80,13 @@ public class MioloCadVenda extends JPanel {
 		gbc_panel_codigo.gridy = 0;
 		add(panel_codigo, gbc_panel_codigo);
 		GridBagLayout gbl_panel_codigo = new GridBagLayout();
-		gbl_panel_codigo.columnWidths = new int[]{89, 86, 77, 0};
-		gbl_panel_codigo.rowHeights = new int[]{30, 0};
-		gbl_panel_codigo.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_codigo.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel_codigo.columnWidths = new int[] { 89, 86, 77, 0 };
+		gbl_panel_codigo.rowHeights = new int[] { 30, 0 };
+		gbl_panel_codigo.columnWeights = new double[] { 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
+		gbl_panel_codigo.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		panel_codigo.setLayout(gbl_panel_codigo);
-		
+
 		JLabel lblVendaNmero = new JLabel("Venda n\u00FAmero:");
 		lblVendaNmero.setFont(new Font("Tahoma", Font.BOLD, 12));
 		GridBagConstraints gbc_lblVendaNmero = new GridBagConstraints();
@@ -93,7 +95,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblVendaNmero.gridx = 0;
 		gbc_lblVendaNmero.gridy = 0;
 		panel_codigo.add(lblVendaNmero, gbc_lblVendaNmero);
-		
+
 		txtidvenda = new JTextField();
 		GridBagConstraints gbc_txtidvenda = new GridBagConstraints();
 		gbc_txtidvenda.insets = new Insets(10, 0, 0, 5);
@@ -103,23 +105,25 @@ public class MioloCadVenda extends JPanel {
 		panel_codigo.add(txtidvenda, gbc_txtidvenda);
 		txtidvenda.setEditable(false);
 		txtidvenda.setColumns(10);
-		
+
 		JButton btnNova = new JButton("Nova");
 		btnNova.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limparCampos();
 			}
 		});
-		btnNova.setIcon(new ImageIcon(MioloCadVenda.class.getResource("/br/univel/icones/add.png")));
+		btnNova.setIcon(new ImageIcon(MioloCadVenda.class
+				.getResource("/br/univel/icones/add.png")));
 		GridBagConstraints gbc_btnNova = new GridBagConstraints();
 		gbc_btnNova.insets = new Insets(10, 0, 0, 5);
 		gbc_btnNova.anchor = GridBagConstraints.WEST;
 		gbc_btnNova.gridx = 2;
 		gbc_btnNova.gridy = 0;
 		panel_codigo.add(btnNova, gbc_btnNova);
-		
+
 		JPanel panel_cliente = new JPanel();
-		panel_cliente.setBorder(new TitledBorder(null, "Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_cliente.setBorder(new TitledBorder(null, "Cliente",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_cliente = new GridBagConstraints();
 		gbc_panel_cliente.anchor = GridBagConstraints.NORTH;
 		gbc_panel_cliente.fill = GridBagConstraints.HORIZONTAL;
@@ -128,12 +132,13 @@ public class MioloCadVenda extends JPanel {
 		gbc_panel_cliente.gridy = 1;
 		add(panel_cliente, gbc_panel_cliente);
 		GridBagLayout gbl_panel_cliente = new GridBagLayout();
-		gbl_panel_cliente.columnWidths = new int[]{120, 406, 50, 0};
-		gbl_panel_cliente.rowHeights = new int[]{25, 0};
-		gbl_panel_cliente.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_cliente.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel_cliente.columnWidths = new int[] { 120, 406, 50, 0 };
+		gbl_panel_cliente.rowHeights = new int[] { 25, 0 };
+		gbl_panel_cliente.columnWeights = new double[] { 0.0, 1.0, 0.0,
+				Double.MIN_VALUE };
+		gbl_panel_cliente.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		panel_cliente.setLayout(gbl_panel_cliente);
-		
+
 		txtidcliente = new JTextField();
 		GridBagConstraints gbc_txtidcliente = new GridBagConstraints();
 		gbc_txtidcliente.fill = GridBagConstraints.HORIZONTAL;
@@ -145,13 +150,13 @@ public class MioloCadVenda extends JPanel {
 		txtidcliente.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
-				if (evt.getKeyCode()==KeyEvent.VK_INSERT){
+				if (evt.getKeyCode() == KeyEvent.VK_INSERT) {
 					abrirProcuraCliente();
 				}
 			}
 		});
 		txtidcliente.setColumns(10);
-		
+
 		txtnomecliente = new JTextField();
 		GridBagConstraints gbc_txtnomecliente = new GridBagConstraints();
 		gbc_txtnomecliente.anchor = GridBagConstraints.SOUTH;
@@ -161,22 +166,24 @@ public class MioloCadVenda extends JPanel {
 		gbc_txtnomecliente.gridy = 0;
 		panel_cliente.add(txtnomecliente, gbc_txtnomecliente);
 		txtnomecliente.setColumns(10);
-		
+
 		JButton btnProcura = new JButton("");
 		btnProcura.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirProcuraCliente();
 			}
 		});
-		btnProcura.setIcon(new ImageIcon(MioloCadVenda.class.getResource("/br/univel/icones/procura.png")));
+		btnProcura.setIcon(new ImageIcon(MioloCadVenda.class
+				.getResource("/br/univel/icones/procura.png")));
 		GridBagConstraints gbc_btnProcura = new GridBagConstraints();
 		gbc_btnProcura.anchor = GridBagConstraints.NORTHEAST;
 		gbc_btnProcura.gridx = 2;
 		gbc_btnProcura.gridy = 0;
 		panel_cliente.add(btnProcura, gbc_btnProcura);
-		
+
 		JPanel panel_produto = new JPanel();
-		panel_produto.setBorder(new TitledBorder(null, "Produto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_produto.setBorder(new TitledBorder(null, "Produto",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_produto = new GridBagConstraints();
 		gbc_panel_produto.anchor = GridBagConstraints.NORTH;
 		gbc_panel_produto.fill = GridBagConstraints.HORIZONTAL;
@@ -185,12 +192,14 @@ public class MioloCadVenda extends JPanel {
 		gbc_panel_produto.gridy = 2;
 		add(panel_produto, gbc_panel_produto);
 		GridBagLayout gbl_panel_produto = new GridBagLayout();
-		gbl_panel_produto.columnWidths = new int[]{75, 265, 55, 53, 94, 0};
-		gbl_panel_produto.rowHeights = new int[]{15, 25, 25, 0};
-		gbl_panel_produto.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_produto.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_produto.columnWidths = new int[] { 75, 265, 55, 53, 94, 0 };
+		gbl_panel_produto.rowHeights = new int[] { 15, 25, 25, 0 };
+		gbl_panel_produto.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0,
+				0.0, Double.MIN_VALUE };
+		gbl_panel_produto.rowWeights = new double[] { 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
 		panel_produto.setLayout(gbl_panel_produto);
-		
+
 		JLabel lblCdigoDeBarras = new JLabel("C\u00F3d. produto");
 		GridBagConstraints gbc_lblCdigoDeBarras = new GridBagConstraints();
 		gbc_lblCdigoDeBarras.anchor = GridBagConstraints.NORTHWEST;
@@ -198,7 +207,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblCdigoDeBarras.gridx = 0;
 		gbc_lblCdigoDeBarras.gridy = 0;
 		panel_produto.add(lblCdigoDeBarras, gbc_lblCdigoDeBarras);
-		
+
 		JLabel lblDescrio = new JLabel("Descri\u00E7\u00E3o");
 		GridBagConstraints gbc_lblDescrio = new GridBagConstraints();
 		gbc_lblDescrio.anchor = GridBagConstraints.NORTHWEST;
@@ -206,7 +215,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblDescrio.gridx = 1;
 		gbc_lblDescrio.gridy = 0;
 		panel_produto.add(lblDescrio, gbc_lblDescrio);
-		
+
 		JLabel lblQuantidade = new JLabel("Quantidade");
 		GridBagConstraints gbc_lblQuantidade = new GridBagConstraints();
 		gbc_lblQuantidade.anchor = GridBagConstraints.NORTH;
@@ -215,7 +224,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblQuantidade.gridx = 3;
 		gbc_lblQuantidade.gridy = 0;
 		panel_produto.add(lblQuantidade, gbc_lblQuantidade);
-		
+
 		JLabel lblPreo = new JLabel("Pre\u00E7o unit\u00E1rio");
 		GridBagConstraints gbc_lblPreo = new GridBagConstraints();
 		gbc_lblPreo.anchor = GridBagConstraints.SOUTH;
@@ -224,7 +233,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblPreo.gridx = 4;
 		gbc_lblPreo.gridy = 0;
 		panel_produto.add(lblPreo, gbc_lblPreo);
-		
+
 		txtidproduto = new JTextField();
 		GridBagConstraints gbc_txtidproduto = new GridBagConstraints();
 		gbc_txtidproduto.fill = GridBagConstraints.HORIZONTAL;
@@ -236,13 +245,13 @@ public class MioloCadVenda extends JPanel {
 		txtidproduto.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
-				if (evt.getKeyCode() == KeyEvent.VK_INSERT){
+				if (evt.getKeyCode() == KeyEvent.VK_INSERT) {
 					abrirProcuraProduto();
 				}
 			}
 		});
 		txtidproduto.setColumns(10);
-		
+
 		txtdescricao = new JTextField();
 		GridBagConstraints gbc_txtdescricao = new GridBagConstraints();
 		gbc_txtdescricao.anchor = GridBagConstraints.SOUTH;
@@ -252,14 +261,15 @@ public class MioloCadVenda extends JPanel {
 		gbc_txtdescricao.gridy = 1;
 		panel_produto.add(txtdescricao, gbc_txtdescricao);
 		txtdescricao.setColumns(10);
-		
+
 		JButton button = new JButton("");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirProcuraProduto();
 			}
 		});
-		button.setIcon(new ImageIcon(MioloCadVenda.class.getResource("/br/univel/icones/procura.png")));
+		button.setIcon(new ImageIcon(MioloCadVenda.class
+				.getResource("/br/univel/icones/procura.png")));
 		GridBagConstraints gbc_button = new GridBagConstraints();
 		gbc_button.anchor = GridBagConstraints.NORTH;
 		gbc_button.fill = GridBagConstraints.HORIZONTAL;
@@ -267,7 +277,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_button.gridx = 2;
 		gbc_button.gridy = 1;
 		panel_produto.add(button, gbc_button);
-		
+
 		txtquantidade = new JTextField();
 		GridBagConstraints gbc_txtquantidade = new GridBagConstraints();
 		gbc_txtquantidade.fill = GridBagConstraints.HORIZONTAL;
@@ -277,7 +287,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_txtquantidade.gridy = 1;
 		panel_produto.add(txtquantidade, gbc_txtquantidade);
 		txtquantidade.setColumns(10);
-		
+
 		txtpreco = new JTextField();
 		GridBagConstraints gbc_txtpreco = new GridBagConstraints();
 		gbc_txtpreco.fill = GridBagConstraints.HORIZONTAL;
@@ -287,31 +297,34 @@ public class MioloCadVenda extends JPanel {
 		gbc_txtpreco.gridy = 1;
 		panel_produto.add(txtpreco, gbc_txtpreco);
 		txtpreco.setColumns(10);
-		
+
 		JButton btnNewButton_1 = new JButton("Incluir");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				incluirItem();
 			}
 		});
-		btnNewButton_1.setIcon(new ImageIcon(MioloCadVenda.class.getResource("/br/univel/icones/add.png")));
+		btnNewButton_1.setIcon(new ImageIcon(MioloCadVenda.class
+				.getResource("/br/univel/icones/add.png")));
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.anchor = GridBagConstraints.EAST;
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNewButton_1.gridx = 3;
 		gbc_btnNewButton_1.gridy = 2;
 		panel_produto.add(btnNewButton_1, gbc_btnNewButton_1);
-		
+
 		JButton btnNewButton = new JButton("Excluir");
-		btnNewButton.setIcon(new ImageIcon(MioloCadVenda.class.getResource("/br/univel/icones/delete.png")));
+		btnNewButton.setIcon(new ImageIcon(MioloCadVenda.class
+				.getResource("/br/univel/icones/delete.png")));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
 		gbc_btnNewButton.gridx = 4;
 		gbc_btnNewButton.gridy = 2;
 		panel_produto.add(btnNewButton, gbc_btnNewButton);
-		
+
 		JPanel panel_venda = new JPanel();
-		panel_venda.setBorder(new TitledBorder(null, "Itens da Venda", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_venda.setBorder(new TitledBorder(null, "Itens da Venda",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_venda = new GridBagConstraints();
 		gbc_panel_venda.fill = GridBagConstraints.BOTH;
 		gbc_panel_venda.insets = new Insets(0, 0, 5, 0);
@@ -319,12 +332,13 @@ public class MioloCadVenda extends JPanel {
 		gbc_panel_venda.gridy = 3;
 		add(panel_venda, gbc_panel_venda);
 		GridBagLayout gbl_panel_venda = new GridBagLayout();
-		gbl_panel_venda.columnWidths = new int[]{416, 172, 0};
-		gbl_panel_venda.rowHeights = new int[]{145, 23, 0};
-		gbl_panel_venda.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_venda.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_venda.columnWidths = new int[] { 416, 172, 0 };
+		gbl_panel_venda.rowHeights = new int[] { 145, 23, 0 };
+		gbl_panel_venda.columnWeights = new double[] { 1.0, 0.0,
+				Double.MIN_VALUE };
+		gbl_panel_venda.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		panel_venda.setLayout(gbl_panel_venda);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
@@ -333,12 +347,12 @@ public class MioloCadVenda extends JPanel {
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 0;
 		panel_venda.add(scrollPane, gbc_scrollPane);
-		
+
 		tabitens = new JTable();
 		tabitens.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
-				if (evt.getClickCount()==2){
+				if (evt.getClickCount() == 2) {
 					alterarItem();
 				}
 			}
@@ -346,13 +360,13 @@ public class MioloCadVenda extends JPanel {
 		tabitens.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
-				if (evt.getKeyCode()==KeyEvent.VK_DELETE){
+				if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
 					model.excluirItem(tabitens.getSelectedRow());
 				}
 			}
 		});
 		scrollPane.setViewportView(tabitens);
-		
+
 		JLabel lblTotal = new JLabel("Total");
 		GridBagConstraints gbc_lblTotal = new GridBagConstraints();
 		gbc_lblTotal.anchor = GridBagConstraints.EAST;
@@ -361,7 +375,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblTotal.gridy = 1;
 		panel_venda.add(lblTotal, gbc_lblTotal);
 		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 14));
-		
+
 		txtvaltotal = new JTextField();
 		txtvaltotal.setForeground(new Color(255, 0, 0));
 		GridBagConstraints gbc_txtvaltotal = new GridBagConstraints();
@@ -373,21 +387,26 @@ public class MioloCadVenda extends JPanel {
 		txtvaltotal.setFont(new Font("Tahoma", Font.BOLD, 14));
 		txtvaltotal.setEditable(false);
 		txtvaltotal.setColumns(10);
-		
+
 		JPanel panel_pagamento = new JPanel();
-		panel_pagamento.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Pagamento", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_pagamento.setBorder(new TitledBorder(UIManager
+				.getBorder("TitledBorder.border"), "Pagamento",
+				TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel_pagamento = new GridBagConstraints();
 		gbc_panel_pagamento.fill = GridBagConstraints.BOTH;
 		gbc_panel_pagamento.gridx = 0;
 		gbc_panel_pagamento.gridy = 4;
 		add(panel_pagamento, gbc_panel_pagamento);
 		GridBagLayout gbl_panel_pagamento = new GridBagLayout();
-		gbl_panel_pagamento.columnWidths = new int[]{120, 120, 0};
-		gbl_panel_pagamento.rowHeights = new int[]{15, 21, 0};
-		gbl_panel_pagamento.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_pagamento.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_pagamento.columnWidths = new int[] { 120, 120, 0 };
+		gbl_panel_pagamento.rowHeights = new int[] { 15, 21, 0 };
+		gbl_panel_pagamento.columnWeights = new double[] { 0.0, 0.0,
+				Double.MIN_VALUE };
+		gbl_panel_pagamento.rowWeights = new double[] { 0.0, 0.0,
+				Double.MIN_VALUE };
 		panel_pagamento.setLayout(gbl_panel_pagamento);
-		
+
 		JLabel lblPagamento = new JLabel("Valor ");
 		GridBagConstraints gbc_lblPagamento = new GridBagConstraints();
 		gbc_lblPagamento.anchor = GridBagConstraints.NORTHWEST;
@@ -395,7 +414,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblPagamento.gridx = 0;
 		gbc_lblPagamento.gridy = 0;
 		panel_pagamento.add(lblPagamento, gbc_lblPagamento);
-		
+
 		JLabel lblTroco = new JLabel("Troco");
 		GridBagConstraints gbc_lblTroco = new GridBagConstraints();
 		gbc_lblTroco.anchor = GridBagConstraints.SOUTHWEST;
@@ -403,7 +422,7 @@ public class MioloCadVenda extends JPanel {
 		gbc_lblTroco.gridx = 1;
 		gbc_lblTroco.gridy = 0;
 		panel_pagamento.add(lblTroco, gbc_lblTroco);
-		
+
 		txtpagamento = new JTextField();
 		GridBagConstraints gbc_txtpagamento = new GridBagConstraints();
 		gbc_txtpagamento.anchor = GridBagConstraints.NORTH;
@@ -415,12 +434,12 @@ public class MioloCadVenda extends JPanel {
 		txtpagamento.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent evt) {
-				if (evt.getKeyCode()==KeyEvent.VK_ENTER)
+				if (evt.getKeyCode() == KeyEvent.VK_ENTER)
 					calcularTroco();
 			}
 		});
 		txtpagamento.setColumns(10);
-		
+
 		txttroco = new JTextField();
 		GridBagConstraints gbc_txttroco = new GridBagConstraints();
 		gbc_txttroco.anchor = GridBagConstraints.SOUTH;
@@ -430,7 +449,7 @@ public class MioloCadVenda extends JPanel {
 		panel_pagamento.add(txttroco, gbc_txttroco);
 		txttroco.setEditable(false);
 		txttroco.setColumns(10);
-		
+
 		setModelTabela();
 
 	}
@@ -446,60 +465,81 @@ public class MioloCadVenda extends JPanel {
 		txtpagamento.setText("");
 		txttroco.setText("");
 		txtidcliente.requestFocus();
-		setModelTabela();;
+		setModelTabela();
+		;
 	}
 
 	private int buscarID() {
 		VendaDAOImpl dao = new VendaDAOImpl();
 		int id = 0;
-		
+
 		try {
 			id = dao.buscarID();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return id;
 	}
 
 	protected void calcularTroco() {
 		BigDecimal troco = new BigDecimal(0);
 		BigDecimal pagamento = new BigDecimal(txtpagamento.getText());
-		
+
 		troco = pagamento.subtract(new BigDecimal(txtvaltotal.getText()));
-		
+
 		txttroco.setText(String.valueOf(troco));
 	}
-	
-	protected void incluirItem() {	
+
+	protected void incluirItem() {
+
+		List<Item> itens = model.retornarItens();
 		Item i = new Item();
-		i.setIdproduto((int) tabitens.getValueAt(tabitens.getSelectedRow(), 0));
-		i.setDescricao(String.valueOf(tabitens.getValueAt(tabitens.getSelectedRow(), 1)));
-		i.setQuantidade((int) (tabitens.getValueAt(tabitens.getSelectedRow(), 2)));
-		i.setPrecounitario(BigDecimal.valueOf((double)(tabitens.getValueAt(tabitens.getSelectedRow(), 3))));
-		i.setTotalProduto(BigDecimal.valueOf((double)(tabitens.getValueAt(tabitens.getSelectedRow(), 4))));
-		((ItemModel) model).incluirItem(i);			
+
+		i.setIdproduto(Integer.parseInt(txtidproduto.getText()));
+		i.setDescricao(txtdescricao.getText());
+		i.setQuantidade(Integer.parseInt(txtquantidade.getText()));
+		i.setPrecounitario(new BigDecimal(
+				Double.parseDouble(txtpreco.getText())));
+
+		int qtd = Integer.parseInt(txtquantidade.getText());
+		BigDecimal preco = new BigDecimal(txtpreco.getText());
+
+		// Multiplicando o preco unitário pela quantidade
+		preco = preco.multiply(new BigDecimal(qtd));
+		i.setTotalProduto(preco);
+
+		// Adicionando na tabela de Itens
+		model.incluirItem(i);
+
+		BigDecimal total = calcularTotal(itens);
+		txtvaltotal.setText(String.valueOf(total));
+
 	}
 
 	protected void alterarItem() {
-		txtidproduto.setText(String.valueOf(tabitens.getValueAt(tabitens.getSelectedRow(), 0)));
-		txtdescricao.setText(String.valueOf(tabitens.getValueAt(tabitens.getSelectedRow(), 1)));
-		txtquantidade.setText(String.valueOf(tabitens.getValueAt(tabitens.getSelectedRow(), 2)));
-		txtpreco.setText(String.valueOf(tabitens.getValueAt(tabitens.getSelectedRow(), 3)));
+		txtidproduto.setText(String.valueOf(tabitens.getValueAt(
+				tabitens.getSelectedRow(), 0)));
+		txtdescricao.setText(String.valueOf(tabitens.getValueAt(
+				tabitens.getSelectedRow(), 1)));
+		txtquantidade.setText(String.valueOf(tabitens.getValueAt(
+				tabitens.getSelectedRow(), 2)));
+		txtpreco.setText(String.valueOf(tabitens.getValueAt(
+				tabitens.getSelectedRow(), 3)));
 	}
 
 	private void setModelTabela() {
 		model = new ItemModel();
-		tabitens.setModel(model);	
+		tabitens.setModel(model);
 	}
 
 	public Runnable getAcaoSalvar() {
 		return () -> {
 			VendaDAOImpl dao = new VendaDAOImpl();
 			Venda v = new Venda();
-			
-			if (verificarValores()){
+
+			if (verificarValores()) {
 				v = setarValores();
 				try {
 					dao.inserir(v);
@@ -508,51 +548,62 @@ public class MioloCadVenda extends JPanel {
 					e.printStackTrace();
 				}
 			}
-			
-			JOptionPane.showMessageDialog(null, "Venda efetuada com sucesso!");					
+
+			JOptionPane.showMessageDialog(null, "Venda efetuada com sucesso!");
 		};
 	}
 
 	private boolean verificarValores() {
-		int id=0;
-		
-		if (txtidcliente.getText().isEmpty() || txtnomecliente.getText().isEmpty() ||
-				txtidproduto.getText().isEmpty() || txtdescricao.getText().isEmpty()
-				|| txtquantidade.getText().isEmpty() || txtvaltotal.getText().isEmpty() || txtpagamento.getText().isEmpty()){
-			JOptionPane.showMessageDialog(null, "Preencha todos os campos para salvar!");
+		int id = 0;
+
+		if (txtidcliente.getText().isEmpty()
+				|| txtnomecliente.getText().isEmpty()
+				|| txtidproduto.getText().isEmpty()
+				|| txtdescricao.getText().isEmpty()
+				|| txtquantidade.getText().isEmpty()
+				|| txtvaltotal.getText().isEmpty()
+				|| txtpagamento.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null,
+					"Preencha todos os campos para salvar!");
 			return false;
 		}
-		if (model.retornarItens().isEmpty()){
-			JOptionPane.showMessageDialog(null, "Não é possível salvar uma venda sem produtos!");
+		if (model.retornarItens().isEmpty()) {
+			JOptionPane.showMessageDialog(null,
+					"Não é possível salvar uma venda sem produtos!");
 			return false;
 		}
 		try {
-			 id = Integer.parseInt(txtidcliente.getText());
+			id = Integer.parseInt(txtidcliente.getText());
 		} catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(null, "Código do cliente inválido! \n Informe um valor numérico.");
-			//return false;
+			JOptionPane
+					.showMessageDialog(null,
+							"Código do cliente inválido! \n Informe um valor numérico.");
+			// return false;
 		}
 		try {
 			id = Integer.parseInt(txtidproduto.getText());
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Código do produto inválido! \n Informe um valor numérico.");
+			JOptionPane
+					.showMessageDialog(null,
+							"Código do produto inválido! \n Informe um valor numérico.");
 		}
-		
+
 		try {
 			id = Integer.parseInt(txtquantidade.getText());
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Quantidade inválida! \n Informe um valor numérico.");
+			JOptionPane.showMessageDialog(null,
+					"Quantidade inválida! \n Informe um valor numérico.");
 		}
 		return true;
 	}
 
 	private BigDecimal calcularTotal(List<Item> itens) {
 		BigDecimal total = new BigDecimal(0);
-		
+
 		for (Item item : itens) {
 			total = total.add(item.getTotalProduto());
 		}
-		
+
 		return total;
 	}
 
@@ -560,10 +611,10 @@ public class MioloCadVenda extends JPanel {
 		return null;
 	}
 
-	private Venda setarValores(){
-		
+	private Venda setarValores() {
+
 		Venda v = new Venda();
-		
+
 		v.setIdVenda(Integer.parseInt(txtidvenda.getText()));
 		v.setIdCliente(Integer.parseInt(txtidcliente.getText()));
 		v.setNomeCliente(txtnomecliente.getText());
@@ -572,18 +623,17 @@ public class MioloCadVenda extends JPanel {
 		v.setItens(model.retornarItens());
 		v.setData(new Date());
 		v.setHora(System.currentTimeMillis());
-		
+
 		return v;
 	}
-	
-	public void abrirProcuraProduto(){
+
+	public void abrirProcuraProduto() {
 		TelaProcuraProduto tpp = new TelaProcuraProduto();
 		tpp.setVisible(true);
 	}
-	
+
 	public void abrirProcuraCliente() {
 		TelaProcuraCliente tpc = new TelaProcuraCliente();
 		tpc.setVisible(true);
 	}
 }
-

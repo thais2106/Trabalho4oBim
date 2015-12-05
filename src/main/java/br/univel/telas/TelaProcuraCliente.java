@@ -23,6 +23,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class TelaProcuraCliente extends JFrame {
 
@@ -58,15 +61,28 @@ public class TelaProcuraCliente extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[]{439, 91, 0};
+		gbl_contentPane.rowHeights = new int[]{14, 23, 259, 0};
+		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
+		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblPesquisar = new JLabel("Pesquisar");
-		lblPesquisar.setBounds(10, 11, 132, 14);
-		contentPane.add(lblPesquisar);
+		GridBagConstraints gbc_lblPesquisar = new GridBagConstraints();
+		gbc_lblPesquisar.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblPesquisar.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPesquisar.gridx = 0;
+		gbc_lblPesquisar.gridy = 0;
+		contentPane.add(lblPesquisar, gbc_lblPesquisar);
 		
 		txtpesquisa = new JTextField();
-		txtpesquisa.setBounds(5, 28, 439, 20);
-		contentPane.add(txtpesquisa);
+		GridBagConstraints gbc_txtpesquisa = new GridBagConstraints();
+		gbc_txtpesquisa.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtpesquisa.insets = new Insets(0, 0, 5, 5);
+		gbc_txtpesquisa.gridx = 0;
+		gbc_txtpesquisa.gridy = 1;
+		contentPane.add(txtpesquisa, gbc_txtpesquisa);
 		txtpesquisa.setColumns(10);
 		
 		JButton btnProcurar = new JButton("OK");
@@ -75,12 +91,21 @@ public class TelaProcuraCliente extends JFrame {
 				pesquisarCliente();
 			}
 		});
-		btnProcurar.setBounds(454, 27, 91, 23);
-		contentPane.add(btnProcurar);
+		GridBagConstraints gbc_btnProcurar = new GridBagConstraints();
+		gbc_btnProcurar.anchor = GridBagConstraints.NORTH;
+		gbc_btnProcurar.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnProcurar.insets = new Insets(0, 0, 5, 0);
+		gbc_btnProcurar.gridx = 1;
+		gbc_btnProcurar.gridy = 1;
+		contentPane.add(btnProcurar, gbc_btnProcurar);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(5, 59, 540, 259);
-		contentPane.add(scrollPane);
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridwidth = 2;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 2;
+		contentPane.add(scrollPane, gbc_scrollPane);
 		
 		tabClientes = new JTable();
 		tabClientes.addMouseListener(new MouseAdapter() {

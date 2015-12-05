@@ -134,7 +134,6 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 					p.setCategoria(c);
 			}
 
-			System.out.println("4" + rs.getString(4));
 			p.setDescricao(rs.getString("descricao"));
 
 			for (Unidade u : Unidade.values()) {

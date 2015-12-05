@@ -88,16 +88,48 @@ public class TelaProcuraProduto extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[]{337, 109, 71, 82, 0};
+		gbl_contentPane.rowHeights = new int[]{14, 23, 310, 0};
+		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
+		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblCdigoDeBarras = new JLabel("Pesquisar");
-		lblCdigoDeBarras.setBounds(5, 5, 82, 14);
-		contentPane.add(lblCdigoDeBarras);
+		GridBagConstraints gbc_lblCdigoDeBarras = new GridBagConstraints();
+		gbc_lblCdigoDeBarras.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblCdigoDeBarras.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCdigoDeBarras.gridx = 0;
+		gbc_lblCdigoDeBarras.gridy = 0;
+		contentPane.add(lblCdigoDeBarras, gbc_lblCdigoDeBarras);
 		
 		txtpesquisa = new JTextField();
-		txtpesquisa.setBounds(5, 25, 337, 20);
-		contentPane.add(txtpesquisa);
+		GridBagConstraints gbc_txtpesquisa = new GridBagConstraints();
+		gbc_txtpesquisa.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtpesquisa.insets = new Insets(0, 0, 5, 5);
+		gbc_txtpesquisa.gridx = 0;
+		gbc_txtpesquisa.gridy = 1;
+		contentPane.add(txtpesquisa, gbc_txtpesquisa);
 		txtpesquisa.setColumns(10);
+		
+		radioCodBarras = new JRadioButton("C\u00F3digo de barras");
+		buttonGroup.add(radioCodBarras);
+		GridBagConstraints gbc_radioCodBarras = new GridBagConstraints();
+		gbc_radioCodBarras.anchor = GridBagConstraints.NORTH;
+		gbc_radioCodBarras.fill = GridBagConstraints.HORIZONTAL;
+		gbc_radioCodBarras.insets = new Insets(0, 0, 5, 5);
+		gbc_radioCodBarras.gridx = 1;
+		gbc_radioCodBarras.gridy = 1;
+		contentPane.add(radioCodBarras, gbc_radioCodBarras);
+		
+		radioDesc = new JRadioButton("Descri\u00E7\u00E3o");
+		buttonGroup.add(radioDesc);
+		GridBagConstraints gbc_radioDesc = new GridBagConstraints();
+		gbc_radioDesc.anchor = GridBagConstraints.NORTHWEST;
+		gbc_radioDesc.insets = new Insets(0, 0, 5, 5);
+		gbc_radioDesc.gridx = 2;
+		gbc_radioDesc.gridy = 1;
+		contentPane.add(radioDesc, gbc_radioDesc);
 		
 		JButton btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
@@ -105,12 +137,21 @@ public class TelaProcuraProduto extends JFrame {
 				procurar();
 			}
 		});
-		btnOk.setBounds(550, 24, 82, 23);
-		contentPane.add(btnOk);
+		GridBagConstraints gbc_btnOk = new GridBagConstraints();
+		gbc_btnOk.anchor = GridBagConstraints.NORTH;
+		gbc_btnOk.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnOk.insets = new Insets(0, 0, 5, 0);
+		gbc_btnOk.gridx = 3;
+		gbc_btnOk.gridy = 1;
+		contentPane.add(btnOk, gbc_btnOk);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(5, 52, 627, 310);
-		contentPane.add(scrollPane);
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridwidth = 4;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 2;
+		contentPane.add(scrollPane, gbc_scrollPane);
 		
 		tabProdutos = new JTable();
 		tabProdutos.addMouseListener(new MouseAdapter() {
@@ -122,16 +163,6 @@ public class TelaProcuraProduto extends JFrame {
 			}
 		});
 		scrollPane.setViewportView(tabProdutos);
-		
-		radioCodBarras = new JRadioButton("C\u00F3digo de barras");
-		buttonGroup.add(radioCodBarras);
-		radioCodBarras.setBounds(348, 24, 109, 23);
-		contentPane.add(radioCodBarras);
-		
-		radioDesc = new JRadioButton("Descri\u00E7\u00E3o");
-		buttonGroup.add(radioDesc);
-		radioDesc.setBounds(459, 24, 71, 23);
-		contentPane.add(radioDesc);
 		setModelTabela();
 
 	}
