@@ -80,7 +80,7 @@ public class MioloCadProduto extends JPanel {
 		GridBagLayout gbl_panel_codigo = new GridBagLayout();
 		gbl_panel_codigo.columnWidths = new int[]{113, 100, 88, 88, 0};
 		gbl_panel_codigo.rowHeights = new int[] {20, 0};
-		gbl_panel_codigo.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_codigo.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_codigo.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel_codigo.setLayout(gbl_panel_codigo);
 		
@@ -109,11 +109,10 @@ public class MioloCadProduto extends JPanel {
 				limparCampos();
 			}
 		});
-		btnNovoProduto.setIcon(new ImageIcon(MioloCadProduto.class.getResource("/br/univel/icones/add.png")));
+		btnNovoProduto.setIcon(new ImageIcon("src/main/resources/add.png"));
 		GridBagConstraints gbc_btnNovoProduto = new GridBagConstraints();
 		gbc_btnNovoProduto.insets = new Insets(10, 0, 0, 5);
-		gbc_btnNovoProduto.anchor = GridBagConstraints.WEST;
-		gbc_btnNovoProduto.fill = GridBagConstraints.VERTICAL;
+		gbc_btnNovoProduto.fill = GridBagConstraints.BOTH;
 		gbc_btnNovoProduto.gridx = 2;
 		gbc_btnNovoProduto.gridy = 0;
 		panel_codigo.add(btnNovoProduto, gbc_btnNovoProduto);

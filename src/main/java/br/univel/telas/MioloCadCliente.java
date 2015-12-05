@@ -52,6 +52,7 @@ public class MioloCadCliente extends JPanel {
 	private JComboBox cbxgenero;
 	private JTable table;
 	private TableModel model;
+	private JButton btnNovo;
 
 	/**
 	 * Create the panel.
@@ -100,20 +101,19 @@ public class MioloCadCliente extends JPanel {
 		txtid.setEditable(false);
 		txtid.setColumns(10);
 
-		JButton button = new JButton("Novo");
-		button.addActionListener(new ActionListener() {
+		btnNovo = new JButton("Novo");
+		btnNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limparCampos();
 			}
 		});
-		button.setIcon(new ImageIcon(MioloCadCliente.class
-				.getResource("/br/univel/icones/add.png")));
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.insets = new Insets(10, 0, 0, 5);
-		gbc_button.anchor = GridBagConstraints.WEST;
-		gbc_button.gridx = 2;
-		gbc_button.gridy = 0;
-		panel_codigo.add(button, gbc_button);
+		btnNovo.setIcon(new ImageIcon("src/main/resources/add.png"));
+		GridBagConstraints gbc_btnNovo = new GridBagConstraints();
+		gbc_btnNovo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNovo.insets = new Insets(10, 0, 0, 5);
+		gbc_btnNovo.gridx = 2;
+		gbc_btnNovo.gridy = 0;
+		panel_codigo.add(btnNovo, gbc_btnNovo);
 
 		JPanel panel_dados = new JPanel();
 		panel_dados.setBorder(new TitledBorder(UIManager

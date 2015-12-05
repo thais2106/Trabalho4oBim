@@ -186,7 +186,7 @@ public class MioloRelatorioCliente extends JPanel {
 	}
 
 	private String gerarClienteEstado() {
-		String sql;
+		String sql = null;
 		UF uf = (UF) cbxuf.getSelectedItem();
 		sql += "uf like \"%" + uf.toString() + "%\" ";
 		return sql;

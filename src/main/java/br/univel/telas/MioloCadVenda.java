@@ -46,6 +46,9 @@ public class MioloCadVenda extends JPanel {
 	protected JTextField txtvaltotal;
 	protected JTextField txttroco;
 	protected ItemModel model;
+	private JButton btnProcuraProduto;
+	private JButton btnIncluir;
+	private JButton btnExcluir;
 
 	/**
 	 * Create the panel.
@@ -109,11 +112,10 @@ public class MioloCadVenda extends JPanel {
 				limparCampos();
 			}
 		});
-		btnNova.setIcon(new ImageIcon(MioloCadVenda.class
-				.getResource("/br/univel/icones/add.png")));
+		btnNova.setIcon(new ImageIcon("src/main/resources/add.png"));
 		GridBagConstraints gbc_btnNova = new GridBagConstraints();
+		gbc_btnNova.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNova.insets = new Insets(10, 0, 0, 5);
-		gbc_btnNova.anchor = GridBagConstraints.WEST;
 		gbc_btnNova.gridx = 2;
 		gbc_btnNova.gridy = 0;
 		panel_codigo.add(btnNova, gbc_btnNova);
@@ -164,19 +166,19 @@ public class MioloCadVenda extends JPanel {
 		panel_cliente.add(txtnomecliente, gbc_txtnomecliente);
 		txtnomecliente.setColumns(10);
 
-		JButton btnProcura = new JButton("");
-		btnProcura.addActionListener(new ActionListener() {
+		JButton btnProcuraCliente = new JButton("");
+		btnProcuraCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirProcuraCliente();
 			}
 		});
-		btnProcura.setIcon(new ImageIcon(MioloCadVenda.class
-				.getResource("/br/univel/icones/procura.png")));
-		GridBagConstraints gbc_btnProcura = new GridBagConstraints();
-		gbc_btnProcura.anchor = GridBagConstraints.NORTHEAST;
-		gbc_btnProcura.gridx = 2;
-		gbc_btnProcura.gridy = 0;
-		panel_cliente.add(btnProcura, gbc_btnProcura);
+		btnProcuraCliente.setIcon(new ImageIcon("src/main/resources/procura.png"));;
+		GridBagConstraints gbc_btnProcuraCliente = new GridBagConstraints();
+		gbc_btnProcuraCliente.fill = GridBagConstraints.VERTICAL;
+		gbc_btnProcuraCliente.anchor = GridBagConstraints.EAST;
+		gbc_btnProcuraCliente.gridx = 2;
+		gbc_btnProcuraCliente.gridy = 0;
+		panel_cliente.add(btnProcuraCliente, gbc_btnProcuraCliente);
 
 		JPanel panel_produto = new JPanel();
 		panel_produto.setBorder(new TitledBorder(null, "Produto",
@@ -259,21 +261,19 @@ public class MioloCadVenda extends JPanel {
 		panel_produto.add(txtdescricao, gbc_txtdescricao);
 		txtdescricao.setColumns(10);
 
-		JButton button = new JButton("");
-		button.addActionListener(new ActionListener() {
+		btnProcuraProduto = new JButton("");
+		btnProcuraProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirProcuraProduto();
 			}
 		});
-		button.setIcon(new ImageIcon(MioloCadVenda.class
-				.getResource("/br/univel/icones/procura.png")));
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.anchor = GridBagConstraints.NORTH;
-		gbc_button.fill = GridBagConstraints.HORIZONTAL;
-		gbc_button.insets = new Insets(0, 0, 5, 5);
-		gbc_button.gridx = 2;
-		gbc_button.gridy = 1;
-		panel_produto.add(button, gbc_button);
+		btnProcuraProduto.setIcon(new ImageIcon("src/main/resources/procura.png"));
+		GridBagConstraints gbc_btnProcuraProduto = new GridBagConstraints();
+		gbc_btnProcuraProduto.fill = GridBagConstraints.BOTH;
+		gbc_btnProcuraProduto.insets = new Insets(0, 0, 5, 5);
+		gbc_btnProcuraProduto.gridx = 2;
+		gbc_btnProcuraProduto.gridy = 1;
+		panel_produto.add(btnProcuraProduto, gbc_btnProcuraProduto);
 
 		txtquantidade = new JTextField();
 		GridBagConstraints gbc_txtquantidade = new GridBagConstraints();
@@ -295,29 +295,27 @@ public class MioloCadVenda extends JPanel {
 		panel_produto.add(txtpreco, gbc_txtpreco);
 		txtpreco.setColumns(10);
 
-		JButton btnNewButton_1 = new JButton("Incluir");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btnIncluir = new JButton("Incluir");
+		btnIncluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				incluirItem();
 			}
 		});
-		btnNewButton_1.setIcon(new ImageIcon(MioloCadVenda.class
-				.getResource("/br/univel/icones/add.png")));
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.anchor = GridBagConstraints.EAST;
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton_1.gridx = 3;
-		gbc_btnNewButton_1.gridy = 2;
-		panel_produto.add(btnNewButton_1, gbc_btnNewButton_1);
+		btnIncluir.setIcon(new ImageIcon("src/main/resources/add.png"));
+		GridBagConstraints gbc_btnIncluir = new GridBagConstraints();
+		gbc_btnIncluir.anchor = GridBagConstraints.EAST;
+		gbc_btnIncluir.insets = new Insets(0, 0, 0, 5);
+		gbc_btnIncluir.gridx = 3;
+		gbc_btnIncluir.gridy = 2;
+		panel_produto.add(btnIncluir, gbc_btnIncluir);
 
-		JButton btnNewButton = new JButton("Excluir");
-		btnNewButton.setIcon(new ImageIcon(MioloCadVenda.class
-				.getResource("/br/univel/icones/delete.png")));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
-		gbc_btnNewButton.gridx = 4;
-		gbc_btnNewButton.gridy = 2;
-		panel_produto.add(btnNewButton, gbc_btnNewButton);
+		btnExcluir = new JButton("Excluir");
+		btnExcluir.setIcon(new ImageIcon("src/main/resources/delete.png"));
+		GridBagConstraints gbc_btnExcluir = new GridBagConstraints();
+		gbc_btnExcluir.anchor = GridBagConstraints.EAST;
+		gbc_btnExcluir.gridx = 4;
+		gbc_btnExcluir.gridy = 2;
+		panel_produto.add(btnExcluir, gbc_btnExcluir);
 
 		JPanel panel_venda = new JPanel();
 		panel_venda.setBorder(new TitledBorder(null, "Itens da Venda",

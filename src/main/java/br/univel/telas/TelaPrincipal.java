@@ -34,15 +34,9 @@ import java.awt.Window.Type;
 public class TelaPrincipal extends JFrame {
 
 	private JPanel contentPane;
-	private JMenuItem mntmCliente;
 	private JTabbedPane tabbedPane;
-	private JMenuItem mntmProduto;
-	private JMenu mnRelatrios;
-	private JMenu mnVenda;
-	private JMenuItem mntmClientes;
-	private JMenuItem mntmProdutos;
-	private JMenuItem mntmVendas;
 	private JPanel panel_status;
+	private BlockPanel blockPanel;
 
 	/**
 	 * Launch the application.
@@ -64,6 +58,10 @@ public class TelaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaPrincipal() {
+		
+		//Inicia tela de Login
+		blockParaLogin();
+		
 		setTitle("Sistema de Vendas");
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,7 +73,7 @@ public class TelaPrincipal extends JFrame {
 		JMenu mnCadastro = new JMenu("Cadastro");
 		menuBar.add(mnCadastro);
 		
-		mntmCliente = new JMenuItem("Cliente");
+		JMenuItem mntmCliente = new JMenuItem("Cliente");
 		mntmCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				abrirTelaCliente();
@@ -83,7 +81,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		mnCadastro.add(mntmCliente);
 		
-		mntmProduto = new JMenuItem("Produto");
+		JMenuItem mntmProduto = new JMenuItem("Produto");
 		mntmProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				abrirTelaProduto();
@@ -91,7 +89,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		mnCadastro.add(mntmProduto);
 		
-		mnVenda = new JMenu("Venda");
+		JMenu mnVenda = new JMenu("Venda");
 		mnVenda.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -100,10 +98,10 @@ public class TelaPrincipal extends JFrame {
 		});
 		menuBar.add(mnVenda);
 		
-		mnRelatrios = new JMenu("Relat\u00F3rios");
+		JMenu mnRelatrios = new JMenu("Relat\u00F3rios");
 		menuBar.add(mnRelatrios);
 		
-		mntmClientes = new JMenuItem("Clientes");
+		JMenuItem mntmClientes = new JMenuItem("Clientes");
 		mntmClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -116,7 +114,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		mnRelatrios.add(mntmClientes);
 		
-		mntmProdutos = new JMenuItem("Produtos");
+		JMenuItem mntmProdutos = new JMenuItem("Produtos");
 		mntmProdutos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -129,7 +127,7 @@ public class TelaPrincipal extends JFrame {
 		});
 		mnRelatrios.add(mntmProdutos);
 		
-		mntmVendas = new JMenuItem("Vendas");
+		JMenuItem mntmVendas = new JMenuItem("Vendas");
 		mntmVendas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -153,6 +151,20 @@ public class TelaPrincipal extends JFrame {
 		panel_status.setForeground(Color.GRAY);
 		panel_status.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.DARK_GRAY));
 		contentPane.add(panel_status, BorderLayout.SOUTH);
+	}
+
+	private void blockParaLogin() {
+		Runnable acaoLogar = () -> {
+			blockPanel.setVisible(false);
+			blockPanel = new BlockPanel();
+		};
+		
+		//Usa painel de login
+		PanelLogin panelLogin = new PanelLogin(acaoLogar);
+		blockPanel = new BlockPanel(panelLogin);
+		
+		setGlassPane(blockPanel);
+		blockPanel.setVisible(true);
 	}
 
 	protected void abrirTelaVenda() {
