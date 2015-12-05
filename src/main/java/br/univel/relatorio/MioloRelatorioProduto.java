@@ -18,6 +18,7 @@ import javax.swing.JRadioButton;
 import net.sf.jasperreports.engine.util.JRStyledText.Run;
 import br.univel.produto.Categoria;
 import br.univel.utilitarios.FileChooserUtil;
+import br.univel.utilitarios.GerarRelatorioUtil;
 import br.univel.utilitarios.JasperReportUtil;
 import br.univel.utilitarios.StatusBar;
 
@@ -36,6 +37,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
+
 import java.awt.BorderLayout;
 
 /**
@@ -72,7 +74,7 @@ public class MioloRelatorioProduto extends JPanel {
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_tipo = new GridBagConstraints();
 		gbc_panel_tipo.fill = GridBagConstraints.BOTH;
-		gbc_panel_tipo.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_tipo.insets = new Insets(20, 10, 5, 10);
 		gbc_panel_tipo.gridwidth = 2;
 		gbc_panel_tipo.gridx = 0;
 		gbc_panel_tipo.gridy = 0;
@@ -103,7 +105,7 @@ public class MioloRelatorioProduto extends JPanel {
 				null, null));
 		GridBagConstraints gbc_panel_categoria = new GridBagConstraints();
 		gbc_panel_categoria.fill = GridBagConstraints.BOTH;
-		gbc_panel_categoria.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_categoria.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_categoria.gridx = 0;
 		gbc_panel_categoria.gridy = 1;
 		add(panel_categoria, gbc_panel_categoria);
@@ -130,7 +132,7 @@ public class MioloRelatorioProduto extends JPanel {
 				new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel_margem = new GridBagConstraints();
 		gbc_panel_margem.fill = GridBagConstraints.BOTH;
-		gbc_panel_margem.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_margem.insets = new Insets(5, 5, 5, 10);
 		gbc_panel_margem.gridx = 1;
 		gbc_panel_margem.gridy = 1;
 		add(panel_margem, gbc_panel_margem);
@@ -156,7 +158,7 @@ public class MioloRelatorioProduto extends JPanel {
 		TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_salvar = new GridBagConstraints();
 		gbc_panel_salvar.fill = GridBagConstraints.BOTH;
-		gbc_panel_salvar.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_salvar.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_salvar.gridwidth = 2;
 		gbc_panel_salvar.gridx = 0;
 		gbc_panel_salvar.gridy = 2;
@@ -230,7 +232,7 @@ public class MioloRelatorioProduto extends JPanel {
 
 	public Runnable setAcaoGerarRelatorio() {
 		return () -> {
-			FileChooserUtil file = new FileChooserUtil();
+			
 			String caminho = txtLocal.getText();
 			String sql = "select * from produto";
 
@@ -240,8 +242,8 @@ public class MioloRelatorioProduto extends JPanel {
 			if (cbxTipoRelatorio.getSelectedIndex() == 3)
 				sql += gerarProdutosMargem();
 
-			if (file.validarLocal(txtLocal))
-				JasperReportUtil.geraRelatorioEmPdfConsulta(sql, "/RelatorioProdutos.jasper", caminho);
+			GerarRelatorioUtil gr = new GerarRelatorioUtil();
+			gr.gerarRelatorio(sql, "/RelatorioProdutos.jasper", caminho);	
 		};
 	}
 

@@ -23,21 +23,10 @@ public class TelaCadVenda extends MolduraAbstrata{
 
 	@Override
 	protected void configuraMiolo() throws SQLException {
-		MioloCadVenda mcv = MioloCadVenda.getInstance();
-		
-		VendaDAOImpl vendadao = new VendaDAOImpl();
-		ClienteDAOImpl clienteDao = new ClienteDAOImpl();
-		
-		//Pegando ID da venda automaticamente
-		mcv.txtidvenda.setText(String.valueOf(vendadao.buscarID()));
-		
-		
+		MioloCadVenda mcv = MioloCadVenda.getInstance();		
 		super.add(mcv, BorderLayout.CENTER);
 		
 		super.setAcaoSalvar(mcv.getAcaoSalvar());
-		
 		super.setAcaoExcluir(mcv.getAcaoExcluir());
-		
 	}
-
 }

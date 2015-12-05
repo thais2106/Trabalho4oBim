@@ -21,7 +21,6 @@ public class TelaCadCliente extends MolduraAbstrata{
 	@Override
 	protected void configuraMiolo() {
 		MioloCadCliente mcc = new MioloCadCliente();
-		
 		super.add(mcc, BorderLayout.CENTER);
 		
 		try {

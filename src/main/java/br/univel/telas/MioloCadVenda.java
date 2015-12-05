@@ -172,7 +172,7 @@ public class MioloCadVenda extends JPanel {
 				abrirProcuraCliente();
 			}
 		});
-		btnProcuraCliente.setIcon(new ImageIcon("src/main/resources/procura.png"));;
+		btnProcuraCliente.setIcon(new ImageIcon("src/main/resources/procura.png"));
 		GridBagConstraints gbc_btnProcuraCliente = new GridBagConstraints();
 		gbc_btnProcuraCliente.fill = GridBagConstraints.VERTICAL;
 		gbc_btnProcuraCliente.anchor = GridBagConstraints.EAST;

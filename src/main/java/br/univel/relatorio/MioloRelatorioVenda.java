@@ -1,53 +1,29 @@
 package br.univel.relatorio;
 
-import javax.swing.JPanel;
-
-import java.awt.GridBagLayout;
-
-import javax.swing.JLabel;
-
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.sql.SQLException;
-import java.util.Date;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.TitledBorder;
 
-import br.univel.cliente.ClienteDAO;
-import br.univel.cliente.ClienteDAOImpl;
 import br.univel.produto.Categoria;
 import br.univel.telas.TelaProcuraCliente;
 import br.univel.utilitarios.FileChooserUtil;
-import br.univel.utilitarios.JasperReportUtil;
+import br.univel.utilitarios.GerarRelatorioUtil;
 import br.univel.utilitarios.StatusBar;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.GridLayout;
-
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-
-import java.awt.Color;
-
-import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.plaf.FileChooserUI;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.io.File;
-
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
 
 /**
  * Campos do relatório de venda
@@ -103,10 +79,10 @@ public class MioloRelatorioVenda extends JPanel {
 		add(panel_content, BorderLayout.CENTER);
 		GridBagLayout gbl_panel_content = new GridBagLayout();
 		gbl_panel_content.columnWidths = new int[] { 205, 204, 0 };
-		gbl_panel_content.rowHeights = new int[] { 50, 50, 50, 50, 0 };
-		gbl_panel_content.columnWeights = new double[] { 1.0, 1.0,
+		gbl_panel_content.rowHeights = new int[] { 50, 50, 50, 50, 0, 0 };
+		gbl_panel_content.columnWeights = new double[] { 1.0, 0.0,
 				Double.MIN_VALUE };
-		gbl_panel_content.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0,
+		gbl_panel_content.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		panel_content.setLayout(gbl_panel_content);
 
@@ -117,7 +93,7 @@ public class MioloRelatorioVenda extends JPanel {
 				new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel_tipo = new GridBagConstraints();
 		gbc_panel_tipo.fill = GridBagConstraints.BOTH;
-		gbc_panel_tipo.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_tipo.insets = new Insets(10, 10, 5, 10);
 		gbc_panel_tipo.gridwidth = 2;
 		gbc_panel_tipo.gridx = 0;
 		gbc_panel_tipo.gridy = 0;
@@ -149,7 +125,7 @@ public class MioloRelatorioVenda extends JPanel {
 				new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel_periodo = new GridBagConstraints();
 		gbc_panel_periodo.fill = GridBagConstraints.BOTH;
-		gbc_panel_periodo.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_periodo.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_periodo.gridx = 0;
 		gbc_panel_periodo.gridy = 1;
 		panel_content.add(panel_periodo, gbc_panel_periodo);
@@ -185,7 +161,7 @@ public class MioloRelatorioVenda extends JPanel {
 				new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel_categoria = new GridBagConstraints();
 		gbc_panel_categoria.fill = GridBagConstraints.BOTH;
-		gbc_panel_categoria.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_categoria.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_categoria.gridx = 1;
 		gbc_panel_categoria.gridy = 1;
 		panel_content.add(panel_categoria, gbc_panel_categoria);
@@ -214,7 +190,7 @@ public class MioloRelatorioVenda extends JPanel {
 				new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel_cliente = new GridBagConstraints();
 		gbc_panel_cliente.fill = GridBagConstraints.BOTH;
-		gbc_panel_cliente.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_cliente.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_cliente.gridwidth = 2;
 		gbc_panel_cliente.gridx = 0;
 		gbc_panel_cliente.gridy = 2;
@@ -222,12 +198,13 @@ public class MioloRelatorioVenda extends JPanel {
 		GridBagLayout gbl_panel_cliente = new GridBagLayout();
 		gbl_panel_cliente.columnWidths = new int[] { 332, 49, 0 };
 		gbl_panel_cliente.rowHeights = new int[] { 23, 0 };
-		gbl_panel_cliente.columnWeights = new double[] { 1.0, 1.0,
+		gbl_panel_cliente.columnWeights = new double[] { 1.0, 0.0,
 				Double.MIN_VALUE };
 		gbl_panel_cliente.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		panel_cliente.setLayout(gbl_panel_cliente);
 
 		btnProcurar = new JButton("");
+		btnProcurar.setIcon(new ImageIcon("src/main/resources/procura.png"));
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaProcuraCliente tpc = new TelaProcuraCliente();
@@ -245,11 +222,9 @@ public class MioloRelatorioVenda extends JPanel {
 		gbc_txtcliente.gridy = 0;
 		panel_cliente.add(txtcliente, gbc_txtcliente);
 		txtcliente.setColumns(10);
-		btnProcurar.setIcon(new ImageIcon(MioloRelatorioVenda.class
-				.getResource("/br/univel/icones/procura.png")));
+		btnProcurar.setIcon(new ImageIcon("src/main/resources/procura.png"));
 		GridBagConstraints gbc_btnProcurar = new GridBagConstraints();
-		gbc_btnProcurar.anchor = GridBagConstraints.EAST;
-		gbc_btnProcurar.fill = GridBagConstraints.VERTICAL;
+		gbc_btnProcurar.fill = GridBagConstraints.BOTH;
 		gbc_btnProcurar.gridx = 1;
 		gbc_btnProcurar.gridy = 0;
 		panel_cliente.add(btnProcurar, gbc_btnProcurar);
@@ -258,6 +233,7 @@ public class MioloRelatorioVenda extends JPanel {
 		panel_salvar.setBorder(new TitledBorder(null, "Salvar como",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_salvar = new GridBagConstraints();
+		gbc_panel_salvar.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_salvar.fill = GridBagConstraints.BOTH;
 		gbc_panel_salvar.gridwidth = 2;
 		gbc_panel_salvar.gridx = 0;
@@ -266,7 +242,7 @@ public class MioloRelatorioVenda extends JPanel {
 		GridBagLayout gbl_panel_salvar = new GridBagLayout();
 		gbl_panel_salvar.columnWidths = new int[] { 292, 89, 0 };
 		gbl_panel_salvar.rowHeights = new int[] { 23, 0 };
-		gbl_panel_salvar.columnWeights = new double[] { 1.0, 1.0,
+		gbl_panel_salvar.columnWeights = new double[] { 1.0, 0.0,
 				Double.MIN_VALUE };
 		gbl_panel_salvar.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		panel_salvar.setLayout(gbl_panel_salvar);
@@ -289,8 +265,8 @@ public class MioloRelatorioVenda extends JPanel {
 		panel_salvar.add(txtLocal, gbc_txtLocal);
 		txtLocal.setColumns(10);
 		GridBagConstraints gbc_btnLocal = new GridBagConstraints();
-		gbc_btnLocal.anchor = GridBagConstraints.NORTH;
 		gbc_btnLocal.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnLocal.anchor = GridBagConstraints.NORTH;
 		gbc_btnLocal.gridx = 1;
 		gbc_btnLocal.gridy = 0;
 		panel_salvar.add(btnLocal, gbc_btnLocal);
@@ -323,31 +299,6 @@ public class MioloRelatorioVenda extends JPanel {
 
 	}
 
-	public Runnable setAcaoGerarRelatorio() {
-		return () -> {
-			FileChooserUtil file = new FileChooserUtil();
-			String caminho = txtLocal.getText();
-			String sql = "SELECT * FROM VENDA ";
-
-			if (cbxTipoRelatorio.getSelectedIndex() == 0)
-				sql += gerarVendasPeriodo();
-
-			if (cbxTipoRelatorio.getSelectedIndex() == 1)
-				sql += gerarVendasCliente();
-
-			System.out.println("depois " + sql);
-
-			if (cbxTipoRelatorio.getSelectedIndex() == 2)
-				sql += gerarVendasCategoria();
-
-			System.out.println("sql " + sql);
-
-			if (file.validarLocal(txtLocal))
-			JasperReportUtil.geraRelatorioEmPdfConsulta(sql,
-					"/RelatorioVendas.jasper", caminho);
-
-		};
-	}
 
 	private String gerarVendasCategoria() {
 		String sql, categoria;
@@ -366,7 +317,6 @@ public class MioloRelatorioVenda extends JPanel {
 		nomeCliente = txtcliente.getText();
 		sql = "WHERE nomecliente like \"%" + nomeCliente + "%\" ";
 
-		System.out.println("sql aqui");
 		return sql;
 	}
 
@@ -407,5 +357,26 @@ public class MioloRelatorioVenda extends JPanel {
 		}
 
 		return true;
+	}
+
+	public Runnable setAcaoGerarRelatorio() {
+		return () -> {
+			String caminhoArquivo = txtLocal.getText();
+			String sql = "SELECT * FROM VENDA ";
+
+			if (cbxTipoRelatorio.getSelectedIndex() == 0)
+				sql += gerarVendasPeriodo();
+
+			if (cbxTipoRelatorio.getSelectedIndex() == 1)
+				sql += gerarVendasCliente();
+
+			System.out.println("depois " + sql);
+
+			if (cbxTipoRelatorio.getSelectedIndex() == 2)
+				sql += gerarVendasCategoria();
+			
+			GerarRelatorioUtil gr = new GerarRelatorioUtil();
+			gr.gerarRelatorio(sql, "/RelatorioVendas.jasper", caminhoArquivo);
+		};
 	}
 }

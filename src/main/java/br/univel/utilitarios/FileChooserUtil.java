@@ -20,8 +20,8 @@ public class FileChooserUtil {
 		}
 	}
 	
-	public boolean validarLocal(JTextField txtLocal) {
-		if (txtLocal.getText().isEmpty()){
+	public boolean validarLocal(String caminhoArquivo) {
+		if (caminhoArquivo.isEmpty()){
 			JOptionPane.showMessageDialog(null, "Informe um caminho para salvar o relatório!");
 			return false;
 		}

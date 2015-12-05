@@ -1,11 +1,11 @@
 package br.univel.telas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
 import javax.swing.JFrame;
@@ -15,16 +15,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 
 import br.univel.relatorio.TelaRelatorioCliente;
 import br.univel.relatorio.TelaRelatorioProduto;
 import br.univel.relatorio.TelaRelatorioVenda;
-import java.awt.Frame;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import java.awt.Color;
-import javax.swing.border.MatteBorder;
-import java.awt.Window.Type;
 
 /**
  * Tela Principal da aplicação com o menu de cadastros
@@ -89,14 +84,32 @@ public class TelaPrincipal extends JFrame {
 		});
 		mnCadastro.add(mntmProduto);
 		
+		JMenuItem mntmUsuario = new JMenuItem("Usu\u00E1rio");
+		mntmUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirCadastroUsuario();
+			}
+		});
+		mnCadastro.add(mntmUsuario);
+		
 		JMenu mnVenda = new JMenu("Venda");
-		mnVenda.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
+		menuBar.add(mnVenda);
+		
+		JMenuItem mntmEfetuarVenda = new JMenuItem("Efetuar Venda");
+		mntmEfetuarVenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				abrirTelaVenda();
 			}
 		});
-		menuBar.add(mnVenda);
+		mnVenda.add(mntmEfetuarVenda);
+		
+		JMenuItem mntmConsultarVenda = new JMenuItem("Consultar Venda");
+		mntmConsultarVenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirConsultaVenda();
+			}
+		});
+		mnVenda.add(mntmConsultarVenda);
 		
 		JMenu mnRelatrios = new JMenu("Relat\u00F3rios");
 		menuBar.add(mnRelatrios);
@@ -151,6 +164,17 @@ public class TelaPrincipal extends JFrame {
 		panel_status.setForeground(Color.GRAY);
 		panel_status.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.DARK_GRAY));
 		contentPane.add(panel_status, BorderLayout.SOUTH);
+	}
+
+	protected void abrirConsultaVenda() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void abrirCadastroUsuario() {
+		TelaCadUsuario tcu = new TelaCadUsuario();
+		tcu.setCloseAction(e -> tabbedPane.remove(tcu));
+		tabbedPane.addTab("Tela de Usuários", tcu);
 	}
 
 	private void blockParaLogin() {

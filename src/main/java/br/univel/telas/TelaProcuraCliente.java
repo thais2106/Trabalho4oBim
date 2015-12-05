@@ -1,32 +1,31 @@
 package br.univel.telas;
 
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
-import br.univel.cliente.ClienteDAOImpl;
 import br.univel.cliente.Cliente;
+import br.univel.cliente.ClienteDAOImpl;
 import br.univel.relatorio.MioloRelatorioVenda;
 import br.univel.tabelas.ClienteModel;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 
 public class TelaProcuraCliente extends JFrame {
 
@@ -172,6 +171,20 @@ public class TelaProcuraCliente extends JFrame {
 			public void mouseClicked(MouseEvent evt) {
 				if (evt.getClickCount()==2){
 					mrv.txtcliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 1)));
+				}
+			}
+		});
+	}
+	
+	public void selectClienteCadUsuario(){
+		MioloCadUsuario mcu = MioloCadUsuario.getInstance();
+		
+		tabClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				if (evt.getClickCount()==2){
+					mcu.txtId.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 0)));
+					mcu.txtNomeCliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 1)));
 				}
 			}
 		});

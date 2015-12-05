@@ -48,7 +48,7 @@ public class MioloRelatorioCliente extends JPanel {
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_tipo = new GridBagConstraints();
 		gbc_panel_tipo.fill = GridBagConstraints.BOTH;
-		gbc_panel_tipo.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_tipo.insets = new Insets(20, 10, 5, 10);
 		gbc_panel_tipo.gridwidth = 2;
 		gbc_panel_tipo.gridx = 0;
 		gbc_panel_tipo.gridy = 0;
@@ -73,7 +73,7 @@ public class MioloRelatorioCliente extends JPanel {
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_cidade = new GridBagConstraints();
 		gbc_panel_cidade.fill = GridBagConstraints.BOTH;
-		gbc_panel_cidade.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_cidade.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_cidade.gridx = 0;
 		gbc_panel_cidade.gridy = 1;
 		add(panel_cidade, gbc_panel_cidade);
@@ -98,14 +98,14 @@ public class MioloRelatorioCliente extends JPanel {
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_estado = new GridBagConstraints();
 		gbc_panel_estado.fill = GridBagConstraints.BOTH;
-		gbc_panel_estado.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_estado.insets = new Insets(5, 5, 5, 10);
 		gbc_panel_estado.gridx = 1;
 		gbc_panel_estado.gridy = 1;
 		add(panel_estado, gbc_panel_estado);
 		panel_estado.setLayout(null);
 
 		cbxuf = new JComboBox(UF.values());
-		cbxuf.setBounds(10, 17, 112, 20);
+		cbxuf.setBounds(10, 17, 94, 20);
 		panel_estado.add(cbxuf);
 
 		panel_salvar = new JPanel();
@@ -115,7 +115,7 @@ public class MioloRelatorioCliente extends JPanel {
 		GridBagConstraints gbc_panel_salvar = new GridBagConstraints();
 		gbc_panel_salvar.anchor = GridBagConstraints.NORTH;
 		gbc_panel_salvar.fill = GridBagConstraints.HORIZONTAL;
-		gbc_panel_salvar.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_salvar.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_salvar.gridwidth = 2;
 		gbc_panel_salvar.gridx = 0;
 		gbc_panel_salvar.gridy = 2;
@@ -178,7 +178,7 @@ public class MioloRelatorioCliente extends JPanel {
 			if (cbxTipoRelatorio.getSelectedIndex()==2)
 				sql += gerarClienteEstado();
 
-			if (file.validarLocal(txtLocal))
+			if (file.validarLocal(txtLocal.getText()))
 				JasperReportUtil.geraRelatorioEmPdfConsulta(sql,
 						"/RelatorioClientes.jasper", caminho);
 
