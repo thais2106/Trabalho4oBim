@@ -20,6 +20,10 @@ import br.univel.relatorio.TelaRelatorioCliente;
 import br.univel.relatorio.TelaRelatorioProduto;
 import br.univel.relatorio.TelaRelatorioVenda;
 import java.awt.Frame;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import java.awt.Color;
+import javax.swing.border.MatteBorder;
 
 /**
  * Tela Principal da aplicação com o menu de cadastros
@@ -37,6 +41,7 @@ public class TelaPrincipal extends JFrame {
 	private JMenuItem mntmClientes;
 	private JMenuItem mntmProdutos;
 	private JMenuItem mntmVendas;
+	private JPanel panel_status;
 
 	/**
 	 * Launch the application.
@@ -58,9 +63,9 @@ public class TelaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaPrincipal() {
-		setExtendedState(Frame.MAXIMIZED_HORIZ);
+		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 650, 600);
+		setBounds(100, 100, 650, 491);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -141,6 +146,11 @@ public class TelaPrincipal extends JFrame {
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
+		
+		panel_status = new JPanel();
+		panel_status.setForeground(Color.GRAY);
+		panel_status.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.DARK_GRAY));
+		contentPane.add(panel_status, BorderLayout.SOUTH);
 	}
 
 	protected void abrirTelaVenda() {
@@ -178,14 +188,12 @@ public class TelaPrincipal extends JFrame {
 		TelaRelatorioProduto trp = new TelaRelatorioProduto();
 		trp.setCloseAction(e -> tabbedPane.remove(trp));
 		tabbedPane.addTab("Relatório de Produtos", trp);
-		
 	}
 	
 	protected void abrirTelaRelatorioVendas() throws SQLException {
 		TelaRelatorioVenda trv = new TelaRelatorioVenda();
 		trv.setCloseAction(e -> tabbedPane.remove(trv));
 		tabbedPane.addTab("Relatório de Vendas", trv);
-		
 	}
 
 }

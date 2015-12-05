@@ -360,6 +360,7 @@ public class MioloCadProduto extends JPanel {
 		
 		p.setId(Integer.parseInt(txtid.getText()));
 		p.setCodBarras(txtcodbarras.getText());
+		p.setDescricao(txtdescricao.getText());
 		p.setCategoria((Categoria)cbxcategoria.getSelectedItem());
 		p.setDescricao(txtdescricao.getText());
 		p.setUnidade((Unidade)cbxunidade.getSelectedItem());
