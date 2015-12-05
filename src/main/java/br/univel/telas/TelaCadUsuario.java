@@ -17,6 +17,9 @@ public class TelaCadUsuario extends MolduraAbstrata{
 	protected void configuraMiolo() throws SQLException {
 		MioloCadUsuario mcu = MioloCadUsuario.getInstance();
 		super.add(mcu, BorderLayout.CENTER);
+		
+		super.setAcaoSalvar(mcu.getAcaoSalvar());
+		super.setAcaoExcluir(mcu.setAcaoExcluir());
 	}
 
 }

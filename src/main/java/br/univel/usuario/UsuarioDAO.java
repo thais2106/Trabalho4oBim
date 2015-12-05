@@ -1,5 +1,6 @@
 package br.univel.usuario;
 
+import java.sql.SQLException;
 import java.util.List;
 /**
  * Interface de métodos da classe Usuário
@@ -7,14 +8,14 @@ import java.util.List;
  *
  */
 public interface UsuarioDAO {
-	public void inserir(Usuario c);
+	public void inserir(Usuario u) throws SQLException;
 	
-	public void atualizar(Usuario c);
+	public void atualizar(Usuario u);
 	
-	public void excluir (Usuario c);
+	public void excluir (Usuario u) throws SQLException;
 	
-	public Usuario buscar(int id);
+	public Usuario buscar(int idCliente);
 	
-	public List<Usuario> listar();
+	public List<Usuario> listar() throws SQLException;
 }
 

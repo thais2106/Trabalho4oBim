@@ -183,7 +183,7 @@ public class TelaProcuraCliente extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
 				if (evt.getClickCount()==2){
-					mcu.txtId.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 0)));
+					mcu.txtIdCliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 0)));
 					mcu.txtNomeCliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 1)));
 				}
 			}

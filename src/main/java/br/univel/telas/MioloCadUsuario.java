@@ -1,27 +1,35 @@
 package br.univel.telas;
 
-import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JPasswordField;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
+
+import br.univel.tabelas.UsuarioModel;
+import br.univel.usuario.Usuario;
+import br.univel.usuario.UsuarioDAOImpl;
 
 public class MioloCadUsuario extends JPanel {
 	protected JTextField txtNomeCliente;
-	protected JTextField txtId;
+	protected JTextField txtIdCliente;
 	private JTextField txtPesquisar;
 	private JTable tabUsuarios;
 	private JPasswordField SenhaField;
 	private static MioloCadUsuario instance;
+	private UsuarioModel model;
 
 	/**
 	 * Create the panel.
@@ -74,15 +82,15 @@ public class MioloCadUsuario extends JPanel {
 		gbc_lblNomeDoCliente.gridy = 0;
 		panel_cadastro.add(lblNomeDoCliente, gbc_lblNomeDoCliente);
 		
-		txtId = new JTextField();
-		GridBagConstraints gbc_txtId = new GridBagConstraints();
-		gbc_txtId.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtId.anchor = GridBagConstraints.SOUTH;
-		gbc_txtId.insets = new Insets(0, 5, 5, 5);
-		gbc_txtId.gridx = 0;
-		gbc_txtId.gridy = 1;
-		panel_cadastro.add(txtId, gbc_txtId);
-		txtId.setColumns(10);
+		txtIdCliente = new JTextField();
+		GridBagConstraints gbc_txtIdCliente = new GridBagConstraints();
+		gbc_txtIdCliente.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtIdCliente.anchor = GridBagConstraints.SOUTH;
+		gbc_txtIdCliente.insets = new Insets(0, 5, 5, 5);
+		gbc_txtIdCliente.gridx = 0;
+		gbc_txtIdCliente.gridy = 1;
+		panel_cadastro.add(txtIdCliente, gbc_txtIdCliente);
+		txtIdCliente.setColumns(10);
 		
 		txtNomeCliente = new JTextField();
 		GridBagConstraints gbc_txtNomeCliente = new GridBagConstraints();
@@ -99,6 +107,7 @@ public class MioloCadUsuario extends JPanel {
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaProcuraCliente tpc = new TelaProcuraCliente();
+				tpc.setVisible(true);
 				tpc.selectClienteCadUsuario();
 			}
 		});
@@ -129,7 +138,7 @@ public class MioloCadUsuario extends JPanel {
 		JPanel panel_pesquisar = new JPanel();
 		panel_pesquisar.setBorder(new TitledBorder(null, "Pesquisar", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_pesquisar = new GridBagConstraints();
-		gbc_panel_pesquisar.insets = new Insets(10, 10, 5, 10);
+		gbc_panel_pesquisar.insets = new Insets(10, 10, 0, 10);
 		gbc_panel_pesquisar.fill = GridBagConstraints.BOTH;
 		gbc_panel_pesquisar.gridx = 0;
 		gbc_panel_pesquisar.gridy = 1;
@@ -169,6 +178,96 @@ public class MioloCadUsuario extends JPanel {
 		
 		tabUsuarios = new JTable();
 		scrollPane.setViewportView(tabUsuarios);
+		setModelTabela();
+	}
 
+	private void setModelTabela() {
+		UsuarioDAOImpl dao = new UsuarioDAOImpl();
+		
+		try {
+			model = new UsuarioModel(dao.listar());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		tabUsuarios.setModel(model);
+		
+	}
+
+	public Runnable getAcaoSalvar() {
+		return () -> {
+			UsuarioDAOImpl dao = new UsuarioDAOImpl();
+			Usuario u = new Usuario();
+			
+			if (verificarCampos())
+				u = setarValores();
+			
+			try {
+				dao.inserir(u);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			model.incluir(u);
+			limparCampos();
+			
+		};
+	}
+
+	private void limparCampos() {
+		txtIdCliente.setText("");
+		txtNomeCliente.setText("");
+		SenhaField.setText("");
+		
+	}
+
+	private Usuario setarValores() {
+		verificarCampos();
+		
+		UsuarioDAOImpl dao = new UsuarioDAOImpl();
+		int id = 0;
+		
+		try {
+			id = dao.buscarID();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		int idCliente = Integer.parseInt(txtIdCliente.getText());
+		String senha = new String(SenhaField.getPassword());
+				
+		Usuario u = new Usuario();
+		u.setId(id);
+		u.setClienteId(idCliente);
+		u.setSenha(senha);
+		
+		return u;
+	}
+
+	private boolean verificarCampos() {
+		if (txtIdCliente.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Informe um código para o cliente!");
+			return false;
+		}
+		
+		try {
+			int id = Integer.parseInt(txtIdCliente.getText());
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Insira um código válido!");
+		}
+		
+		if (SenhaField.getPassword().length==0){
+			JOptionPane.showMessageDialog(null, "Insira uma senha!");
+			return false;
+		}
+		
+		return true;
+	}
+
+	public Runnable setAcaoExcluir() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
