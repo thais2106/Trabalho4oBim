@@ -20,6 +20,7 @@ import br.univel.cliente.ClienteDAO;
 import br.univel.cliente.ClienteDAOImpl;
 import br.univel.produto.Categoria;
 import br.univel.telas.TelaProcuraCliente;
+import br.univel.utilitarios.FileChooserUtil;
 import br.univel.utilitarios.JasperReportUtil;
 import br.univel.utilitarios.StatusBar;
 
@@ -39,6 +40,7 @@ import java.awt.Color;
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.plaf.FileChooserUI;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -272,7 +274,8 @@ public class MioloRelatorioVenda extends JPanel {
 		JButton btnLocal = new JButton("Local");
 		btnLocal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				escolherLocal();
+				FileChooserUtil file = new FileChooserUtil();
+				file.escolherLocal(txtLocal);
 			}
 		});
 
@@ -293,19 +296,6 @@ public class MioloRelatorioVenda extends JPanel {
 		panel_salvar.add(btnLocal, gbc_btnLocal);
 
 		popularCbxTipoRelatorio();
-
-	}
-
-	protected void escolherLocal() {
-		JFileChooser file = new JFileChooser();
-		int i = file.showSaveDialog(null);
-
-		if (i == 1) {
-			txtLocal.setText("");
-		} else {
-			File arquivo = file.getSelectedFile();
-			txtLocal.setText(arquivo.getPath());
-		}
 
 	}
 
@@ -335,6 +325,7 @@ public class MioloRelatorioVenda extends JPanel {
 
 	public Runnable setAcaoGerarRelatorio() {
 		return () -> {
+			FileChooserUtil file = new FileChooserUtil();
 			String caminho = txtLocal.getText();
 			String sql = "SELECT * FROM VENDA ";
 
@@ -351,6 +342,7 @@ public class MioloRelatorioVenda extends JPanel {
 
 			System.out.println("sql " + sql);
 
+			if (file.validarLocal(txtLocal))
 			JasperReportUtil.geraRelatorioEmPdfConsulta(sql,
 					"/RelatorioVendas.jasper", caminho);
 

@@ -24,6 +24,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
 import javax.swing.border.MatteBorder;
+import java.awt.Window.Type;
 
 /**
  * Tela Principal da aplicação com o menu de cadastros
@@ -63,6 +64,7 @@ public class TelaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaPrincipal() {
+		setTitle("Sistema de Vendas");
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 491);

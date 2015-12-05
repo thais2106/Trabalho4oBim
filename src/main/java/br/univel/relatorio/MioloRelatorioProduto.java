@@ -17,125 +17,248 @@ import javax.swing.JRadioButton;
 
 import net.sf.jasperreports.engine.util.JRStyledText.Run;
 import br.univel.produto.Categoria;
+import br.univel.utilitarios.FileChooserUtil;
 import br.univel.utilitarios.JasperReportUtil;
+import br.univel.utilitarios.StatusBar;
+
+import javax.swing.border.TitledBorder;
+import javax.swing.UIManager;
+
+import java.awt.Color;
+
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.border.MatteBorder;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EtchedBorder;
+import java.awt.BorderLayout;
 
 /**
  * Tela para gerar relatório de produto.
+ * 
  * @author tcrivelatti - 01/12/2015 - 20:08:31
  *
  */
 public class MioloRelatorioProduto extends JPanel {
-	private JRadioButton radioCategoria;
-	private JComboBox cbxcategoria;
-	private JRadioButton radioMargemLucro;
-	private JTextField txtmargemlucro;
+	private JComboBox cbxCategoria;
+	private JTextField txtMargemLucro;
+	private JPanel panel_tipo;
+	private JComboBox cbxTipoRelatorio;
+	private JPanel panel_salvar;
+	private JTextField txtLocal;
+	private JButton button;
+	private JPanel panel_status;
+	private StatusBar statusBar;
 
 	/**
 	 * Create the panel.
 	 */
 	public MioloRelatorioProduto() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] { 305, 140, 0 };
+		gridBagLayout.rowHeights = new int[] { 46, 45, 50, 0, 30, 0 };
+		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0,
+				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
-		
-		JLabel lblPesquisarProduto = new JLabel("Pesquisar produto");
-		GridBagConstraints gbc_lblPesquisarProduto = new GridBagConstraints();
-		gbc_lblPesquisarProduto.anchor = GridBagConstraints.WEST;
-		gbc_lblPesquisarProduto.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPesquisarProduto.gridx = 0;
-		gbc_lblPesquisarProduto.gridy = 0;
-		add(lblPesquisarProduto, gbc_lblPesquisarProduto);
-		
-		JPanel panel = new JPanel();
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.gridwidth = 4;
-		gbc_panel.insets = new Insets(0, 0, 0, 5);
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 1;
-		add(panel, gbc_panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0};
-		gbl_panel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
-		
-		radioCategoria = new JRadioButton("Categoria");
-		GridBagConstraints gbc_radioCategoria = new GridBagConstraints();
-		gbc_radioCategoria.anchor = GridBagConstraints.WEST;
-		gbc_radioCategoria.insets = new Insets(0, 0, 5, 0);
-		gbc_radioCategoria.gridx = 0;
-		gbc_radioCategoria.gridy = 0;
-		panel.add(radioCategoria, gbc_radioCategoria);
-		
-		cbxcategoria = new JComboBox(Categoria.values());
-		GridBagConstraints gbc_cbxcategoria = new GridBagConstraints();
-		gbc_cbxcategoria.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cbxcategoria.gridx = 0;
-		gbc_cbxcategoria.gridy = 1;
-		panel.add(cbxcategoria, gbc_cbxcategoria);
-		
-		JPanel panel_1 = new JPanel();
-		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-		gbc_panel_1.fill = GridBagConstraints.BOTH;
-		gbc_panel_1.gridx = 4;
-		gbc_panel_1.gridy = 1;
-		add(panel_1, gbc_panel_1);
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{0, 0};
-		gbl_panel_1.rowHeights = new int[]{0, 0, 0};
-		gbl_panel_1.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		panel_1.setLayout(gbl_panel_1);
-		
-		radioMargemLucro = new JRadioButton("Margem de lucro");
-		GridBagConstraints gbc_radioMargemLucro = new GridBagConstraints();
-		gbc_radioMargemLucro.anchor = GridBagConstraints.WEST;
-		gbc_radioMargemLucro.insets = new Insets(0, 0, 5, 0);
-		gbc_radioMargemLucro.gridx = 0;
-		gbc_radioMargemLucro.gridy = 0;
-		panel_1.add(radioMargemLucro, gbc_radioMargemLucro);
-		
-		txtmargemlucro = new JTextField();
-		GridBagConstraints gbc_txtmargemlucro = new GridBagConstraints();
-		gbc_txtmargemlucro.anchor = GridBagConstraints.WEST;
-		gbc_txtmargemlucro.gridx = 0;
-		gbc_txtmargemlucro.gridy = 1;
-		panel_1.add(txtmargemlucro, gbc_txtmargemlucro);
-		txtmargemlucro.setColumns(10);
-		
 
+		panel_tipo = new JPanel();
+		panel_tipo.setBorder(new TitledBorder(null, "Tipo de Relat\u00F3rio",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		GridBagConstraints gbc_panel_tipo = new GridBagConstraints();
+		gbc_panel_tipo.fill = GridBagConstraints.BOTH;
+		gbc_panel_tipo.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_tipo.gridwidth = 2;
+		gbc_panel_tipo.gridx = 0;
+		gbc_panel_tipo.gridy = 0;
+		add(panel_tipo, gbc_panel_tipo);
+		GridBagLayout gbl_panel_tipo = new GridBagLayout();
+		gbl_panel_tipo.columnWidths = new int[] { 197, 0 };
+		gbl_panel_tipo.rowHeights = new int[] { 20, 0 };
+		gbl_panel_tipo.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_panel_tipo.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
+		panel_tipo.setLayout(gbl_panel_tipo);
+
+		cbxTipoRelatorio = new JComboBox();
+		cbxTipoRelatorio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mensagensStatus();
+			}
+		});
+		GridBagConstraints gbc_cbxTipoRelatorio = new GridBagConstraints();
+		gbc_cbxTipoRelatorio.anchor = GridBagConstraints.NORTH;
+		gbc_cbxTipoRelatorio.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbxTipoRelatorio.gridx = 0;
+		gbc_cbxTipoRelatorio.gridy = 0;
+		panel_tipo.add(cbxTipoRelatorio, gbc_cbxTipoRelatorio);
+
+		JPanel panel_categoria = new JPanel();
+		panel_categoria.setBorder(new TitledBorder(null,
+				"Categoria do Produto", TitledBorder.LEADING, TitledBorder.TOP,
+				null, null));
+		GridBagConstraints gbc_panel_categoria = new GridBagConstraints();
+		gbc_panel_categoria.fill = GridBagConstraints.BOTH;
+		gbc_panel_categoria.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_categoria.gridx = 0;
+		gbc_panel_categoria.gridy = 1;
+		add(panel_categoria, gbc_panel_categoria);
+		GridBagLayout gbl_panel_categoria = new GridBagLayout();
+		gbl_panel_categoria.columnWidths = new int[] { 275, 0 };
+		gbl_panel_categoria.rowHeights = new int[] { 20, 0 };
+		gbl_panel_categoria.columnWeights = new double[] { 1.0,
+				Double.MIN_VALUE };
+		gbl_panel_categoria.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
+		panel_categoria.setLayout(gbl_panel_categoria);
+
+		cbxCategoria = new JComboBox(Categoria.values());
+		GridBagConstraints gbc_cbxCategoria = new GridBagConstraints();
+		gbc_cbxCategoria.anchor = GridBagConstraints.NORTH;
+		gbc_cbxCategoria.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbxCategoria.gridx = 0;
+		gbc_cbxCategoria.gridy = 0;
+		panel_categoria.add(cbxCategoria, gbc_cbxCategoria);
+
+		JPanel panel_margem = new JPanel();
+		panel_margem.setBorder(new TitledBorder(UIManager
+				.getBorder("TitledBorder.border"), "Margem de Lucro",
+				TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
+		GridBagConstraints gbc_panel_margem = new GridBagConstraints();
+		gbc_panel_margem.fill = GridBagConstraints.BOTH;
+		gbc_panel_margem.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_margem.gridx = 1;
+		gbc_panel_margem.gridy = 1;
+		add(panel_margem, gbc_panel_margem);
+		GridBagLayout gbl_panel_margem = new GridBagLayout();
+		gbl_panel_margem.columnWidths = new int[] { 100, 0 };
+		gbl_panel_margem.rowHeights = new int[] { 20, 0 };
+		gbl_panel_margem.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_panel_margem.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
+		panel_margem.setLayout(gbl_panel_margem);
+
+		txtMargemLucro = new JTextField();
+		GridBagConstraints gbc_txtMargemLucro = new GridBagConstraints();
+		gbc_txtMargemLucro.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtMargemLucro.anchor = GridBagConstraints.NORTH;
+		gbc_txtMargemLucro.gridx = 0;
+		gbc_txtMargemLucro.gridy = 0;
+		panel_margem.add(txtMargemLucro, gbc_txtMargemLucro);
+		txtMargemLucro.setColumns(10);
+
+		panel_salvar = new JPanel();
+		panel_salvar.setBorder(new TitledBorder(null, "Salvar como",
+
+		TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		GridBagConstraints gbc_panel_salvar = new GridBagConstraints();
+		gbc_panel_salvar.fill = GridBagConstraints.BOTH;
+		gbc_panel_salvar.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_salvar.gridwidth = 2;
+		gbc_panel_salvar.gridx = 0;
+		gbc_panel_salvar.gridy = 2;
+		add(panel_salvar, gbc_panel_salvar);
+		GridBagLayout gbl_panel_salvar = new GridBagLayout();
+		gbl_panel_salvar.columnWidths = new int[] { 292, 89, 0 };
+		gbl_panel_salvar.rowHeights = new int[] { 23, 0 };
+		gbl_panel_salvar.columnWeights = new double[] { 1.0, 0.0,
+				Double.MIN_VALUE };
+		gbl_panel_salvar.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
+		panel_salvar.setLayout(gbl_panel_salvar);
+
+		txtLocal = new JTextField();
+		txtLocal.setEditable(false);
+		txtLocal.setColumns(10);
+		GridBagConstraints gbc_txtLocal = new GridBagConstraints();
+		gbc_txtLocal.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtLocal.insets = new Insets(0, 0, 0, 5);
+		gbc_txtLocal.gridx = 0;
+		gbc_txtLocal.gridy = 0;
+		panel_salvar.add(txtLocal, gbc_txtLocal);
+
+		button = new JButton("Local");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FileChooserUtil file = new FileChooserUtil();
+				file.escolherLocal(txtLocal);
+			}
+		});
+		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.fill = GridBagConstraints.HORIZONTAL;
+		gbc_button.anchor = GridBagConstraints.NORTH;
+		gbc_button.gridx = 1;
+		gbc_button.gridy = 0;
+		panel_salvar.add(button, gbc_button);
+
+		panel_status = new JPanel();
+		panel_status.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null,
+				null, null, null));
+		GridBagConstraints gbc_panel_status = new GridBagConstraints();
+		gbc_panel_status.anchor = GridBagConstraints.SOUTH;
+		gbc_panel_status.fill = GridBagConstraints.BOTH;
+		gbc_panel_status.gridwidth = 2;
+		gbc_panel_status.gridx = 0;
+		gbc_panel_status.gridy = 4;
+		add(panel_status, gbc_panel_status);
+		panel_status.setLayout(new BorderLayout(0, 0));
+		
+		statusBar = new StatusBar();
+		panel_status.add(statusBar, BorderLayout.CENTER);
+
+		popularComboboxRelatorio();
+	}
+
+	public void mensagensStatus() {
+		if (cbxTipoRelatorio.getSelectedIndex()==0)
+			statusBar.setMessage("Gerar relatório de todas os produtos cadastrados.");
+		
+		if (cbxTipoRelatorio.getSelectedIndex()==1)
+			statusBar.setMessage("Gera relatório de produtos por categoria.");
+		
+		if (cbxTipoRelatorio.getSelectedIndex()==2)
+			statusBar.setMessage("Gera relatório de produtos por margem de lucro.");
+	}
+
+	private void popularComboboxRelatorio() {
+		cbxTipoRelatorio.addItem("Todos os produtos");
+		cbxTipoRelatorio.addItem("Produtos por categoria");
+		cbxTipoRelatorio.addItem("Produtos por margem de lucro");
 	}
 
 	public Runnable setAcaoGerarRelatorio() {
 		return () -> {
-			String sql = "select * from produto where ";
-			
-			if (radioCategoria.isSelected()){
-				Categoria c = (Categoria) cbxcategoria.getSelectedItem();
-				
-				sql += "categoria like \"%" + c.toString() + "%\" ";
-			}
-			
-			if (radioMargemLucro.isSelected()){
-				if (txtmargemlucro.getText().isEmpty())
-					JOptionPane.showMessageDialog(null, "Informe uma margem de lucro!");
-				else {
-					sql += "margemlucro = " + new BigDecimal(txtmargemlucro.getText());
-				
-							//BigDecimal margem = ;
-					
-				}	 
-				
-			}
-			
-			JasperReportUtil.geraRelatorioEmPdfConsulta(sql, "/RelatorioProdutos.jasper", "RelatorioProdutos");
-			
+			FileChooserUtil file = new FileChooserUtil();
+			String caminho = txtLocal.getText();
+			String sql = "select * from produto";
+
+			if (cbxTipoRelatorio.getSelectedIndex() == 2)
+				sql += gerarProdutosCategoria();
+
+			if (cbxTipoRelatorio.getSelectedIndex() == 3)
+				sql += gerarProdutosMargem();
+
+			if (file.validarLocal(txtLocal))
+				JasperReportUtil.geraRelatorioEmPdfConsulta(sql, "/RelatorioProdutos.jasper", caminho);
 		};
 	}
 
+	private String gerarProdutosMargem() {
+		String sql = null;
+		if (txtMargemLucro.getText().isEmpty())
+			JOptionPane.showMessageDialog(null, "Informe uma margem de lucro!");
+		else
+			sql += " where margemlucro = "
+					+ new BigDecimal(txtMargemLucro.getText());
+		return sql;
+	}
+
+	private String gerarProdutosCategoria() {
+		String sql = null;
+		String categoria = cbxCategoria.getSelectedItem().toString();
+		sql += " WHERE categoria like \"%" + categoria + "%\" ";
+		return sql;
+	}
 }
