@@ -46,14 +46,14 @@ public class MioloCadUsuario extends JPanel {
 		panel_cadastro.setBorder(new TitledBorder(null, "Cadastrar Usu\u00E1rio", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_cadastro = new GridBagConstraints();
 		gbc_panel_cadastro.fill = GridBagConstraints.BOTH;
-		gbc_panel_cadastro.insets = new Insets(10, 10, 5, 10);
+		gbc_panel_cadastro.insets = new Insets(20, 10, 5, 10);
 		gbc_panel_cadastro.gridx = 0;
 		gbc_panel_cadastro.gridy = 0;
 		add(panel_cadastro, gbc_panel_cadastro);
 		GridBagLayout gbl_panel_cadastro = new GridBagLayout();
 		gbl_panel_cadastro.columnWidths = new int[]{68, 190, 63, 0};
 		gbl_panel_cadastro.rowHeights = new int[]{14, 23, 14, 22, 0};
-		gbl_panel_cadastro.columnWeights = new double[]{1.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_cadastro.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_cadastro.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_cadastro.setLayout(gbl_panel_cadastro);
 		

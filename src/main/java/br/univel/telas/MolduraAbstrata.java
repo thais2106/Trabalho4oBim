@@ -1,18 +1,16 @@
 package br.univel.telas;
 
-import javax.swing.JPanel;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Color;
 import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
-
-import javax.swing.JLabel;
-import javax.swing.JButton;
-
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 /**
  * Tela moldura onde aparecerá os campos para preencher 
  * @author tcrivelatti - 28/10/2015
@@ -42,9 +40,40 @@ public abstract class MolduraAbstrata extends JPanel {
 		panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
 		add(panel, BorderLayout.NORTH);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{23, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
 		
-		JLabel lblSistemaDeVendas = new JLabel("Sistema de Vendas");
-		panel.add(lblSistemaDeVendas);
+		btnSalvar = new JButton("Salvar");
+		btnSalvar.setIcon(new ImageIcon("src/main/resources/salvar.png"));
+		GridBagConstraints gbc_btnSalvar = new GridBagConstraints();
+		gbc_btnSalvar.fill = GridBagConstraints.VERTICAL;
+		gbc_btnSalvar.anchor = GridBagConstraints.WEST;
+		gbc_btnSalvar.insets = new Insets(0, 0, 0, 5);
+		gbc_btnSalvar.gridx = 0;
+		gbc_btnSalvar.gridy = 0;
+		panel.add(btnSalvar, gbc_btnSalvar);
+		
+		btnExcluir = new JButton("Excluir");
+		btnExcluir.setIcon(new ImageIcon("src/main/resources/deletarmaior.png"));
+		GridBagConstraints gbc_btnExcluir = new GridBagConstraints();
+		gbc_btnExcluir.fill = GridBagConstraints.BOTH;
+		gbc_btnExcluir.insets = new Insets(0, 0, 0, 5);
+		gbc_btnExcluir.gridx = 1;
+		gbc_btnExcluir.gridy = 0;
+		panel.add(btnExcluir, gbc_btnExcluir);
+		
+		btnFechar = new JButton("Fechar");
+		btnFechar.setIcon(new ImageIcon("src/main/resources/fechar.png"));
+		GridBagConstraints gbc_btnFechar = new GridBagConstraints();
+		gbc_btnFechar.fill = GridBagConstraints.VERTICAL;
+		gbc_btnFechar.anchor = GridBagConstraints.EAST;
+		gbc_btnFechar.gridx = 2;
+		gbc_btnFechar.gridy = 0;
+		panel.add(btnFechar, gbc_btnFechar);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.LIGHT_GRAY);
@@ -55,28 +84,6 @@ public abstract class MolduraAbstrata extends JPanel {
 		gbl_panel_1.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
-		
-		btnSalvar = new JButton("Salvar");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
-		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton.gridx = 1;
-		gbc_btnNewButton.gridy = 0;
-		panel_1.add(btnSalvar, gbc_btnNewButton);
-		
-		btnExcluir = new JButton("Excluir");
-		GridBagConstraints gbc_btnExcluir = new GridBagConstraints();
-		gbc_btnExcluir.insets = new Insets(0, 0, 0, 5);
-		gbc_btnExcluir.gridx = 2;
-		gbc_btnExcluir.gridy = 0;
-		panel_1.add(btnExcluir, gbc_btnExcluir);
-		
-		btnFechar = new JButton("Fechar");
-		GridBagConstraints gbc_btnFechar = new GridBagConstraints();
-		gbc_btnFechar.anchor = GridBagConstraints.EAST;
-		gbc_btnFechar.gridx = 3;
-		gbc_btnFechar.gridy = 0;
-		panel_1.add(btnFechar, gbc_btnFechar);
 
 		try {
 			configuraMiolo();

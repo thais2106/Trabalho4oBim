@@ -62,7 +62,7 @@ public class MioloRelatorioProduto extends JPanel {
 	 */
 	public MioloRelatorioProduto() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 305, 140, 0 };
+		gridBagLayout.columnWidths = new int[] { 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 46, 45, 50, 0, 30, 0 };
 		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0,
@@ -80,7 +80,7 @@ public class MioloRelatorioProduto extends JPanel {
 		gbc_panel_tipo.gridy = 0;
 		add(panel_tipo, gbc_panel_tipo);
 		GridBagLayout gbl_panel_tipo = new GridBagLayout();
-		gbl_panel_tipo.columnWidths = new int[] { 197, 0 };
+		gbl_panel_tipo.columnWidths = new int[] { 0, 0 };
 		gbl_panel_tipo.rowHeights = new int[] { 20, 0 };
 		gbl_panel_tipo.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
 		gbl_panel_tipo.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
@@ -110,7 +110,7 @@ public class MioloRelatorioProduto extends JPanel {
 		gbc_panel_categoria.gridy = 1;
 		add(panel_categoria, gbc_panel_categoria);
 		GridBagLayout gbl_panel_categoria = new GridBagLayout();
-		gbl_panel_categoria.columnWidths = new int[] { 275, 0 };
+		gbl_panel_categoria.columnWidths = new int[] { 0, 0 };
 		gbl_panel_categoria.rowHeights = new int[] { 20, 0 };
 		gbl_panel_categoria.columnWeights = new double[] { 1.0,
 				Double.MIN_VALUE };
@@ -137,7 +137,7 @@ public class MioloRelatorioProduto extends JPanel {
 		gbc_panel_margem.gridy = 1;
 		add(panel_margem, gbc_panel_margem);
 		GridBagLayout gbl_panel_margem = new GridBagLayout();
-		gbl_panel_margem.columnWidths = new int[] { 100, 0 };
+		gbl_panel_margem.columnWidths = new int[] { 0, 0 };
 		gbl_panel_margem.rowHeights = new int[] { 20, 0 };
 		gbl_panel_margem.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
 		gbl_panel_margem.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
@@ -164,7 +164,7 @@ public class MioloRelatorioProduto extends JPanel {
 		gbc_panel_salvar.gridy = 2;
 		add(panel_salvar, gbc_panel_salvar);
 		GridBagLayout gbl_panel_salvar = new GridBagLayout();
-		gbl_panel_salvar.columnWidths = new int[] { 292, 89, 0 };
+		gbl_panel_salvar.columnWidths = new int[] { 0, 0, 0 };
 		gbl_panel_salvar.rowHeights = new int[] { 23, 0 };
 		gbl_panel_salvar.columnWeights = new double[] { 1.0, 0.0,
 				Double.MIN_VALUE };
@@ -199,7 +199,6 @@ public class MioloRelatorioProduto extends JPanel {
 		panel_status.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null,
 				null, null, null));
 		GridBagConstraints gbc_panel_status = new GridBagConstraints();
-		gbc_panel_status.anchor = GridBagConstraints.SOUTH;
 		gbc_panel_status.fill = GridBagConstraints.BOTH;
 		gbc_panel_status.gridwidth = 2;
 		gbc_panel_status.gridx = 0;

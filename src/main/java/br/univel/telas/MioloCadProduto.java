@@ -67,20 +67,20 @@ public class MioloCadProduto extends JPanel {
 		gridBagLayout.columnWidths = new int[]{450, 0};
 		gridBagLayout.rowHeights = new int[]{35, 166, 144, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		panel_codigo = new JPanel();
 		GridBagConstraints gbc_panel_codigo = new GridBagConstraints();
 		gbc_panel_codigo.fill = GridBagConstraints.BOTH;
-		gbc_panel_codigo.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_codigo.insets = new Insets(20, 10, 5, 10);
 		gbc_panel_codigo.gridx = 0;
 		gbc_panel_codigo.gridy = 0;
 		add(panel_codigo, gbc_panel_codigo);
 		GridBagLayout gbl_panel_codigo = new GridBagLayout();
-		gbl_panel_codigo.columnWidths = new int[]{113, 100, 88, 88, 0};
+		gbl_panel_codigo.columnWidths = new int[]{0, 0, 0, 0};
 		gbl_panel_codigo.rowHeights = new int[] {20, 0};
-		gbl_panel_codigo.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_codigo.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_codigo.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel_codigo.setLayout(gbl_panel_codigo);
 		
@@ -111,7 +111,7 @@ public class MioloCadProduto extends JPanel {
 		});
 		btnNovoProduto.setIcon(new ImageIcon("src/main/resources/add.png"));
 		GridBagConstraints gbc_btnNovoProduto = new GridBagConstraints();
-		gbc_btnNovoProduto.insets = new Insets(10, 0, 0, 5);
+		gbc_btnNovoProduto.insets = new Insets(10, 0, 0, 0);
 		gbc_btnNovoProduto.fill = GridBagConstraints.BOTH;
 		gbc_btnNovoProduto.gridx = 2;
 		gbc_btnNovoProduto.gridy = 0;
@@ -121,14 +121,14 @@ public class MioloCadProduto extends JPanel {
 		panel_dados.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Dados do Produto", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel_dados = new GridBagConstraints();
 		gbc_panel_dados.fill = GridBagConstraints.BOTH;
-		gbc_panel_dados.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_dados.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_dados.gridx = 0;
 		gbc_panel_dados.gridy = 1;
 		add(panel_dados, gbc_panel_dados);
 		GridBagLayout gbl_panel_dados = new GridBagLayout();
-		gbl_panel_dados.columnWidths = new int[]{100, 82, 105, 94, 0};
+		gbl_panel_dados.columnWidths = new int[]{0, 0, 105, 0, 0};
 		gbl_panel_dados.rowHeights = new int[]{14, 20, 14, 20, 14, 20, 0};
-		gbl_panel_dados.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_panel_dados.columnWeights = new double[]{1.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		gbl_panel_dados.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_dados.setLayout(gbl_panel_dados);
 		
@@ -150,8 +150,8 @@ public class MioloCadProduto extends JPanel {
 		
 		txtcodbarras = new JTextField();
 		GridBagConstraints gbc_txtcodbarras = new GridBagConstraints();
-		gbc_txtcodbarras.anchor = GridBagConstraints.NORTH;
 		gbc_txtcodbarras.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtcodbarras.anchor = GridBagConstraints.NORTH;
 		gbc_txtcodbarras.insets = new Insets(0, 0, 5, 5);
 		gbc_txtcodbarras.gridx = 0;
 		gbc_txtcodbarras.gridy = 1;
@@ -245,6 +245,7 @@ public class MioloCadProduto extends JPanel {
 		panel_tabela = new JPanel();
 		panel_tabela.setBorder(new TitledBorder(null, "Produtos Cadastrados", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_tabela = new GridBagConstraints();
+		gbc_panel_tabela.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_tabela.fill = GridBagConstraints.BOTH;
 		gbc_panel_tabela.gridx = 0;
 		gbc_panel_tabela.gridy = 2;

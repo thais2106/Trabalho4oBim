@@ -60,22 +60,22 @@ public class MioloCadCliente extends JPanel {
 
 	public MioloCadCliente() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 494, 0 };
+		gridBagLayout.columnWidths = new int[] { 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 46, 150, 62, 190, 0 };
 		gridBagLayout.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0,
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0,
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		JPanel panel_codigo = new JPanel();
 		GridBagConstraints gbc_panel_codigo = new GridBagConstraints();
 		gbc_panel_codigo.fill = GridBagConstraints.BOTH;
-		gbc_panel_codigo.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_codigo.insets = new Insets(20, 10, 5, 10);
 		gbc_panel_codigo.gridx = 0;
 		gbc_panel_codigo.gridy = 0;
 		add(panel_codigo, gbc_panel_codigo);
 		GridBagLayout gbl_panel_codigo = new GridBagLayout();
-		gbl_panel_codigo.columnWidths = new int[] { 99, 86, 77, 0 };
+		gbl_panel_codigo.columnWidths = new int[] { 0, 0, 0, 0 };
 		gbl_panel_codigo.rowHeights = new int[] { 30, 0 };
 		gbl_panel_codigo.columnWeights = new double[] { 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
@@ -123,12 +123,12 @@ public class MioloCadCliente extends JPanel {
 		GridBagConstraints gbc_panel_dados = new GridBagConstraints();
 		gbc_panel_dados.anchor = GridBagConstraints.NORTH;
 		gbc_panel_dados.fill = GridBagConstraints.HORIZONTAL;
-		gbc_panel_dados.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_dados.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_dados.gridx = 0;
 		gbc_panel_dados.gridy = 1;
 		add(panel_dados, gbc_panel_dados);
 		GridBagLayout gbl_panel_dados = new GridBagLayout();
-		gbl_panel_dados.columnWidths = new int[] { 339, 18, 64, 0 };
+		gbl_panel_dados.columnWidths = new int[] { 0, 0, 0, 0 };
 		gbl_panel_dados.rowHeights = new int[] { 14, 20, 14, 20, 14, 20, 0 };
 		gbl_panel_dados.columnWeights = new double[] { 1.0, 1.0, 1.0,
 				Double.MIN_VALUE };
@@ -139,7 +139,6 @@ public class MioloCadCliente extends JPanel {
 		JLabel lblNome = new JLabel("Nome");
 		GridBagConstraints gbc_lblNome = new GridBagConstraints();
 		gbc_lblNome.fill = GridBagConstraints.BOTH;
-		gbc_lblNome.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblNome.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNome.gridx = 0;
 		gbc_lblNome.gridy = 0;
@@ -148,7 +147,6 @@ public class MioloCadCliente extends JPanel {
 		JLabel lblGnero = new JLabel("G\u00EAnero");
 		GridBagConstraints gbc_lblGnero = new GridBagConstraints();
 		gbc_lblGnero.fill = GridBagConstraints.BOTH;
-		gbc_lblGnero.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblGnero.insets = new Insets(0, 0, 5, 0);
 		gbc_lblGnero.gridx = 2;
 		gbc_lblGnero.gridy = 0;
@@ -175,7 +173,6 @@ public class MioloCadCliente extends JPanel {
 		JLabel lblEndereo = new JLabel("Endere\u00E7o");
 		GridBagConstraints gbc_lblEndereo = new GridBagConstraints();
 		gbc_lblEndereo.fill = GridBagConstraints.BOTH;
-		gbc_lblEndereo.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblEndereo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEndereo.gridx = 0;
 		gbc_lblEndereo.gridy = 2;
@@ -183,7 +180,6 @@ public class MioloCadCliente extends JPanel {
 
 		txtendereco = new JTextField();
 		GridBagConstraints gbc_txtendereco = new GridBagConstraints();
-		gbc_txtendereco.anchor = GridBagConstraints.NORTH;
 		gbc_txtendereco.fill = GridBagConstraints.BOTH;
 		gbc_txtendereco.insets = new Insets(0, 0, 5, 0);
 		gbc_txtendereco.gridwidth = 3;
@@ -195,7 +191,6 @@ public class MioloCadCliente extends JPanel {
 		JLabel lblCidade = new JLabel("Cidade");
 		GridBagConstraints gbc_lblCidade = new GridBagConstraints();
 		gbc_lblCidade.fill = GridBagConstraints.BOTH;
-		gbc_lblCidade.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblCidade.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCidade.gridx = 0;
 		gbc_lblCidade.gridy = 4;
@@ -204,7 +199,6 @@ public class MioloCadCliente extends JPanel {
 		JLabel lblEstado = new JLabel("Estado");
 		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
 		gbc_lblEstado.fill = GridBagConstraints.BOTH;
-		gbc_lblEstado.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblEstado.insets = new Insets(0, 0, 5, 0);
 		gbc_lblEstado.gridx = 2;
 		gbc_lblEstado.gridy = 4;
@@ -212,7 +206,6 @@ public class MioloCadCliente extends JPanel {
 
 		txtcidade = new JTextField();
 		GridBagConstraints gbc_txtcidade = new GridBagConstraints();
-		gbc_txtcidade.anchor = GridBagConstraints.NORTH;
 		gbc_txtcidade.fill = GridBagConstraints.BOTH;
 		gbc_txtcidade.insets = new Insets(0, 0, 0, 5);
 		gbc_txtcidade.gridwidth = 2;
@@ -223,7 +216,6 @@ public class MioloCadCliente extends JPanel {
 
 		cbxuf = new JComboBox();
 		GridBagConstraints gbc_cbxuf = new GridBagConstraints();
-		gbc_cbxuf.anchor = GridBagConstraints.NORTH;
 		gbc_cbxuf.fill = GridBagConstraints.BOTH;
 		gbc_cbxuf.gridx = 2;
 		gbc_cbxuf.gridy = 5;
@@ -237,12 +229,12 @@ public class MioloCadCliente extends JPanel {
 		GridBagConstraints gbc_panel_contato = new GridBagConstraints();
 		gbc_panel_contato.anchor = GridBagConstraints.NORTH;
 		gbc_panel_contato.fill = GridBagConstraints.HORIZONTAL;
-		gbc_panel_contato.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_contato.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_contato.gridx = 0;
 		gbc_panel_contato.gridy = 2;
 		add(panel_contato, gbc_panel_contato);
 		GridBagLayout gbl_panel_contato = new GridBagLayout();
-		gbl_panel_contato.columnWidths = new int[] { 318, 115, 0 };
+		gbl_panel_contato.columnWidths = new int[] { 0, 0, 0 };
 		gbl_panel_contato.rowHeights = new int[] { 14, 20, 0 };
 		gbl_panel_contato.columnWeights = new double[] { 1.0, 1.0,
 				Double.MIN_VALUE };
@@ -289,6 +281,7 @@ public class MioloCadCliente extends JPanel {
 		panel_tabela.setBorder(new TitledBorder(null, "Clientes Cadastrados",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_tabela = new GridBagConstraints();
+		gbc_panel_tabela.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_tabela.fill = GridBagConstraints.BOTH;
 		gbc_panel_tabela.gridx = 0;
 		gbc_panel_tabela.gridy = 3;

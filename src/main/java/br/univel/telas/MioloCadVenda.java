@@ -75,12 +75,12 @@ public class MioloCadVenda extends JPanel {
 		GridBagConstraints gbc_panel_codigo = new GridBagConstraints();
 		gbc_panel_codigo.anchor = GridBagConstraints.NORTH;
 		gbc_panel_codigo.fill = GridBagConstraints.HORIZONTAL;
-		gbc_panel_codigo.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_codigo.insets = new Insets(20, 10, 5, 10);
 		gbc_panel_codigo.gridx = 0;
 		gbc_panel_codigo.gridy = 0;
 		add(panel_codigo, gbc_panel_codigo);
 		GridBagLayout gbl_panel_codigo = new GridBagLayout();
-		gbl_panel_codigo.columnWidths = new int[] { 89, 86, 77, 0 };
+		gbl_panel_codigo.columnWidths = new int[] { 0, 0, 0, 0 };
 		gbl_panel_codigo.rowHeights = new int[] { 30, 0 };
 		gbl_panel_codigo.columnWeights = new double[] { 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
@@ -126,12 +126,12 @@ public class MioloCadVenda extends JPanel {
 		GridBagConstraints gbc_panel_cliente = new GridBagConstraints();
 		gbc_panel_cliente.anchor = GridBagConstraints.NORTH;
 		gbc_panel_cliente.fill = GridBagConstraints.HORIZONTAL;
-		gbc_panel_cliente.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_cliente.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_cliente.gridx = 0;
 		gbc_panel_cliente.gridy = 1;
 		add(panel_cliente, gbc_panel_cliente);
 		GridBagLayout gbl_panel_cliente = new GridBagLayout();
-		gbl_panel_cliente.columnWidths = new int[] { 120, 406, 50, 0 };
+		gbl_panel_cliente.columnWidths = new int[] { 0, 0, 0, 0 };
 		gbl_panel_cliente.rowHeights = new int[] { 25, 0 };
 		gbl_panel_cliente.columnWeights = new double[] { 0.0, 1.0, 0.0,
 				Double.MIN_VALUE };
@@ -186,12 +186,12 @@ public class MioloCadVenda extends JPanel {
 		GridBagConstraints gbc_panel_produto = new GridBagConstraints();
 		gbc_panel_produto.anchor = GridBagConstraints.NORTH;
 		gbc_panel_produto.fill = GridBagConstraints.HORIZONTAL;
-		gbc_panel_produto.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_produto.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_produto.gridx = 0;
 		gbc_panel_produto.gridy = 2;
 		add(panel_produto, gbc_panel_produto);
 		GridBagLayout gbl_panel_produto = new GridBagLayout();
-		gbl_panel_produto.columnWidths = new int[] { 75, 265, 55, 53, 94, 0 };
+		gbl_panel_produto.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
 		gbl_panel_produto.rowHeights = new int[] { 15, 25, 25, 0 };
 		gbl_panel_produto.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0,
 				0.0, Double.MIN_VALUE };
@@ -303,7 +303,7 @@ public class MioloCadVenda extends JPanel {
 		});
 		btnIncluir.setIcon(new ImageIcon("src/main/resources/add.png"));
 		GridBagConstraints gbc_btnIncluir = new GridBagConstraints();
-		gbc_btnIncluir.anchor = GridBagConstraints.EAST;
+		gbc_btnIncluir.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnIncluir.insets = new Insets(0, 0, 0, 5);
 		gbc_btnIncluir.gridx = 3;
 		gbc_btnIncluir.gridy = 2;
@@ -312,7 +312,7 @@ public class MioloCadVenda extends JPanel {
 		btnExcluir = new JButton("Excluir");
 		btnExcluir.setIcon(new ImageIcon("src/main/resources/delete.png"));
 		GridBagConstraints gbc_btnExcluir = new GridBagConstraints();
-		gbc_btnExcluir.anchor = GridBagConstraints.EAST;
+		gbc_btnExcluir.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnExcluir.gridx = 4;
 		gbc_btnExcluir.gridy = 2;
 		panel_produto.add(btnExcluir, gbc_btnExcluir);
@@ -322,7 +322,7 @@ public class MioloCadVenda extends JPanel {
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panel_venda = new GridBagConstraints();
 		gbc_panel_venda.fill = GridBagConstraints.BOTH;
-		gbc_panel_venda.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_venda.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_venda.gridx = 0;
 		gbc_panel_venda.gridy = 3;
 		add(panel_venda, gbc_panel_venda);
@@ -389,12 +389,13 @@ public class MioloCadVenda extends JPanel {
 				TitledBorder.LEADING, TitledBorder.TOP, null,
 				new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel_pagamento = new GridBagConstraints();
+		gbc_panel_pagamento.insets = new Insets(5, 10, 5, 10);
 		gbc_panel_pagamento.fill = GridBagConstraints.BOTH;
 		gbc_panel_pagamento.gridx = 0;
 		gbc_panel_pagamento.gridy = 4;
 		add(panel_pagamento, gbc_panel_pagamento);
 		GridBagLayout gbl_panel_pagamento = new GridBagLayout();
-		gbl_panel_pagamento.columnWidths = new int[] { 120, 120, 0 };
+		gbl_panel_pagamento.columnWidths = new int[] { 0, 0, 0 };
 		gbl_panel_pagamento.rowHeights = new int[] { 15, 21, 0 };
 		gbl_panel_pagamento.columnWeights = new double[] { 0.0, 0.0,
 				Double.MIN_VALUE };
