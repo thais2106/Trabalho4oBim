@@ -17,10 +17,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.TableCellRenderer;
 
 import br.univel.tabelas.UsuarioModel;
 import br.univel.usuario.Usuario;
 import br.univel.usuario.UsuarioDAOImpl;
+import br.univel.utilitarios.PasswordCellRenderer;
 
 public class MioloCadUsuario extends JPanel {
 	protected JTextField txtNomeCliente;
@@ -176,7 +178,13 @@ public class MioloCadUsuario extends JPanel {
 		gbc_scrollPane.gridy = 1;
 		panel_pesquisar.add(scrollPane, gbc_scrollPane);
 		
-		tabUsuarios = new JTable();
+		final PasswordCellRenderer renderer = new PasswordCellRenderer();		
+		tabUsuarios = new JTable(model){
+			public TableCellRenderer getCellRenderer(int row, int column){
+				if (column==2) return renderer;
+				return super.getCellRenderer(row, column);
+			}
+		};
 		scrollPane.setViewportView(tabUsuarios);
 		setModelTabela();
 	}

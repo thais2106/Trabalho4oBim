@@ -19,21 +19,21 @@ public class UsuarioModel extends AbstractTableModel {
 	}
 	
 	@Override
-	public int getRowCount() {
-		return usuarios.size();
-	}
-
-	@Override
 	public int getColumnCount() {
 		return 3;
 	}
 	
 	@Override
+	public int getRowCount() {
+		return usuarios.size();
+	}
+	
+	@Override
 	public String getColumnName(int col) {
 		switch (col) {
-		case 1:
+		case 0:
 			return "ID USUÁRIO";
-		case 2:
+		case 1:
 			return "ID CLIENTE";
 		default:
 			return "SENHA";
@@ -45,9 +45,9 @@ public class UsuarioModel extends AbstractTableModel {
 		Usuario u = usuarios.get(row);
 		
 		switch (col) {
-		case 1:
+		case 0:
 			return u.getId();
-		case 2:
+		case 1:
 			return u.getClienteId();
 		default:
 			return u.getSenha();
