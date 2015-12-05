@@ -178,14 +178,15 @@ public class TelaPrincipal extends JFrame {
 	}
 
 	protected void abrirNovaSenha() {
-		TelaNovaSenha tns = TelaNovaSenha.getInstance();
-		tns.setVisible(true);
+		TelaCadNovaSenha tns = new TelaCadNovaSenha();
+		tns.setCloseAction(e -> tabbedPane.remove(tns));
+		tabbedPane.addTab("Cadastro de Usuário", tns);
 	}
 
 	protected void abrirCadastroUsuario() {
 		TelaCadUsuario tcu = new TelaCadUsuario();
 		tcu.setCloseAction(e -> tabbedPane.remove(tcu));
-		tabbedPane.addTab("Cadastro de Usuário", tcu);
+		tabbedPane.addTab("Alterar senha", tcu);
 		
 	}
 

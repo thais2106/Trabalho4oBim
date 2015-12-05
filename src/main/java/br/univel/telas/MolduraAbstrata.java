@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import br.univel.utilitarios.StatusBar;
 /**
  * Tela moldura onde aparecerá os campos para preencher 
  * @author tcrivelatti - 28/10/2015
@@ -18,7 +20,7 @@ import javax.swing.JPanel;
  */
 
 public abstract class MolduraAbstrata extends JPanel {
-	private JPanel panel;
+	private JPanel panel_north;
 	private JButton btnFechar;
 	private JButton btnSalvar;
 	private JButton btnExcluir;
@@ -33,19 +35,18 @@ public abstract class MolduraAbstrata extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	
 	public MolduraAbstrata() {
 		setLayout(new BorderLayout(0, 0));
 		
-		panel = new JPanel();
-		panel.setBackground(Color.LIGHT_GRAY);
-		add(panel, BorderLayout.NORTH);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{23, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
+		panel_north = new JPanel();
+		panel_north.setBackground(Color.LIGHT_GRAY);
+		add(panel_north, BorderLayout.NORTH);
+		GridBagLayout gbl_panel_north = new GridBagLayout();
+		gbl_panel_north.columnWidths = new int[]{0, 0, 0, 0};
+		gbl_panel_north.rowHeights = new int[]{23, 0};
+		gbl_panel_north.columnWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel_north.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel_north.setLayout(gbl_panel_north);
 		
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.setIcon(new ImageIcon("src/main/resources/salvar.png"));
@@ -55,7 +56,7 @@ public abstract class MolduraAbstrata extends JPanel {
 		gbc_btnSalvar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnSalvar.gridx = 0;
 		gbc_btnSalvar.gridy = 0;
-		panel.add(btnSalvar, gbc_btnSalvar);
+		panel_north.add(btnSalvar, gbc_btnSalvar);
 		
 		btnExcluir = new JButton("Excluir");
 		btnExcluir.setIcon(new ImageIcon("src/main/resources/deletarmaior.png"));
@@ -64,7 +65,7 @@ public abstract class MolduraAbstrata extends JPanel {
 		gbc_btnExcluir.insets = new Insets(0, 0, 0, 5);
 		gbc_btnExcluir.gridx = 1;
 		gbc_btnExcluir.gridy = 0;
-		panel.add(btnExcluir, gbc_btnExcluir);
+		panel_north.add(btnExcluir, gbc_btnExcluir);
 		
 		btnFechar = new JButton("Fechar");
 		btnFechar.setIcon(new ImageIcon("src/main/resources/fechar.png"));
@@ -73,17 +74,8 @@ public abstract class MolduraAbstrata extends JPanel {
 		gbc_btnFechar.anchor = GridBagConstraints.EAST;
 		gbc_btnFechar.gridx = 2;
 		gbc_btnFechar.gridy = 0;
-		panel.add(btnFechar, gbc_btnFechar);
+		panel_north.add(btnFechar, gbc_btnFechar);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.LIGHT_GRAY);
-		add(panel_1, BorderLayout.SOUTH);
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_panel_1.rowHeights = new int[]{0, 0};
-		gbl_panel_1.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-		panel_1.setLayout(gbl_panel_1);
 
 		try {
 			configuraMiolo();

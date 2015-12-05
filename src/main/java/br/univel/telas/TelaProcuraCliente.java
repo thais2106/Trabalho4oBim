@@ -163,7 +163,7 @@ public class TelaProcuraCliente extends JFrame {
 		tabClientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
-				if (evt.getClickCount()==2){
+				if (evt.getClickCount()==1){
 					mcv.txtidcliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 0)));
 					mcv.txtnomecliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 1)));
 				}
@@ -177,7 +177,7 @@ public class TelaProcuraCliente extends JFrame {
 		tabClientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
-				if (evt.getClickCount()==2){
+				if (evt.getClickCount()==1){
 					mrv.txtcliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 1)));
 				}
 			}
@@ -190,25 +190,12 @@ public class TelaProcuraCliente extends JFrame {
 		tabClientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent evt) {
-				if (evt.getClickCount()==2){
+				if (evt.getClickCount()==1){
 					mcu.txtIdCliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 0)));
 					mcu.txtNomeCliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 1)));
 				}
 			}
 		});
 	}
-	
-	public void selectClienteSenha(){
-		TelaNovaSenha tns = TelaNovaSenha.getInstance();
-		
-		tabClientes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent evt) {
-				if (evt.getClickCount()==2){
-					tns.txtIdCliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 0)));
-					tns.txtNomeCliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 1)));
-				}
-			}
-		});
-	}
 }
+

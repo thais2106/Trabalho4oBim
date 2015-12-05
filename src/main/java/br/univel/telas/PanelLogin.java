@@ -13,10 +13,14 @@ import javax.swing.JTextField;
 import java.awt.Insets;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+
+import br.univel.usuario.Usuario;
+import br.univel.usuario.UsuarioDAOImpl;
 /**
  * Tela de Login
  * @author Thaís - 05/12/2015 - 12:56:51
@@ -114,11 +118,31 @@ public class PanelLogin extends JPanel {
 	}
 
 	private void logar() {
+		int usuario = Integer.parseInt(txtUsuario.getText());
+		String senha = new String(SenhaField.getPassword());
+		
+		UsuarioDAOImpl dao = new UsuarioDAOImpl();
+		Usuario u = new Usuario();
+		
+		try {
+			u = dao.buscarUsuario(usuario);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (senha.equals(u.getSenha()))
+			acaoLogar.run();
+		else 
+			JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!");
+		
+		/*
 		if (txtUsuario.getText().trim().equals("1") && new String(SenhaField.getPassword()).equals("1")){
 			acaoLogar.run();
 		} else {
 			JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos!");
 		}
+		*/
 	}
 	
 	

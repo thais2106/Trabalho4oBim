@@ -2,15 +2,11 @@
 
 Trabalho do 4º Bimestre - 2015
 
-# 27 de Outubro de 2015
+# Tela Login
 
-* Criação do repositório.
-* Criação do projeto.
-* Criação da classe Cliente e suas classes Enum e DAO.
-* Criação da classe Produto e suas classes Enum e DAO.
-* Criação da classe Usuário e sua classe DAO.
+* Login pelo ID do usuário e uma senha cadastrada
 
-# 28 de Outubro de 2015
+# 
 
 *Tela principal e tela de cadastro de cliente
 

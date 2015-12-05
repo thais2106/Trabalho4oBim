@@ -61,7 +61,8 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 
 		while (rs.next()) {
 			u.setId(rs.getInt("id"));
-			u.setClienteId(rs.getInt("idcliente"));;
+			u.setClienteId(rs.getInt("idcliente"));
+			u.setSenha(rs.getString("senha"));
 		}
 		rs.close();
 		ps.close();
@@ -105,6 +106,26 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		}
 	
 		return cod + 1;
+	}
+
+	@Override
+	public Usuario buscarUsuario(int idCliente) throws SQLException {
+		Usuario u = new Usuario();
+		sql = "SELECT * FROM USUARIO WHERE ID = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, idCliente);
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			u.setId(rs.getInt("id"));
+			u.setClienteId(rs.getInt("idcliente"));
+			u.setSenha(rs.getString("senha"));
+		}
+		rs.close();
+		ps.close();
+
+		return u;
 	}
 
 }

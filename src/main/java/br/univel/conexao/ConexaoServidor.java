@@ -30,6 +30,7 @@ public class ConexaoServidor {
 			System.out.println("Erro ao conectar no banco de dados" + e.getMessage());
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public static Connection getConnection(){
@@ -39,6 +40,5 @@ public class ConexaoServidor {
 		
 		return con;
 	}
-	
 	
 }
