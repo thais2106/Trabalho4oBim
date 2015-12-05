@@ -14,7 +14,7 @@ public interface UsuarioDAO {
 	
 	public void excluir (Usuario u) throws SQLException;
 	
-	public Usuario buscar(int idCliente);
+	public Usuario buscar(int idCliente) throws SQLException;
 	
 	public List<Usuario> listar() throws SQLException;
 }

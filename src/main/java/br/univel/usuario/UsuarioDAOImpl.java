@@ -11,6 +11,8 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 import br.univel.conexao.ConexaoServidor;
+import br.univel.produto.Categoria;
+import br.univel.produto.Unidade;
 
 public class UsuarioDAOImpl implements UsuarioDAO{
 	private String sql;
@@ -49,9 +51,22 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 	}
 
 	@Override
-	public Usuario buscar(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Usuario buscar(int id) throws SQLException {
+		Usuario u = new Usuario();
+		sql = "SELECT * FROM USUARIO WHERE ID = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, id);
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			u.setId(rs.getInt("id"));
+			u.setClienteId(rs.getInt("idcliente"));;
+		}
+		rs.close();
+		ps.close();
+
+		return u;
 	}
 
 	@Override

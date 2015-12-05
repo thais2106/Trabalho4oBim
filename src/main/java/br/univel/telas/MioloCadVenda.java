@@ -629,7 +629,7 @@ public class MioloCadVenda extends JPanel {
 	}
 
 	public void abrirProcuraCliente() {
-		TelaProcuraCliente tpc = new TelaProcuraCliente();
+		TelaProcuraCliente tpc = TelaProcuraCliente.getInstance();
 		tpc.setVisible(true);
 		tpc.selectClienteTelaVenda();
 	}

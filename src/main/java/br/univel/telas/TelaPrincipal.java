@@ -84,14 +84,6 @@ public class TelaPrincipal extends JFrame {
 		});
 		mnCadastro.add(mntmProduto);
 		
-		JMenuItem mntmUsuario = new JMenuItem("Usu\u00E1rio");
-		mntmUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				abrirCadastroUsuario();
-			}
-		});
-		mnCadastro.add(mntmUsuario);
-		
 		JMenu mnVenda = new JMenu("Venda");
 		menuBar.add(mnVenda);
 		
@@ -152,6 +144,25 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		mnRelatrios.add(mntmVendas);
+		
+		JMenu mnUsurios = new JMenu("Usu\u00E1rios");
+		menuBar.add(mnUsurios);
+		
+		JMenuItem mntmCadastrarUsurio = new JMenuItem("Cadastro de usu\u00E1rio");
+		mntmCadastrarUsurio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirCadastroUsuario();
+			}
+		});
+		mnUsurios.add(mntmCadastrarUsurio);
+		
+		JMenuItem mntmMudarASenha = new JMenuItem("Modificar a senha");
+		mntmMudarASenha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirNovaSenha();
+			}
+		});
+		mnUsurios.add(mntmMudarASenha);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -166,15 +177,21 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(panel_status, BorderLayout.SOUTH);
 	}
 
-	protected void abrirConsultaVenda() {
-		// TODO Auto-generated method stub
-		
+	protected void abrirNovaSenha() {
+		TelaNovaSenha tns = TelaNovaSenha.getInstance();
+		tns.setVisible(true);
 	}
 
 	protected void abrirCadastroUsuario() {
 		TelaCadUsuario tcu = new TelaCadUsuario();
 		tcu.setCloseAction(e -> tabbedPane.remove(tcu));
-		tabbedPane.addTab("Tela de Usuários", tcu);
+		tabbedPane.addTab("Cadastro de Usuário", tcu);
+		
+	}
+
+	protected void abrirConsultaVenda() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void blockParaLogin() {

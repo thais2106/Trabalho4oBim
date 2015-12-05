@@ -33,6 +33,7 @@ public class TelaProcuraCliente extends JFrame {
 	private JTextField txtpesquisa;
 	private JTable tabClientes;
 	private ClienteModel clienteModel;
+	private static TelaProcuraCliente instance;
 
 	/**
 	 * Launch the application.
@@ -53,8 +54,15 @@ public class TelaProcuraCliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaProcuraCliente() {
-		setTitle("Procura de Cliente");
+	public synchronized static TelaProcuraCliente getInstance() {
+		if (instance == null) {
+			instance = new TelaProcuraCliente();
+		}
+		return instance;
+	}
+	
+	private TelaProcuraCliente() {
+		setTitle("Sistema de Vendas - Procura de Cliente");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 569, 366);
 		contentPane = new JPanel();
@@ -185,6 +193,20 @@ public class TelaProcuraCliente extends JFrame {
 				if (evt.getClickCount()==2){
 					mcu.txtIdCliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 0)));
 					mcu.txtNomeCliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 1)));
+				}
+			}
+		});
+	}
+	
+	public void selectClienteSenha(){
+		TelaNovaSenha tns = TelaNovaSenha.getInstance();
+		
+		tabClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				if (evt.getClickCount()==2){
+					tns.txtIdCliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 0)));
+					tns.txtNomeCliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 1)));
 				}
 			}
 		});

@@ -209,7 +209,7 @@ public class MioloRelatorioVenda extends JPanel {
 		btnProcurar.setIcon(new ImageIcon("src/main/resources/procura.png"));
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaProcuraCliente tpc = new TelaProcuraCliente();
+				TelaProcuraCliente tpc = TelaProcuraCliente.getInstance();
 				tpc.setVisible(true);
 				tpc.selectClienteRelatorioVenda();
 			}
