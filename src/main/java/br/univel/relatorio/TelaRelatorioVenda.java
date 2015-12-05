@@ -16,7 +16,7 @@ public class TelaRelatorioVenda extends MolduraRelatorio{
 
 	@Override
 	protected void configuraMiolo() throws SQLException {
-		MioloRelatorioVenda mrv = new MioloRelatorioVenda();
+		MioloRelatorioVenda mrv = MioloRelatorioVenda.getRelatorioVenda();
 		super.add(mrv, BorderLayout.CENTER);
 		
 		super.setAcaoGerarRelatorio(mrv.setAcaoGerarRelatorio());	

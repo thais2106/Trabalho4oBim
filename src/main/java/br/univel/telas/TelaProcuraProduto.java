@@ -169,8 +169,6 @@ public class TelaProcuraProduto extends JFrame {
 
 	public void adicionarItem() {
 		
-		System.out.println("Adicionar item");
-		
 		Item i = new Item();
 
 		i.setIdproduto((int) tabProdutos.getValueAt(tabProdutos.getSelectedRow(), 0));

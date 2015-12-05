@@ -1,5 +1,7 @@
 package br.univel.telas;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -11,11 +13,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,17 +24,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
 
 import br.univel.tabelas.ItemModel;
 import br.univel.venda.Item;
 import br.univel.venda.Venda;
 import br.univel.venda.VendaDAOImpl;
-import javax.swing.border.TitledBorder;
-import javax.swing.ImageIcon;
-import java.awt.Font;
-import java.awt.BorderLayout;
-import javax.swing.UIManager;
-import java.awt.Color;
 
 public class MioloCadVenda extends JPanel {
 	private static MioloCadVenda instance;
@@ -635,5 +632,6 @@ public class MioloCadVenda extends JPanel {
 	public void abrirProcuraCliente() {
 		TelaProcuraCliente tpc = new TelaProcuraCliente();
 		tpc.setVisible(true);
+		tpc.selectClienteTelaVenda();
 	}
 }

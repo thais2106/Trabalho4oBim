@@ -17,6 +17,7 @@ import javax.swing.JTable;
 
 import br.univel.cliente.ClienteDAOImpl;
 import br.univel.cliente.Cliente;
+import br.univel.relatorio.MioloRelatorioVenda;
 import br.univel.tabelas.ClienteModel;
 
 import java.awt.event.ActionListener;
@@ -32,7 +33,6 @@ public class TelaProcuraCliente extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtpesquisa;
 	private JTable tabClientes;
-	MioloCadVenda mcv = MioloCadVenda.getInstance();
 	private ClienteModel clienteModel;
 
 	/**
@@ -65,7 +65,7 @@ public class TelaProcuraCliente extends JFrame {
 		gbl_contentPane.columnWidths = new int[]{439, 91, 0};
 		gbl_contentPane.rowHeights = new int[]{14, 23, 259, 0};
 		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblPesquisar = new JLabel("Pesquisar");
@@ -108,15 +108,6 @@ public class TelaProcuraCliente extends JFrame {
 		contentPane.add(scrollPane, gbc_scrollPane);
 		
 		tabClientes = new JTable();
-		tabClientes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent evt) {
-				if (evt.getClickCount()==2){
-					mcv.txtidcliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 0)));
-					mcv.txtnomecliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 1)));
-				}
-			}
-		});
 		scrollPane.setViewportView(tabClientes);
 		
 		setModelTabela();
@@ -158,5 +149,31 @@ public class TelaProcuraCliente extends JFrame {
 		
 		clienteModel = new ClienteModel(clientes);
 		tabClientes.setModel(clienteModel);
+	}
+	
+	public void selectClienteTelaVenda(){
+		MioloCadVenda mcv = MioloCadVenda.getInstance();
+		tabClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				if (evt.getClickCount()==2){
+					mcv.txtidcliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 0)));
+					mcv.txtnomecliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 1)));
+				}
+			}
+		});
+	}
+
+	public void selectClienteRelatorioVenda() {
+		MioloRelatorioVenda mrv = MioloRelatorioVenda.getRelatorioVenda();
+		
+		tabClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent evt) {
+				if (evt.getClickCount()==2){
+					mrv.txtcliente.setText(String.valueOf(tabClientes.getValueAt(tabClientes.getSelectedRow(), 1)));
+				}
+			}
+		});
 	}
 }
