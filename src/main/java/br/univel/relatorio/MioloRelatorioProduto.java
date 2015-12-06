@@ -117,7 +117,7 @@ public class MioloRelatorioProduto extends JPanel {
 		gbl_panel_categoria.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		panel_categoria.setLayout(gbl_panel_categoria);
 
-		cbxCategoria = new JComboBox(Categoria.values());
+		cbxCategoria = new JComboBox();
 		GridBagConstraints gbc_cbxCategoria = new GridBagConstraints();
 		gbc_cbxCategoria.anchor = GridBagConstraints.NORTH;
 		gbc_cbxCategoria.fill = GridBagConstraints.HORIZONTAL;
@@ -209,24 +209,35 @@ public class MioloRelatorioProduto extends JPanel {
 		statusBar = new StatusBar();
 		panel_status.add(statusBar, BorderLayout.CENTER);
 
-		popularComboboxRelatorio();
+		popularCombobox();
 	}
 
 	public void mensagensStatus() {
-		if (cbxTipoRelatorio.getSelectedIndex()==0)
-			statusBar.setMessage("Gerar relatório de todas os produtos cadastrados.");
+		if (cbxTipoRelatorio.getSelectedIndex()==0){
+			statusBar.setMessage("Gerar relatório de todos os produtos cadastrados.");
+			cbxCategoria.setEnabled(false);
+			txtMargemLucro.setEnabled(false);
+		}
 		
-		if (cbxTipoRelatorio.getSelectedIndex()==1)
+		if (cbxTipoRelatorio.getSelectedIndex()==1){
 			statusBar.setMessage("Gera relatório de produtos por categoria.");
+			cbxCategoria.setEnabled(true);
+			txtMargemLucro.setEnabled(false);
+		}
 		
-		if (cbxTipoRelatorio.getSelectedIndex()==2)
+		if (cbxTipoRelatorio.getSelectedIndex()==2){
 			statusBar.setMessage("Gera relatório de produtos por margem de lucro.");
+			cbxCategoria.setEnabled(false);
+			txtMargemLucro.setEnabled(true);
+		}
 	}
 
-	private void popularComboboxRelatorio() {
+	private void popularCombobox() {
 		cbxTipoRelatorio.addItem("Todos os produtos");
 		cbxTipoRelatorio.addItem("Produtos por categoria");
 		cbxTipoRelatorio.addItem("Produtos por margem de lucro");
+		
+		Categoria.comboboxCategoria(cbxCategoria);
 	}
 
 	public Runnable setAcaoGerarRelatorio() {
@@ -235,10 +246,10 @@ public class MioloRelatorioProduto extends JPanel {
 			String caminho = txtLocal.getText();
 			String sql = "select * from produto";
 
-			if (cbxTipoRelatorio.getSelectedIndex() == 2)
+			if (cbxTipoRelatorio.getSelectedIndex() == 1)
 				sql += gerarProdutosCategoria();
 
-			if (cbxTipoRelatorio.getSelectedIndex() == 3)
+			if (cbxTipoRelatorio.getSelectedIndex() == 2)
 				sql += gerarProdutosMargem();
 
 			GerarRelatorioUtil gr = new GerarRelatorioUtil();
@@ -251,15 +262,15 @@ public class MioloRelatorioProduto extends JPanel {
 		if (txtMargemLucro.getText().isEmpty())
 			JOptionPane.showMessageDialog(null, "Informe uma margem de lucro!");
 		else
-			sql += " where margemlucro = "
-					+ new BigDecimal(txtMargemLucro.getText());
+			sql = " where margemlucro = " + new BigDecimal(txtMargemLucro.getText());
 		return sql;
 	}
 
 	private String gerarProdutosCategoria() {
 		String sql = null;
 		String categoria = cbxCategoria.getSelectedItem().toString();
-		sql += " WHERE categoria like \"%" + categoria + "%\" ";
+		sql = " WHERE categoria like \"%" + categoria + "%\" ";
+		
 		return sql;
 	}
 }

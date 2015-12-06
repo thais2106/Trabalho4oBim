@@ -329,17 +329,18 @@ public class MioloRelatorioVenda extends JPanel {
 
 		if (!dataInicial.isEmpty() && !dataFinal.isEmpty()) {
 			if (validarPeriodo())
-				sql += "WHERE datavenda BETWEEN STR_TO_DATE(" + dataInicial
-						+ ", '%d/%m/%Y') AND " + "STR_TO_DATE(" + dataFinal
-						+ ", '%d/%m/%Y')";
-
-			/*
-			 * sql += "WHERE datavenda BETWEEN CONVERT(DATETIME, " + dataInicial
-			 * + ", 103) " + "AND CONVERT(DATETIME, " + dataFinal + ", 103)";
-			 */
+				sql = "WHERE datavenda BETWEEN \"" + 
+			getData(dataInicial) + "\" AND \"" + getData(dataFinal) + "\"";
 		}
-		System.out.println("vai sair " + sql);
 		return sql;
+	}
+	
+	public String getData(String dataDigitada){
+	    String data = "";
+	    data += dataDigitada.substring(6, dataDigitada.length()) + "/";
+	    data += dataDigitada.substring(3, 5) + "/";
+	    data += dataDigitada.substring(0, 2);
+		return data;
 	}
 
 	private boolean validarPeriodo() {
@@ -371,8 +372,6 @@ public class MioloRelatorioVenda extends JPanel {
 
 			if (cbxTipoRelatorio.getSelectedIndex() == 1)
 				sql += gerarVendasCliente();
-
-			System.out.println("depois " + sql);
 
 			if (cbxTipoRelatorio.getSelectedIndex() == 2)
 				sql += gerarVendasCategoria();
