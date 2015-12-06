@@ -310,6 +310,11 @@ public class MioloCadVenda extends JPanel {
 		panel_produto.add(btnIncluir, gbc_btnIncluir);
 
 		btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				excluirItem();
+			}
+		});
 		btnExcluir.setIcon(new ImageIcon("src/main/resources/delete.png"));
 		GridBagConstraints gbc_btnExcluir = new GridBagConstraints();
 		gbc_btnExcluir.fill = GridBagConstraints.HORIZONTAL;
@@ -450,8 +455,12 @@ public class MioloCadVenda extends JPanel {
 
 	}
 
+	protected void excluirItem() {	
+		model.excluirItem(tabitens.getSelectedRow());
+	}
+
 	protected void limparCampos() {
-		buscarID();
+		txtidvenda.setText(String.valueOf(buscarID()));
 		txtidcliente.setText("");
 		txtnomecliente.setText("");
 		txtidproduto.setText("");

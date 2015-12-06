@@ -10,7 +10,7 @@ import java.util.List;
 public interface UsuarioDAO {
 	public void inserir(Usuario u) throws SQLException;
 	
-	public void atualizar(Usuario u);
+	public void atualizar(Usuario u) throws SQLException;
 	
 	public void excluir (Usuario u) throws SQLException;
 	

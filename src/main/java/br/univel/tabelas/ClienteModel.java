@@ -1,6 +1,7 @@
 package br.univel.tabelas;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -77,14 +78,21 @@ public class ClienteModel extends AbstractTableModel implements TableModel {
 	}
 	
 	public void incluir(Cliente c){
+		for (Iterator<Cliente> iterator = clientes.iterator(); iterator.hasNext();) {
+			Cliente cliente = (Cliente) iterator.next();
+			
+			if (cliente.getId()==c.getId()){
+				iterator.remove();
+			}
+			
+		}
+		
 		clientes.add(c);
 		super.fireTableDataChanged();
 	}
 	
-	@Override
-	public void fireTableStructureChanged() {
-		// TODO Auto-generated method stub
+	public void remover(Cliente c){
+		clientes.remove(c);
 		super.fireTableStructureChanged();
 	}
-
 }

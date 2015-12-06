@@ -417,6 +417,10 @@ public class MioloCadProduto extends JPanel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			((ProdutoModel) model).remover(p);
+			setModelTabela();
+			
 		};
 	}
 

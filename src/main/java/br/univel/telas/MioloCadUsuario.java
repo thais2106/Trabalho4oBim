@@ -23,11 +23,12 @@ import br.univel.tabelas.UsuarioModel;
 import br.univel.usuario.Usuario;
 import br.univel.usuario.UsuarioDAOImpl;
 import br.univel.utilitarios.PasswordCellRenderer;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class MioloCadUsuario extends JPanel {
 	protected JTextField txtNomeCliente;
 	protected JTextField txtIdCliente;
-	private JTextField txtPesquisar;
 	private JTable tabUsuarios;
 	private JPasswordField SenhaField;
 	private static MioloCadUsuario instance;
@@ -138,7 +139,7 @@ public class MioloCadUsuario extends JPanel {
 		panel_cadastro.add(SenhaField, gbc_SenhaField);
 		
 		JPanel panel_pesquisar = new JPanel();
-		panel_pesquisar.setBorder(new TitledBorder(null, "Pesquisar", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_pesquisar.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Usu\u00E1rios cadastros", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel_pesquisar = new GridBagConstraints();
 		gbc_panel_pesquisar.insets = new Insets(10, 10, 0, 10);
 		gbc_panel_pesquisar.fill = GridBagConstraints.BOTH;
@@ -147,35 +148,18 @@ public class MioloCadUsuario extends JPanel {
 		add(panel_pesquisar, gbc_panel_pesquisar);
 		GridBagLayout gbl_panel_pesquisar = new GridBagLayout();
 		gbl_panel_pesquisar.columnWidths = new int[]{271, 66, 0};
-		gbl_panel_pesquisar.rowHeights = new int[]{23, 139, 0};
+		gbl_panel_pesquisar.rowHeights = new int[]{139, 0};
 		gbl_panel_pesquisar.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_pesquisar.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_pesquisar.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel_pesquisar.setLayout(gbl_panel_pesquisar);
-		
-		txtPesquisar = new JTextField();
-		GridBagConstraints gbc_txtPesquisar = new GridBagConstraints();
-		gbc_txtPesquisar.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtPesquisar.insets = new Insets(0, 5, 5, 5);
-		gbc_txtPesquisar.gridx = 0;
-		gbc_txtPesquisar.gridy = 0;
-		panel_pesquisar.add(txtPesquisar, gbc_txtPesquisar);
-		txtPesquisar.setColumns(10);
-		
-		JButton btnOk = new JButton("OK");
-		GridBagConstraints gbc_btnOk = new GridBagConstraints();
-		gbc_btnOk.anchor = GridBagConstraints.NORTHEAST;
-		gbc_btnOk.insets = new Insets(0, 0, 5, 5);
-		gbc_btnOk.gridx = 1;
-		gbc_btnOk.gridy = 0;
-		panel_pesquisar.add(btnOk, gbc_btnOk);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.insets = new Insets(0, 5, 0, 5);
+		gbc_scrollPane.insets = new Insets(0, 5, 0, 0);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridwidth = 2;
 		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 1;
+		gbc_scrollPane.gridy = 0;
 		panel_pesquisar.add(scrollPane, gbc_scrollPane);
 		
 		final PasswordCellRenderer renderer = new PasswordCellRenderer();		
@@ -275,7 +259,6 @@ public class MioloCadUsuario extends JPanel {
 	}
 
 	public Runnable setAcaoExcluir() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

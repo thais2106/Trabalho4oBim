@@ -34,9 +34,19 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 	}
 
 	@Override
-	public void atualizar(Usuario c) {
-		// TODO Auto-generated method stub
+	public void atualizar(Usuario u) throws SQLException {
+		sql = "UPDATE USUARIO SET id=?, idcliente=?, senha=? where id=?";
 		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, u.getId());
+		ps.setInt(2, u.getClienteId());
+		ps.setString(3, u.getSenha());
+		ps.setInt(4, u.getId());
+		
+		ps.executeUpdate();
+		ps.close();
+		
+		JOptionPane.showMessageDialog(null, "Usuário alterado com sucesso!");
 	}
 
 	@Override

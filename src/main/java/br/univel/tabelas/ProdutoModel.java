@@ -1,10 +1,12 @@
 package br.univel.tabelas;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import br.univel.cliente.Cliente;
 import br.univel.produto.Produto;
 
 /**
@@ -79,7 +81,19 @@ public class ProdutoModel extends AbstractTableModel {
 	}
 
 	public void incluir(Produto p) {
+		for (Iterator<Produto> iterator = produtos.iterator(); iterator.hasNext();) {
+			Produto produto = (Produto) iterator.next();
+			
+			if (produto.getId()==p.getId()){
+				iterator.remove();
+			}
+		}
 		produtos.add(p);
+		super.fireTableDataChanged();
+	}
+
+	public void remover(Produto p) {
+		produtos.remove(p);
 		super.fireTableDataChanged();
 	}
 

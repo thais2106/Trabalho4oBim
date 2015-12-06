@@ -36,9 +36,10 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class MioloNovaSenha extends JPanel {
-	private JTextField txtPesquisar;
 	private JTable tabUsuarios;
 	JTextField txtIdCliente;
 	JTextField txtNomeCliente;
@@ -172,8 +173,7 @@ public class MioloNovaSenha extends JPanel {
 		panel.add(novaSenha2, gbc_novaSenha2);
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Pesquisar",
-				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Usu\u00E1rios cadastrados", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
@@ -182,27 +182,10 @@ public class MioloNovaSenha extends JPanel {
 		add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[] { 271, 66, 0 };
-		gbl_panel_1.rowHeights = new int[] { 23, 139, 0, 0 };
+		gbl_panel_1.rowHeights = new int[] { 139, 0, 0 };
 		gbl_panel_1.columnWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
-		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panel_1.rowWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
-
-		txtPesquisar = new JTextField();
-		txtPesquisar.setColumns(10);
-		GridBagConstraints gbc_txtPesquisar = new GridBagConstraints();
-		gbc_txtPesquisar.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtPesquisar.insets = new Insets(0, 5, 5, 5);
-		gbc_txtPesquisar.gridx = 0;
-		gbc_txtPesquisar.gridy = 0;
-		panel_1.add(txtPesquisar, gbc_txtPesquisar);
-
-		JButton btnOk = new JButton("OK");
-		GridBagConstraints gbc_btnOk = new GridBagConstraints();
-		gbc_btnOk.anchor = GridBagConstraints.NORTHEAST;
-		gbc_btnOk.insets = new Insets(0, 0, 5, 0);
-		gbc_btnOk.gridx = 1;
-		gbc_btnOk.gridy = 0;
-		panel_1.add(btnOk, gbc_btnOk);
 
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -210,7 +193,7 @@ public class MioloNovaSenha extends JPanel {
 		gbc_scrollPane.gridwidth = 2;
 		gbc_scrollPane.insets = new Insets(0, 5, 5, 0);
 		gbc_scrollPane.gridx = 0;
-		gbc_scrollPane.gridy = 1;
+		gbc_scrollPane.gridy = 0;
 		panel_1.add(scrollPane, gbc_scrollPane);
 		
 		renderer = new PasswordCellRenderer();
@@ -270,9 +253,13 @@ public class MioloNovaSenha extends JPanel {
 				UsuarioDAOImpl dao = new UsuarioDAOImpl();
 				Usuario u = setarValores();
 
-				dao.atualizar(u);
+				try {
+					dao.atualizar(u);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-				JOptionPane.showMessageDialog(null,"Senha alterada com sucesso!");
 			}
 		};
 	}
@@ -315,7 +302,7 @@ public class MioloNovaSenha extends JPanel {
 	private Usuario setarValores() {
 		int id = (int) tabUsuarios.getValueAt(tabUsuarios.getSelectedRow(), 0);
 		int idCliente = Integer.parseInt(txtIdCliente.getText());
-		String senha = new String(novaSenha.getPassword().toString());
+		String senha = new String(novaSenha.getPassword());
 
 		Usuario u = new Usuario();
 		u.setId(id);
@@ -329,8 +316,6 @@ public class MioloNovaSenha extends JPanel {
 		String senha1 = new String(novaSenha.getPassword());
 		String senha2 = new String(novaSenha2.getPassword());
 
-		System.out.println("senha 1 "+senha1 );
-		System.out.println("senha 2 "+senha2 );
 		if (senha1.equals(senha2))
 			return true;
 		else

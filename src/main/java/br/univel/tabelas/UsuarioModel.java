@@ -1,10 +1,12 @@
 package br.univel.tabelas;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import br.univel.cliente.Cliente;
 import br.univel.usuario.Usuario;
 
 public class UsuarioModel extends AbstractTableModel {
@@ -55,6 +57,13 @@ public class UsuarioModel extends AbstractTableModel {
 	}
 	
 	public void incluir(Usuario u) {
+		for (Iterator<Usuario> iterator = usuarios.iterator(); iterator.hasNext();) {
+			Usuario usuario = (Usuario) iterator.next();
+			
+			if (usuario.getId()==u.getId()){
+				iterator.remove();
+			}
+		}
 		usuarios.add(u);
 		super.fireTableDataChanged();
 	}

@@ -410,9 +410,9 @@ public class MioloCadCliente extends JPanel {
 			int opcao = JOptionPane.showConfirmDialog(null,
 					"Tem certeza que deseja excluir o registro?", "Aviso",
 					JOptionPane.YES_NO_OPTION);
-
+			
+			Cliente c = new Cliente();
 			if (opcao == 0) {
-				Cliente c = new Cliente();
 				c = setarValores();
 
 				try {
@@ -422,6 +422,11 @@ public class MioloCadCliente extends JPanel {
 					e.printStackTrace();
 				}
 			}
+			
+			((ClienteModel) model).remover(c);
+			setModelTabela();
+			
+			
 		};
 	}
 
